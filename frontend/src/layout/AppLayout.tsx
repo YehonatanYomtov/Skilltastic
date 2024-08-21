@@ -2,28 +2,26 @@
 import { Outlet } from "react-router-dom";
 
 //* components-UI
-import Navbar from "../../components/ui/NavBar/Navbar";
-import Breadcrumbs from "../../components/ui/Breadcrumbs/Breadcrumbs";
-import BackButton from "../../components/ui/BackButton/BackButton";
-import DarkLightModeButton from "../../components/ui/DarkLightModeButton/DarkLightModeButton";
+import Navbar from "../components/ui/NavBar/Navbar.tsx";
+import BackButton from "../components/ui/BackButton/BackButton.tsx";
+import Footer from "../components/ui/Footer/Footer.tsx";
+// import Breadcrumbs from "../../components/ui/Breadcrumbs/Breadcrumbs";
 
 //* styles
 import styles from "./AppLayout.module.css";
 
 function AppLayout() {
   return (
-    <div>
-      <header>
-        <Navbar />
-        <Breadcrumbs />
-      </header>
+    <>
+      <Navbar />
 
       <main className={styles.main}>
         <Outlet />
         <BackButton />
-        <DarkLightModeButton />
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
 

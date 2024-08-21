@@ -1,0 +1,30 @@
+.nav_link {
+  position: relative;
+  height: 4.5rem;
+  width: 4.9rem;
+  left: 0.3rem;
+  padding-right: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem 0 0 0.5rem;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--clr--main-secondary);
+  border: 2px solid transparent;
+  transition: all 0.1s;
+
+  &:hover {
+    color: var(--clr--main-primary-active);
+  }
+}
+
+.nav_link.active {
+  color: var(--clr--main-primary-active);
+  background-color: var(--clr--main-primary-bg-active);
+  border: 2px solid rgba(255, 255, 255, 0.309);
+  border-right: none;
+  box-shadow: var(--box-shadow-1);
+  transition: 0.4s;
+  transition: box-shadow none;
+}
