@@ -1,13 +1,16 @@
 //* Styles
 import styles from "./SearchCoursesInput.module.css";
 
+//* Types
+import { FormEvent } from "react";
+
 function SearchCoursesInput() {
-  function handleSubmitSearch(e) {
+  function handleSubmitSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
   return (
-    <form onSubmit={handleSubmitSearch}>
+    <form onSubmit={handleSubmitSearch} className={styles.container}>
       <div>
         <input type="search" placeholder="Search courses..." />
         <button type="submit">

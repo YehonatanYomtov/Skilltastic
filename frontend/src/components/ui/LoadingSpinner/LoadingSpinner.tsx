@@ -1,5 +1,15 @@
 import { Oval } from "react-loader-spinner";
 
+type LoadingSpinnerProps = {
+  style?: React.CSSProperties;
+  height?: number;
+  width?: number;
+  color?: string;
+  secondaryColor?: string;
+  strokeWidth?: number;
+  strokeWidthSecondary?: number;
+};
+
 function LoadingSpinner({
   style,
   height = 80,
@@ -8,7 +18,7 @@ function LoadingSpinner({
   secondaryColor = "#4fa94d",
   strokeWidth = 2,
   strokeWidthSecondary = 2,
-}) {
+}: LoadingSpinnerProps) {
   return (
     <Oval
       height={height}

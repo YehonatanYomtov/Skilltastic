@@ -5,10 +5,11 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 //* UI-components
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+// import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-//* styles
-import styles from "./ProtectedRoute.module.css";
+//* Styles
+// import styles from "./ProtectedRoute.module.css";
+
 import { ReactNode } from "react";
 import { RootState } from "../../../data/store";
 

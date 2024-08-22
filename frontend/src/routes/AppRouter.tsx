@@ -2,7 +2,7 @@
 // import { useEffect } from "react";
 
 //* react-router
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 //* redux-hooks
 // import { useSelector } from "react-redux";
@@ -23,9 +23,9 @@ import Contact from "../pages/Contact/Contact.tsx";
 import ErrorMessage from "../components/ui/ErrorMessage/ErrorMessage.tsx";
 import SignUpForm from "../features/auth/SignUpForm/SignUpForm.tsx";
 import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
-import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
-import { useSelector } from "react-redux";
-import { RootState } from "../data/store.ts";
+// import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../data/store.ts";
 import CourseCreation from "../features/course/CourseCreation/CourseCreation.tsx";
 import CourseVideo from "../features/course/CourseVideo/CourseVideo.tsx";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
@@ -39,7 +39,7 @@ function AppRouter() {
   // const user = useSelector((state) => state.user.user);
   // const userSignedIn = useSelector((state) => state.user.userSignedIn);
   // const error = useSelector((state) => state.user.error);
-  const user = useSelector((state: RootState) => state.auth.user);
+  // const user = useSelector((state: RootState) => state.auth.user);
 
   // useAuth();
 
