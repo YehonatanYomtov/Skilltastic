@@ -9,10 +9,11 @@
   align-items: center;
   gap: 1.5rem;
   padding: 2rem;
-  /* border: 2px solid var(--clr-red-4); */
+  border: 1px solid rgba(255, 0, 0, 0.603);
   border-radius: 15px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  background-color: rgba(0, 0, 0, 0.726);
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px,
+    rgba(38, 57, 77, 0.214) 1px 1px 4px 1px inset;
+  background-color: var(--clr--main-primary);
 
   h1 {
     color: red;
@@ -26,15 +27,17 @@
   }
 
   button {
-    color: var(--clr-blue-light);
-    border: 2px solid var(--clr-blue-light);
+    color: var(--clr--main-secondary);
+    border: 1px solid var(--clr-grey-4);
     margin-top: 1rem;
     padding: 0.5rem 1.2rem;
     background-color: transparent;
+    box-shadow: var(--box-shadow-1);
+    transition: all 0.1s;
   }
 
   button:hover {
-    background-color: rgba(82, 106, 111, 0.554);
-    color: var(--clr-blue-light);
+    background-color: var(--clr--main-blue);
+    color: white;
   }
 }

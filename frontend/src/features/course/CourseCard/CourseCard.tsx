@@ -1,7 +1,9 @@
 import { memo } from "react";
 
-// Styles
+//* styles
 import styles from "./CourseCard.module.css";
+
+//* types
 
 function CourseCard({ course }) {
   const {

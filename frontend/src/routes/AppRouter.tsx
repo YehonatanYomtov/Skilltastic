@@ -1,11 +1,11 @@
 //* react-hooks
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 //* react-router
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 //* redux-hooks
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 //* layout
 import AppLayout from "../layout/AppLayout.tsx";
@@ -15,12 +15,18 @@ import AppLayout from "../layout/AppLayout.tsx";
 // import LogInForm from "../pages/LogInForm/LogInForm";
 import Home from "../pages/Home/Home.tsx";
 import Profile from "../pages/Profile/Profile.tsx";
+import Courses from "../pages/Courses/Courses.tsx";
+import Contact from "../pages/Contact/Contact.tsx";
 // import UserPage from "../pages/UserPage/UserPage";
 
 //* components-UI
-// import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 import ErrorMessage from "../components/ui/ErrorMessage/ErrorMessage.tsx";
-import Courses from "../pages/Courses/Courses.tsx";
+import SignUpForm from "../features/auth/SignUpForm/SignUpForm.tsx";
+import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
+import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
+import { useSelector } from "react-redux";
+import { RootState } from "../data/store.ts";
+// import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
 // import useAuth from "../hooks/useAuth";
@@ -31,6 +37,7 @@ function AppRouter() {
   // const user = useSelector((state) => state.user.user);
   // const userSignedIn = useSelector((state) => state.user.userSignedIn);
   // const error = useSelector((state) => state.user.error);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   // useAuth();
 
@@ -38,31 +45,60 @@ function AppRouter() {
   //   localStorage.setItem("userSignedIn", JSON.stringify(userSignedIn));
   // }, [userSignedIn]);
 
+  // const user = true;
+  // const userSignedIn = true;
+  // // const user = false;
+  // // const userSignedIn = false;
+
   const router = createBrowserRouter([
+    // {
+    //   path: "/sign-up",
+    //   element:
+    //     !user && !userSignedIn ? <SignUpForm /> : <Navigate replace to="/" />,
+    // },
+    // {
+    //   path: "/log-in",
+    //   element:
+    //     !user && !userSignedIn ? <LogInForm /> : <Navigate replace to="/" />,
+    // },
     {
-      //   path: "/sign-up",
-      //   element:
-      //     !user && !userSignedIn ? <SignUpForm /> : <Navigate replace to="/" />,
-      // },
-      // {
-      //   path: "/log-in",
-      //   element:
-      //     !user && !userSignedIn ? <LogInForm /> : <Navigate replace to="/" />,
-      // },
-      // {
       path: "/",
       element: (
-        // <ProtectedRoute>
-        <AppLayout />
-        // </ProtectedRoute>
+        <ProtectedRoute>
+          <AppLayout />
+        </ProtectedRoute>
       ),
       errorElement: <ErrorMessage />,
       children: [
-        { index: true, element: <Home /> },
+        {
+          path: "/sign-up",
+          element: <SignUpForm />,
+        },
 
-        { path: "profile", element: <Profile /> },
+        {
+          path: "/log-in",
+          element: <LogInForm />,
+        },
 
-        { path: "courses", element: <Courses /> },
+        {
+          index: true,
+          element: <Home />,
+        },
+
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+
+        {
+          path: "courses",
+          element: <Courses />,
+        },
+
+        {
+          path: "contact",
+          element: <Contact />,
+        },
 
         // { path: "browse", element: <BrowseRecipes /> },
         // { path: "browse/:recipeID", element: <RecipeFullInfo /> },

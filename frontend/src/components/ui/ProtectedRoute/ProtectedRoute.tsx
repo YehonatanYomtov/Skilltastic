@@ -9,20 +9,26 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 //* styles
 import styles from "./ProtectedRoute.module.css";
+import { ReactNode } from "react";
 
-function ProtectedRoute({ children }) {
-  const user = useSelector((state) => state.user.user);
-  const userSignedIn = useSelector((state) => state.user.userSignedIn);
+type ProtectedRouteProps = {
+  children: ReactNode;
+};
 
-  if (userSignedIn) {
-    if (user) return children;
+function ProtectedRoute({ children }: ProtectedRouteProps) {
+  // const user = useSelector((state) => state.user.user);
+  // const userSignedIn = useSelector((state) => state.user.userSignedIn);
+  const user = useSelector((state: RootState) => state.auth.user);
 
-    return (
-      <div className={styles.spinnerBgStyling}>
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  // if (userSignedIn) {
+  if (user) return children;
+
+  // return (
+  //   <div className={styles.spinnerBgStyling}>
+  //     <LoadingSpinner />
+  //   </div>
+  // );
+  // }
 
   return <Navigate replace to="/log-in" />;
 }

@@ -1,9 +1,11 @@
-// 3rd party packages
+//* 3rd party packages
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-// Styles
+//* styles
 import styles from "./IntroCarousel.module.css";
+
+type Responsive = {};
 
 function IntroCarousel() {
   const responsive: any = {

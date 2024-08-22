@@ -2,9 +2,16 @@
 import { NavLink } from "react-router-dom";
 
 //* styles
-import styles from "./NavBLink.module.css";
+import styles from "./NavbarLink.module.css";
+import { ReactElement, ReactNode } from "react";
 
-function NavBLink({ to = "/", children }) {
+//* types
+type NavbarLinkProps = {
+  to: string;
+  children: ReactNode;
+};
+
+function NavbarLink({ to = "/", children }: NavbarLinkProps) {
   return (
     <NavLink
       className={({ isActive }) =>
@@ -18,4 +25,4 @@ function NavBLink({ to = "/", children }) {
   );
 }
 
-export default NavBLink;
+export default NavbarLink;

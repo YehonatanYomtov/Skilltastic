@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 //* components-UI
-import ParallaxEffect from "../../../components/ui/ParallaxEffect/ParallaxEffect";
+// import ParallaxEffect from "../../../components/ui/ParallaxEffect/ParallaxEffect";
 
 //* user-slice
 // import { logout } from "../userSlice";
