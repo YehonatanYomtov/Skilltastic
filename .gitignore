@@ -5,4 +5,4 @@
 .env
 
 # Ignore backend dist folder
-# backend/dist
+backend/dist

@@ -2,15 +2,15 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "src/server.ts",
   "type": "module",
   "scripts": {
-    "build": "npx tsc && cd ../frontend && npm run build && cd ../backend",
-    "dev": "MODE=development concurrently \"npx tsc --watch\" \"node --watch dist/index.js\"",
-    "prod": "MODE=production node dist/index.js"
+    "build": "npm i && npx tsc && cd ../frontend && npm i && npm run build && cd ../backend",
+    "dev": "MODE=development concurrently \"npx tsc --watch\" \"node --watch dist/server.js\"",
+    "prod": "MODE=production node dist/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yehonatan Yomtov",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
