@@ -18,8 +18,6 @@ import styles from "./Navbar.module.css";
 function Navbar() {
   const location = useLocation();
 
-  console.log(location.pathname);
-
   return (
     <nav className={styles.nav_main_container}>
       <ul>

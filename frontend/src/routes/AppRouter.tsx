@@ -26,6 +26,8 @@ import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
 import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 import { useSelector } from "react-redux";
 import { RootState } from "../data/store.ts";
+import CourseCreation from "../features/course/CourseCreation/CourseCreation.tsx";
+import CourseVideo from "../features/course/CourseVideo/CourseVideo.tsx";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
@@ -45,11 +47,6 @@ function AppRouter() {
   //   localStorage.setItem("userSignedIn", JSON.stringify(userSignedIn));
   // }, [userSignedIn]);
 
-  // const user = true;
-  // const userSignedIn = true;
-  // // const user = false;
-  // // const userSignedIn = false;
-
   const router = createBrowserRouter([
     // {
     //   path: "/sign-up",
@@ -64,9 +61,9 @@ function AppRouter() {
     {
       path: "/",
       element: (
-        <ProtectedRoute>
-          <AppLayout />
-        </ProtectedRoute>
+        // <ProtectedRoute>
+        <AppLayout />
+        // </ProtectedRoute>
       ),
       errorElement: <ErrorMessage />,
       children: [
@@ -93,6 +90,14 @@ function AppRouter() {
         {
           path: "courses",
           element: <Courses />,
+        },
+        {
+          path: "courses/new",
+          element: <CourseCreation />,
+        },
+        {
+          path: "courses/:courseId",
+          element: <CourseVideo />,
         },
 
         {

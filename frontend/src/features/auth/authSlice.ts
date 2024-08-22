@@ -2,15 +2,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 //* Firebase-imports
-import { auth, storage } from "../../firebase/firebaseConfig.ts";
+import { auth } from "../../firebase/firebaseConfig.ts";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile,
   User,
 } from "firebase/auth";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 //* Utils
 // import {
@@ -42,6 +40,7 @@ const initialState: AuthState = {
 };
 
 //* Async thunks
+
 export const login = createAsyncThunk(
   "auth/signin",
   async function ({ email, password }: EmailAndPassword) {
@@ -50,6 +49,7 @@ export const login = createAsyncThunk(
       email,
       password
     );
+    console.log(userCredential.user);
     return userCredential.user;
   }
 );

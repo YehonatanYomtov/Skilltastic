@@ -6,6 +6,7 @@ import IntroCarousel from "./subComponents/IntroCarousel/IntroCarousel";
 //* styles
 import styles from "./Home.module.css";
 import WelcomeMessage from "../../features/user/WelcomeMessage/WelcomeMessage";
+import SearchCoursesInput from "./subComponents/SearchCoursesInput/SearchCoursesInput";
 
 const courseList = [
   {
@@ -141,6 +142,10 @@ function HomePage() {
       <h1>Home</h1>
 
       <WelcomeMessage />
+
+      <section>
+        <SearchCoursesInput />
+      </section>
 
       <section>
         <IntroCarousel />

@@ -103,11 +103,12 @@ li {
 }
 
 button {
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   border: 1px solid transparent;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
+  padding: 0.5rem 0.7rem;
   cursor: pointer;
-  transition: border-color 0.25s;
+  /* transition: border-color 0.25s; */
 }
 
 button:focus,

@@ -10,6 +10,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 //* styles
 import styles from "./ProtectedRoute.module.css";
 import { ReactNode } from "react";
+import { RootState } from "../../../data/store";
 
 type ProtectedRouteProps = {
   children: ReactNode;
