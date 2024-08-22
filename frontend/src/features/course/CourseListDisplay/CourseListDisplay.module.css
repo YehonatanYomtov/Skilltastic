@@ -1,0 +1,69 @@
+.container {
+  width: 90rem;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-radius: 0.4rem;
+  box-shadow: var(--box-shadow-inset-1);
+}
+
+.customArrow {
+  background-color: #333333d3;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.1s;
+
+  &:hover {
+    background-color: #333;
+  }
+}
+
+.customArrowLeft {
+  left: 0.4rem;
+}
+
+.customArrowRight {
+  right: 0.4rem;
+}
+
+@media (max-width: 1650px) {
+  .container {
+    width: 76rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .container {
+    width: 60rem;
+  }
+}
+
+@media (max-width: 1150px) {
+  .container {
+    width: 45rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 30rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    width: 15.5rem;
+    padding: 1rem;
+  }
+}

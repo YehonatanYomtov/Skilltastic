@@ -3,9 +3,9 @@ import styles from "./Footer.module.css";
 
 function Footer() {
   return (
-    <div className={styles.container}>
-      <p className={styles.text}>Footer</p>
-    </div>
+    <footer className={styles.container}>
+      <p className={styles.text}>© 2024 SkillTastic</p>
+    </footer>
   );
 }
 

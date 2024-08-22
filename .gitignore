@@ -3,3 +3,6 @@
 
 # Ignore all .env files
 .env
+
+# Ignore backend dist folder
+# backend/dist

@@ -1,33 +1,47 @@
+import { memo } from "react";
+
 // Styles
 import styles from "./CourseCard.module.css";
 
-function CourseCard() {
+function CourseCard({ course }) {
+  const {
+    courseTitle,
+    teacherName,
+    courseDescription,
+    ratingAverage,
+    ratingCount,
+    price,
+    discountPrice,
+    tag,
+    imageUrl,
+  } = course;
+
   return (
     <div className={styles.card_main_container}>
       <div className={styles.card_img_container}>
-        <img src="" alt="" />
+        <img src={imageUrl} alt={courseTitle} />
       </div>
 
       <div className={styles.card_info_container}>
-        <h3>(Course title)</h3>
-        <p>(Teacher name)</p>
-        <p>(Course description)</p>
+        <h3>{courseTitle}</h3>
+        <p className={styles.name}>{teacherName}</p>
+        {/* <p>{courseDescription}</p> */}
 
         <div className={styles.rating}>
-          <strong>(Rating average)</strong>
+          <strong>{ratingAverage}</strong>
           <div>(Rating stars)</div>
-          <p>( (Rating amount) )</p>
+          <p>({ratingCount})</p>
         </div>
 
         <div className={styles.price}>
-          <p>(Price)</p>
-          <span>(Discount price)</span>
+          <strong>{price}</strong>
+          {discountPrice && <span>{discountPrice}</span>}
         </div>
 
-        <div className={styles.tag}>Discount</div>
+        {tag && <div className={styles.tag}>{tag}</div>}
       </div>
     </div>
   );
 }
 
-export default CourseCard;
+export default memo(CourseCard);

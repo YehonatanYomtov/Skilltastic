@@ -15,12 +15,12 @@
   background-color: rgba(0, 0, 0, 0.726);
 
   h1 {
-    color: var(--clr-red-4);
+    color: red;
   }
 
   p,
   i {
-    color: var(--clr-red-1);
+    color: red;
     font-size: var(--fs-2);
     letter-spacing: 0.7px;
   }

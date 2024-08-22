@@ -7,6 +7,7 @@
   --clr--main-primary: white;
   --clr--main-secondary: rgb(73, 73, 73);
   --clr--main-blue: rgb(45, 157, 255);
+  --clr--main-grey-light: rgb(151, 155, 157);
 
   --clr--main-primary-bg-active: rgb(237, 241, 255);
   --clr--main-primary-active: rgb(51, 49, 222);
@@ -18,6 +19,8 @@
   --box-shadow-2: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --box-shadow-3: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   --box-shadow-4: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  --box-shadow-inset-1: rgba(0, 0, 0, 0.16) 0px 1px 3px inset;
 }
 
 :root.dark {
@@ -46,19 +49,39 @@
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-body {
+html,
+body,
+#root {
+  position: absolute;
+  top: 0;
+  left: 1.9rem;
+  right: 0;
+  bottom: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+html {
+  left: 3.6rem;
+}
+
+body {
   transition: all 0.1s;
   background-color: var(--clr--main-primary);
   color: var(--clr--main-secondary);
 }
 
 #root {
-  position: absolute;
-  top: 0;
-  left: 5.5rem;
-  right: 0;
-  bottom: 0;
+  padding: 2rem 2rem 1rem 2rem;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {

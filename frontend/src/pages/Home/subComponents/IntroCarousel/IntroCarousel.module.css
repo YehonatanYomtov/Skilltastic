@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  height: 22rem;
+  width: 90rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow-1);
+  margin: 3rem 0;
+  transition: all 0.1s;
+}
+
+.item {
+  height: 22rem;
+  width: 100%;
+}
+
+@media (max-width: 1650px) {
+  .container {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    height: 18rem;
+    width: 30rem;
+    padding: 1rem;
+  }
+}
