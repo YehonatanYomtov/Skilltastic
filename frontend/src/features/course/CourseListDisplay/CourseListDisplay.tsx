@@ -7,8 +7,15 @@ import "react-multi-carousel/lib/styles.css";
 //* Course-feature component
 import CourseCard from "../CourseCard/CourseCard";
 
+//* Sub-components
+import CustomLeftArrow from "./CustomLeftAndRightArrows/CustomLeftArrow";
+import CustomRightArrow from "./CustomLeftAndRightArrows/CustomRightArrow";
+
 //* Styles
 import styles from "./CourseListDisplay.module.css";
+
+//* Types
+import { CourseCard as CourseCardType } from "../../../../types/index.ts";
 
 const responsive = {
   superLargeDesktop: {
@@ -37,7 +44,11 @@ const responsive = {
   },
 };
 
-function CourseListDisplay({ courseList }) {
+type CourseListDisplayProps = {
+  courseList: CourseCardType[];
+};
+
+function CourseListDisplay({ courseList }: CourseListDisplayProps) {
   return (
     <Carousel
       responsive={responsive}

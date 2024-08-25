@@ -2,7 +2,7 @@
 import { useLocation, useNavigate, useRouteError } from "react-router-dom";
 
 //* redux
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 //* components-UI
 import Button from "../Button/Button.tsx";
@@ -18,7 +18,7 @@ function ErrorMessage({ message = "Error" }) {
   const error = useRouteError();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const location = useLocation();
 
   function handleError() {
@@ -39,9 +39,9 @@ function ErrorMessage({ message = "Error" }) {
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
 
-      <i>{error?.statusText || error?.message || message}</i>
+      {/* <i>{error?.statusText || error?.message || message}</i> */}
 
-      <Button onClick={handleError} type="blue-hollow">
+      <Button onClick={handleError} variant="blue-hollow">
         Ok
       </Button>
     </div>

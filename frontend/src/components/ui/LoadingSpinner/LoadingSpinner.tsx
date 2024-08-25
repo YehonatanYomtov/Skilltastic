@@ -20,18 +20,18 @@ function LoadingSpinner({
   strokeWidthSecondary = 2,
 }: LoadingSpinnerProps) {
   return (
-    <Oval
-      height={height}
-      width={width}
-      color={color}
-      wrapperStyle={style}
-      wrapperClass=""
-      visible={true}
-      ariaLabel="oval-loading"
-      secondaryColor={secondaryColor}
-      strokeWidth={strokeWidth}
-      strokeWidthSecondary={strokeWidthSecondary}
-    />
+    <div style={style}>
+      <Oval
+        height={height}
+        width={width}
+        color={color}
+        visible={true}
+        ariaLabel="oval-loading"
+        secondaryColor={secondaryColor}
+        strokeWidth={strokeWidth}
+        strokeWidthSecondary={strokeWidthSecondary}
+      />
+    </div>
   );
 }
 

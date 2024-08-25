@@ -4,27 +4,23 @@ import { memo } from "react";
 import styles from "./CourseCard.module.css";
 
 //* Types
+import { CourseCard as CourseCardType } from "../../../../types/index.ts";
 type CourseCardProps = {
-  courseTitle: string;
-  teacherName: string;
-  ratingAverage: number;
-  ratingCount: string;
-  price: number;
-  discountPrice?: number;
-  tag?: string;
-  imageUrl: string;
+  course: CourseCardType;
 };
 
-function CourseCard({
-  courseTitle,
-  teacherName,
-  ratingAverage,
-  ratingCount,
-  price,
-  discountPrice,
-  tag,
-  imageUrl,
-}: CourseCardProps) {
+function CourseCard({ course }: CourseCardProps) {
+  const {
+    courseTitle,
+    teacherName,
+    ratingAverage,
+    ratingCount,
+    price,
+    discountPrice,
+    tag,
+    imageUrl,
+  } = course;
+
   return (
     <div className={styles.card_main_container}>
       <div className={styles.card_img_container}>

@@ -1,50 +1,51 @@
-//* react-hooks
+//* React-hooks
 import { useEffect, useRef, useState } from "react";
 
-//* react-router
+//* React-router
 import { Link, useNavigate } from "react-router-dom";
 
-//* redux-hooks
+//* Redux-hooks
 import { useDispatch, useSelector } from "react-redux";
 
-//* components-UI
+//* Components-UI
 import Button from "../../../components/ui/Button/Button.tsx";
-import Input from "../../../components/ui/Input/Input.tsx";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner.tsx";
 import ErrorMessage from "../../../components/ui/ErrorMessage/ErrorMessage.tsx";
 // import ParallaxEffect from "../../../components/ui/ParallaxEffect/ParallaxEffect.tsx";
 // import PopUp from "../../../components/ui/PopUp/PopUp.tsx";
 
-//* user-slice
-// import { signup } from "../../features/User/userSlice";
+//* Auth-slice
+import { signup } from "../authSlice.ts";
 
-//* styles
+//* Styles
 import styles from "./SignUpForm.module.css";
+import PopUp from "../../../components/ui/PopUp/PopUp.tsx";
+
+//* Types
+import { AppDispatch, RootState } from "../../../data/store.ts";
 
 function SignUpForm() {
-  //! change all inputs to use the useRef hook to minimize the code.
+  const [alert, setAlert] = useState<string>("");
 
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const { email, password, confirmPassword } = inputs;
-
-  const [alert, setAlert] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
   // const status = useSelector((state) => state.user.status);
   // const error = useSelector((state) => state.user.error);
-  const status = "s";
-  const error = "";
+  const user = useSelector((state: RootState) => state.auth.user);
+  const status: string = "idle";
+  const error: string = "";
 
-  const inputRef = useRef(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const email: string = emailRef.current?.value || "";
+    const password: string = passwordRef.current?.value || "";
+    const confirmPassword: string = confirmPasswordRef.current?.value || "";
 
     if (email === "" || password === "" || confirmPassword === "") {
       return setAlert("One or more inputs are empty!");
@@ -54,31 +55,41 @@ function SignUpForm() {
       return setAlert("Password and ConfirmPassword do not match!");
     }
 
-    // dispatch(signup({ email, password }));
-    navigate("/");
-    setInputs((cur) => {
-      return { ...cur, email: "", password: "", confirmPassword: "" };
-    });
-  }
+    console.log("USER --> ", user);
 
-  function handleInputs(e, state) {
-    setInputs((cur) => {
-      return { ...cur, [state]: e.target.value };
-    });
+    if (user) {
+      dispatch(signup({ email, password }));
+
+      if (emailRef.current) emailRef.current.value = "";
+      if (passwordRef.current) passwordRef.current.value = "";
+      if (confirmPasswordRef.current) confirmPasswordRef.current.value = "";
+
+      return navigate("/");
+    } else {
+      setAlert("Error with Firebase Auth!");
+    }
   }
 
   useEffect(() => {
-    // inputRef.current.focus();
+    emailRef.current?.focus();
   }, []);
 
   useEffect(() => {
+    const email: string = emailRef.current?.value || "";
+    const password: string = passwordRef.current?.value || "";
+    const confirmPassword: string = confirmPasswordRef.current?.value || "";
+
     if (
       (email !== "" && password === "" && confirmPassword === "") ||
       (email === "" && password === "" && confirmPassword === "")
     ) {
       setAlert("");
     }
-  }, [email, password, confirmPassword]);
+  }, [
+    emailRef.current?.value,
+    passwordRef.current?.value,
+    confirmPasswordRef.current?.value,
+  ]);
 
   return (
     <div className={styles.container_main}>
@@ -87,37 +98,32 @@ function SignUpForm() {
       {status === "loading" && !error && <LoadingSpinner />}
 
       {status !== "loading" && !error && (
-        // <ParallaxEffect glareColor={"#98d4ffc0"} glare={0.18}>
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.blur}></div>
           <h1>Sign Up</h1>
 
           <input
-            ref={inputRef}
-            value={email}
-            onChange={(e) => handleInputs(e, "email")}
+            ref={emailRef}
             className={styles.input}
             type="email"
             placeholder="Email..."
           />
 
           <input
-            value={password}
-            onChange={(e) => handleInputs(e, "password")}
+            ref={passwordRef}
             className={styles.input}
             type="password"
             placeholder="Password..."
           />
 
           <input
-            value={confirmPassword}
-            onChange={(e) => handleInputs(e, "confirmPassword")}
+            ref={confirmPasswordRef}
             className={styles.input}
             type="password"
             placeholder="Confirm Password..."
           />
 
-          {/* {alert !== "" && <PopUp>{alert}</PopUp>} */}
+          {alert !== "" && <PopUp>{alert}</PopUp>}
 
           <div className={styles.no_account}>
             Already have an account?
@@ -129,7 +135,6 @@ function SignUpForm() {
           <Button className={styles.sign_up_button}>Sign Up</Button>
           {error && <p className={styles.error}>{error}</p>}
         </form>
-        // </ParallaxEffect>
       )}
     </div>
   );

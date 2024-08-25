@@ -44,6 +44,7 @@ const initialState: AuthState = {
 export const login = createAsyncThunk(
   "auth/signin",
   async function ({ email, password }: EmailAndPassword) {
+    console.log(email, password);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -54,7 +55,7 @@ export const login = createAsyncThunk(
   }
 );
 
-export const signup = createAsyncThunk(
+export const signup = createAsyncThunk<User, EmailAndPassword>(
   "auth/signup",
   async function ({ email, password }: EmailAndPassword) {
     const userCredential = await createUserWithEmailAndPassword(

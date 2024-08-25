@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import App from "./App.jsx";
 
 //* global-store
-import store from "./data/store.js";
+import store from "./data/store.ts";
 
 //* global-styles
 import "./assets/global-styles.css";

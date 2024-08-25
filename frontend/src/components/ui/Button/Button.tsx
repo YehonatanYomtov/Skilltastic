@@ -5,18 +5,20 @@ import styles from "./Button.module.css";
 type ButtonProps = {
   className?: string;
   children: React.ReactNode;
-  type?: "button" | "submit" | "reset" | string;
+  type?: "button" | "submit" | "reset";
+  variant?: "blue-hollow" | "blue";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
   className = "",
   children,
   type,
+  variant,
   ...otherProps
 }: ButtonProps) {
   return (
     <button
-      className={`${!type ? styles.button : styles[type]} ${className}`}
+      className={`${variant ? styles[variant] : styles.button} ${className}`}
       type={type}
       {...otherProps}
     >

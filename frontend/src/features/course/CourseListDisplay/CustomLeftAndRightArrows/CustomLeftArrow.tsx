@@ -2,16 +2,16 @@
 import styles from "./CustomLeftAndRightArrows.module.css";
 
 //* Types
-import { ClickHandler } from "../../../../../../types";
+import { ClickHandler } from "../../../../../types/index.ts";
 
-function CustomLeftArrow({ onClick }: { onClick: ClickHandler }) {
+function CustomLeftArrow({ onClick }: { onClick?: ClickHandler }) {
   return (
-    <div
+    <button
       className={`${styles.customArrow} ${styles.customArrowLeft}`}
       onClick={onClick}
     >
       <i className="fa-solid fa-angle-left"></i>
-    </div>
+    </button>
   );
 }
 
