@@ -21,8 +21,8 @@ import Contact from "../pages/Contact/Contact.tsx";
 
 //* components-UI
 import ErrorMessage from "../components/ui/ErrorMessage/ErrorMessage.tsx";
-import SignUpForm from "../features/auth/SignUpForm/SignUpForm.tsx";
-import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
+// import SignUpForm from "../features/auth/SignUpForm/SignUpForm.tsx";
+// import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../data/store.ts";
@@ -67,15 +67,15 @@ function AppRouter() {
       ),
       errorElement: <ErrorMessage />,
       children: [
-        {
-          path: "/sign-up",
-          element: <SignUpForm />,
-        },
+        // {
+        //   path: "/sign-up",
+        //   element: <SignUpForm />,
+        // },
 
-        {
-          path: "/log-in",
-          element: <LogInForm />,
-        },
+        // {
+        //   path: "/log-in",
+        //   element: <LogInForm />,
+        // },
 
         {
           index: true,

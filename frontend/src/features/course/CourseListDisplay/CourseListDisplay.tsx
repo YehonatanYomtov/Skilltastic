@@ -1,10 +1,14 @@
-import CarouselDisplay from "../../../pages/Home/subComponents/IntroCarousel/IntroCarousel";
-import CourseCard from "../CourseCard/CourseCard";
+// import CarouselDisplay from "../../../pages/Home/subComponents/IntroCarousel/IntroCarousel";
 
-import styles from "./CourseListDisplay.module.css";
-
+//* 3rd party components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
+//* Course-feature component
+import CourseCard from "../CourseCard/CourseCard";
+
+//* Styles
+import styles from "./CourseListDisplay.module.css";
 
 const responsive = {
   superLargeDesktop: {
@@ -32,28 +36,6 @@ const responsive = {
     items: 1,
   },
 };
-
-function CustomLeftArrow({ onClick }) {
-  return (
-    <div
-      className={`${styles.customArrow} ${styles.customArrowLeft}`}
-      onClick={onClick}
-    >
-      <i className="fa-solid fa-angle-left"></i>
-    </div>
-  );
-}
-
-function CustomRightArrow({ onClick }) {
-  return (
-    <div
-      className={`${styles.customArrow} ${styles.customArrowRight}`}
-      onClick={onClick}
-    >
-      <i className="fa-solid fa-angle-right"></i>
-    </div>
-  );
-}
 
 function CourseListDisplay({ courseList }) {
   return (

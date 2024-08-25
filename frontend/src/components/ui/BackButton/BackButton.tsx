@@ -4,9 +4,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 //* styles
 import styles from "./BackButton.module.css";
 
+const mainRoutes: string[] = ["/", "/profile", "/courses", "/contact"];
+
 function BackButton() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  function navigateBack(routes: string[]) {
+    routes.map((route) => {
+      console.log(route);
+      if (location.pathname === route) {
+        navigate("/");
+      } else {
+        navigate(-1);
+      }
+    });
+  }
 
   return location.pathname !== "/" ? (
     <button
@@ -19,7 +32,7 @@ function BackButton() {
           : {}
       }
       className={styles.back_button}
-      onClick={() => navigate(-1)}
+      onClick={() => navigateBack(mainRoutes)}
     >
       &larr; Back
     </button>

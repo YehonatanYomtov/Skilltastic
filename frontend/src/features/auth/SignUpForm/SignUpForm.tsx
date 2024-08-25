@@ -92,7 +92,7 @@ function SignUpForm() {
           <div className={styles.blur}></div>
           <h1>Sign Up</h1>
 
-          <Input
+          <input
             ref={inputRef}
             value={email}
             onChange={(e) => handleInputs(e, "email")}
@@ -101,7 +101,7 @@ function SignUpForm() {
             placeholder="Email..."
           />
 
-          <Input
+          <input
             value={password}
             onChange={(e) => handleInputs(e, "password")}
             className={styles.input}
@@ -109,7 +109,7 @@ function SignUpForm() {
             placeholder="Password..."
           />
 
-          <Input
+          <input
             value={confirmPassword}
             onChange={(e) => handleInputs(e, "confirmPassword")}
             className={styles.input}

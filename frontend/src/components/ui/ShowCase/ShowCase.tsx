@@ -1,6 +1,11 @@
+import { ReactElement } from "react";
 import styles from "./ShowCase.module.css";
 
-function ShowCase({ children }) {
+type ShowCaseProps = {
+  children: ReactElement;
+};
+
+function ShowCase({ children }: ShowCaseProps) {
   return <div className={styles.container}>{children}</div>;
 }
 

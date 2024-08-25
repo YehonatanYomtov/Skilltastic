@@ -5,11 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 //* redux-hooks
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 //* components-UI
 import Button from "../../../components/ui/Button/Button.tsx";
-import Input from "../../../components/ui/Input/Input.tsx";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner.tsx";
 import ErrorMessage from "../../../components/ui/ErrorMessage/ErrorMessage.tsx";
 // import ParallaxEffect from "../../../components/ui/ParallaxEffect/ParallaxEffect.tsx";
@@ -29,7 +28,7 @@ function LogInForm() {
   // const status = useSelector((state) => state.user.status);
   // const error = useSelector((state) => state.user.error);
 
-  const status = "s";
+  const status = "";
   const error = "";
 
   const inputRef = useRef(null);
@@ -62,7 +61,7 @@ function LogInForm() {
           <div className={styles.blur}></div>
           <h1>Log In</h1>
 
-          <Input
+          <input
             ref={inputRef}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -71,7 +70,7 @@ function LogInForm() {
             placeholder="Email..."
           />
 
-          <Input
+          <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={styles.input}
@@ -79,7 +78,7 @@ function LogInForm() {
             placeholder="Password..."
           />
 
-          {alert !== "" && <PopUp>{alert}</PopUp>}
+          {/* {alert !== "" && <PopUp>{alert}</PopUp>} */}
 
           <div className={styles.no_account}>
             Don`t have an account?

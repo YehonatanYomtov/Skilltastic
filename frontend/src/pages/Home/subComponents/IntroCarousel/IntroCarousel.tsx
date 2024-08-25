@@ -2,13 +2,24 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-//* styles
+//* Styles
 import styles from "./IntroCarousel.module.css";
 
-type Responsive = {};
+//* Types
+type BreakpointType = {
+  max: number;
+  min: number;
+};
+
+type ResponsiveType = {
+  [key: string]: {
+    breakpoint: BreakpointType;
+    items: number;
+  };
+};
 
 function IntroCarousel() {
-  const responsive: any = {
+  const responsive: ResponsiveType = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 0 },
       items: 1,
