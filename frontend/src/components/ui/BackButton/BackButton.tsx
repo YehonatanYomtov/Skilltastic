@@ -12,7 +12,6 @@ function BackButton() {
 
   function navigateBack(routes: string[]) {
     routes.map((route) => {
-      console.log(route);
       if (location.pathname === route) {
         navigate("/");
       } else {

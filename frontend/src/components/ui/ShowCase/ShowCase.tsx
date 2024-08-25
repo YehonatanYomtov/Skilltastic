@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import styles from "./ShowCase.module.css";
 
 type ShowCaseProps = {
-  children: ReactElement;
+  children: ReactElement[];
 };
 
 function ShowCase({ children }: ShowCaseProps) {

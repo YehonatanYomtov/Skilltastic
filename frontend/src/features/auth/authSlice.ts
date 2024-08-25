@@ -7,7 +7,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  User,
 } from "firebase/auth";
 
 //* Utils
@@ -18,12 +17,17 @@ import {
 // } from "../../utils/addCaseTemplate.ts";
 
 //* Types
-type AuthState = {
-  status: string;
-  user: User | null;
-  error: string | null;
-  // isClicked: boolean;
+
+type AuthUser = {
+  uid: string;
+  email: string | null;
 };
+
+interface AuthState {
+  status: "idle" | "loading" | "success" | "error";
+  user: AuthUser | null;
+  error: string | null;
+}
 
 type EmailAndPassword = {
   email: string;
@@ -42,7 +46,7 @@ const initialState: AuthState = {
 //* Async thunks
 
 export const login = createAsyncThunk(
-  "auth/signin",
+  "auth/login",
   async function ({ email, password }: EmailAndPassword) {
     console.log(email, password);
     const userCredential = await signInWithEmailAndPassword(
@@ -50,22 +54,30 @@ export const login = createAsyncThunk(
       email,
       password
     );
-    console.log(userCredential.user);
-    return userCredential.user;
+
+    const { user } = userCredential;
+
+    return {
+      uid: user.uid,
+      email: user.email,
+    };
   }
 );
 
-export const signup = createAsyncThunk<User, EmailAndPassword>(
+export const signup = createAsyncThunk(
   "auth/signup",
-  async function ({ email, password }: EmailAndPassword) {
+  async ({ email, password }: { email: string; password: string }) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    const newUser = userCredential.user;
+    const { user } = userCredential;
 
-    return newUser;
+    return {
+      uid: user.uid,
+      email: user.email,
+    };
   }
 );
 
@@ -103,7 +115,7 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error.message || "Login failed";
-        state.status = "idle";
+        state.status = "error";
       })
       .addCase(signup.pending, (state) => {
         state.status = "loading";
@@ -114,8 +126,9 @@ const authSlice = createSlice({
         state.status = "success";
       })
       .addCase(signup.rejected, (state, action) => {
+        console.log(action.error);
         state.error = action.error.message || "Signup failed";
-        state.status = "idle";
+        state.status = "error";
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

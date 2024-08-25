@@ -20,7 +20,7 @@ export type CourseCard = {
   ratingAverage: string | number;
   ratingCount: string | number;
   price: string | number;
-  discountPrice?: string | number;
+  discountPrice?: string | number | null;
   tag?: string;
   imageUrl: string;
 };

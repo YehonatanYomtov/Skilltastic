@@ -9,7 +9,7 @@ import store from "./data/store.ts";
 //* global-styles
 import "./assets/global-styles.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <App />

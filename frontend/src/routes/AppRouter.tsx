@@ -2,7 +2,7 @@
 // import { useEffect } from "react";
 
 //* react-router
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 //* redux-hooks
 // import { useSelector } from "react-redux";
@@ -26,6 +26,10 @@ import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
 // import { RootState } from "../data/store.ts";
 import CourseCreation from "../features/course/CourseCreation/CourseCreation.tsx";
 import CourseVideo from "../features/course/CourseVideo/CourseVideo.tsx";
+import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
+import { RootState } from "../data/store.ts";
+import { useSelector } from "react-redux";
+import useAuth from "../hooks/useAuth.ts";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
@@ -37,9 +41,10 @@ function AppRouter() {
   // const user = useSelector((state) => state.user.user);
   // const userSignedIn = useSelector((state) => state.user.userSignedIn);
   // const error = useSelector((state) => state.user.error);
-  // const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
+  console.log("user: ", user);
 
-  // useAuth();
+  useAuth();
 
   // useEffect(() => {
   //   localStorage.setItem("userSignedIn", JSON.stringify(userSignedIn));
@@ -58,62 +63,65 @@ function AppRouter() {
     // },
     {
       path: "/",
-      element: (
-        // <ProtectedRoute>
-        <AppLayout />
-        // </ProtectedRoute>
-      ),
+      element: <AppLayout />,
       errorElement: <ErrorMessage />,
       children: [
         {
-          path: "/sign-up",
-          element: <SignUpForm />,
-        },
-
-        {
-          path: "/log-in",
-          element: <LogInForm />,
-        },
-
-        {
           index: true,
-          element: <Home />,
+          element: (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          ),
         },
-
         {
           path: "profile",
-          element: <Profile />,
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
         },
-
         {
           path: "courses",
-          element: <Courses />,
+          element: (
+            <ProtectedRoute>
+              <Courses />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "courses/new",
-          element: <CourseCreation />,
+          element: (
+            <ProtectedRoute>
+              <CourseCreation />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "courses/:courseId",
-          element: <CourseVideo />,
+          element: (
+            <ProtectedRoute>
+              <CourseVideo />
+            </ProtectedRoute>
+          ),
         },
-
         {
           path: "contact",
-          element: <Contact />,
+          element: (
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          ),
         },
-
-        // { path: "browse", element: <BrowseRecipes /> },
-        // { path: "browse/:recipeID", element: <RecipeFullInfo /> },
-
-        // { path: "recipes", element: <Recipes /> },
-        // { path: "recipes/new", element: <CreateNewRecipe /> },
-        // { path: "recipes/edit/:recipeID", element: <EditRecipe /> },
-        // { path: "recipes/liked-recipes", element: <LikedRecipes /> },
-        // {
-        //   path: "recipes/liked-recipes/:recipeID",
-        //   element: <RecipeFullInfo />,
-        // },
+        {
+          path: "/sign-up",
+          element: !user ? <SignUpForm /> : <Navigate replace to="/" />,
+        },
+        {
+          path: "/log-in",
+          element: !user ? <LogInForm /> : <Navigate replace to="/" />,
+        },
       ],
     },
   ]);

@@ -2,14 +2,16 @@
 import { useLocation, useNavigate, useRouteError } from "react-router-dom";
 
 //* redux
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-//* components-UI
+//* Components-UI
 import Button from "../Button/Button.tsx";
-// import ParallaxEffect from "../ParallaxEffect/ParallaxEffect";
 
-//* slice
-// import { exitError } from "../../../features/Recipe/recipeSlice";
+//* Auth-slice
+import { clearError } from "../../../features/auth/authSlice.ts";
+
+//* Types
+import { AppDispatch } from "../../../data/store.ts";
 
 //* styles
 import styles from "./ErrorMessage.module.css";
@@ -18,7 +20,7 @@ function ErrorMessage({ message = "Error" }) {
   const error = useRouteError();
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
 
   function handleError() {
@@ -29,17 +31,15 @@ function ErrorMessage({ message = "Error" }) {
     } else {
       navigate(-1);
     }
-    // dispatch(exitError());
+    dispatch(clearError());
   }
-
-  console.error(message || error);
 
   return (
     <div className={styles.container}>
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
 
-      {/* <i>{error?.statusText || error?.message || message}</i> */}
+      <i>{error?.statusText || error?.message || message}</i>
 
       <Button onClick={handleError} variant="blue-hollow">
         Ok

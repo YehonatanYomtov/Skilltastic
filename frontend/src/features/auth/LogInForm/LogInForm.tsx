@@ -1,84 +1,84 @@
-//* react-hooks
+//* React-hooks
 import { useEffect, useRef, useState } from "react";
 
-//* react-router
+//* React-router
 import { Link, useNavigate } from "react-router-dom";
 
-//* redux-hooks
-import { useDispatch } from "react-redux";
+//* Redux-hooks
+import { useDispatch, useSelector } from "react-redux";
 
-//* components-UI
+//* Components-UI
 import Button from "../../../components/ui/Button/Button.tsx";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner.tsx";
 import ErrorMessage from "../../../components/ui/ErrorMessage/ErrorMessage.tsx";
-// import ParallaxEffect from "../../../components/ui/ParallaxEffect/ParallaxEffect.tsx";
-// import PopUp from "../../../components/ui/PopUp/PopUp.tsx";
+import PopUp from "../../../components/ui/PopUp/PopUp.tsx";
 
-//* user-slice
-// import { signin } from "../../features/User/userSlice";
+//* Auth-slice
+import { login } from "../authSlice.ts";
 
-//* styles
+//* Types
+import { AppDispatch, RootState } from "../../../data/store.ts";
+
+//* Styles
 import styles from "./LogInForm.module.css";
 
 function LogInForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState("");
+  const [alert, setAlert] = useState<string>("");
 
-  // const status = useSelector((state) => state.user.status);
-  // const error = useSelector((state) => state.user.error);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const status = "";
-  const error = "";
+  const status = useSelector((state: RootState) => state.auth.status);
+  const error = useSelector((state: RootState) => state.auth.error);
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const inputRef = useRef(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const email: string = emailRef.current?.value || "";
+    const password: string = passwordRef.current?.value || "";
+
     if (email === "" || password === "") {
       return setAlert("One or more inputs are empty!");
     }
 
-    // dispatch(signin({ email, password }));
+    dispatch(login({ email, password }));
     navigate("/");
   }
 
   useEffect(() => {
-    inputRef.current?.focus();
+    emailRef.current?.focus();
   }, []);
 
   return (
     <div className={styles.container_main}>
       {status === "error" && error && <ErrorMessage message={error} />}
 
-      {status === "loading" && !error && <LoadingSpinner />}
+      {status === "loading" && !error && !user && <LoadingSpinner />}
 
-      {status !== "loading" && !error && (
-        // <ParallaxEffect glareColor={"#98d4ffc0"} glare={0.18}>
+      {(status === "success" || status === "idle") && !error && (
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.blur}></div>
           <h1>Log In</h1>
 
           <input
-            ref={inputRef}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            ref={emailRef}
             className={styles.input}
             type="email"
             placeholder="Email..."
           />
 
           <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            ref={passwordRef}
             className={styles.input}
             type="password"
             placeholder="Password..."
           />
 
-          {/* {alert !== "" && <PopUp>{alert}</PopUp>} */}
+          {alert !== "" && <PopUp>{alert}</PopUp>}
 
           <div className={styles.no_account}>
             Don`t have an account?
@@ -92,7 +92,6 @@ function LogInForm() {
 
           {error && <p className={styles.error}>{error}</p>}
         </form>
-        // </ParallaxEffect>
       )}
     </div>
   );

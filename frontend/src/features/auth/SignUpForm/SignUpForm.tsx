@@ -31,11 +31,9 @@ function SignUpForm() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
-  // const status = useSelector((state) => state.user.status);
-  // const error = useSelector((state) => state.user.error);
+  const status = useSelector((state: RootState) => state.auth.status);
+  const error = useSelector((state: RootState) => state.auth.error);
   const user = useSelector((state: RootState) => state.auth.user);
-  const status: string = "idle";
-  const error: string = "";
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -55,19 +53,13 @@ function SignUpForm() {
       return setAlert("Password and ConfirmPassword do not match!");
     }
 
-    console.log("USER --> ", user);
+    dispatch(signup({ email, password }));
 
-    if (user) {
-      dispatch(signup({ email, password }));
+    if (emailRef.current) emailRef.current.value = "";
+    if (passwordRef.current) passwordRef.current.value = "";
+    if (confirmPasswordRef.current) confirmPasswordRef.current.value = "";
 
-      if (emailRef.current) emailRef.current.value = "";
-      if (passwordRef.current) passwordRef.current.value = "";
-      if (confirmPasswordRef.current) confirmPasswordRef.current.value = "";
-
-      return navigate("/");
-    } else {
-      setAlert("Error with Firebase Auth!");
-    }
+    return navigate("/");
   }
 
   useEffect(() => {
@@ -95,9 +87,9 @@ function SignUpForm() {
     <div className={styles.container_main}>
       {status === "error" && error && <ErrorMessage message={error} />}
 
-      {status === "loading" && !error && <LoadingSpinner />}
+      {status === "loading" && !error && !user && <LoadingSpinner />}
 
-      {status !== "loading" && !error && (
+      {(status === "success" || status === "idle") && !error && (
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.blur}></div>
           <h1>Sign Up</h1>
