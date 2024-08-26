@@ -13,7 +13,7 @@ import AppLayout from "../layout/AppLayout.tsx";
 //* pages
 import Home from "../pages/Home/Home.tsx";
 import Profile from "../pages/Profile/Profile.tsx";
-import Courses from "../pages/Courses/Courses.tsx";
+// import Courses from "../pages/Courses/Courses.tsx";
 import Contact from "../pages/Contact/Contact.tsx";
 // import UserPage from "../pages/UserPage/UserPage";
 
@@ -30,6 +30,11 @@ import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 import { RootState } from "../data/store.ts";
 import { useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth.ts";
+import SubLayout from "../layout/SubLayout/SubLayout.tsx";
+import FavoriteCourses from "../features/course/FavoriteCourses/FavoriteCourses.tsx";
+import CourseWishlist from "../features/course/CourseWishlist/CourseWishlist.tsx";
+import MyCreatedCourses from "../features/course/MyCreatedCourses/MyCreatedCourses.tsx";
+import OwnedCourses from "../features/course/OwnedCourses/OwnedCourses.tsx";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
@@ -81,23 +86,56 @@ function AppRouter() {
               <Profile />
             </ProtectedRoute>
           ),
+          children: [{}],
         },
         {
           path: "courses",
-          element: (
-            <ProtectedRoute>
-              <Courses />
-            </ProtectedRoute>
-          ),
+          element: <SubLayout />,
+          children: [
+            {
+              path: "owned",
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  <OwnedCourses />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "created",
+              element: (
+                <ProtectedRoute>
+                  <MyCreatedCourses />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "wishlist",
+              element: (
+                <ProtectedRoute>
+                  <CourseWishlist />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "favorites",
+              element: (
+                <ProtectedRoute>
+                  <FavoriteCourses />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "create-course",
+              element: (
+                <ProtectedRoute>
+                  <CourseCreation />
+                </ProtectedRoute>
+              ),
+            },
+          ],
         },
-        {
-          path: "courses/new",
-          element: (
-            <ProtectedRoute>
-              <CourseCreation />
-            </ProtectedRoute>
-          ),
-        },
+
         {
           path: "courses/:courseId",
           element: (
@@ -106,19 +144,12 @@ function AppRouter() {
             </ProtectedRoute>
           ),
         },
+
         {
           path: "contact",
           element: (
             <ProtectedRoute>
               <Contact />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "profile/create-course",
-          element: (
-            <ProtectedRoute>
-              <CourseCreation />
             </ProtectedRoute>
           ),
         },

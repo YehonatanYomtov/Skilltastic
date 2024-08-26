@@ -5,16 +5,29 @@
 
   /** Main-Colors */
   --clr--main-primary: white;
+  --clr--main-bg-primary: white;
+
   --clr--main-secondary: rgb(73, 73, 73);
+  --clr--main-bg-secondary: #e6f3ff;
+
   --clr--main-blue: #2d9dff;
+
   --clr--main-grey-light: rgb(151, 155, 157);
 
+  --clr-text-secondary: rgb(129, 129, 129);
+
+  /** Hover */
   --clr--main-hover-primary: rgb(245, 245, 245);
+
   --clr--main-hover-secondary: rgb(89, 89, 89);
+  --clr--main--hover-bg-secondary: #d9edff;
+
   --clr--main-hover-blue: #47a9ff;
 
+  /** Active */
   --clr--main-blue-bg-active: rgb(230, 246, 255);
   --clr--main-blue-active: #1c95ff8f;
+  --clr--main--hover-bg-secondary-active: #d2eaff;
 
   --clr--nav-bg: white;
 
@@ -37,8 +50,12 @@
 :root.dark {
   /** Main-Colors */
   /* --clr--main-primary: rgb(0, 30, 65); */
-  --clr--main-primary: rgb(15, 11, 72);
+  --clr--main-primary: #131413;
+  --clr--main-bg-primary: rgb(15, 11, 72);
+
   --clr--main-secondary: rgb(255, 255, 255);
+  --clr--main-bg-secondary: #292b2c;
+
   --clr--main-blue: rgb(45, 157, 255);
 
   --clr--main-primary-bg-active: rgb(84, 80, 209);

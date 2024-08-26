@@ -4,14 +4,34 @@ form {
 
   input {
     width: 100%;
-    border-radius: 1.2rem;
+    border: 1.5px solid var(--clr--main-secondary);
+    border-radius: 5rem;
     padding: 0.8rem 1rem 0.8rem 3rem;
+    font-size: 1rem;
+    letter-spacing: 0.03rem;
+    box-shadow: var(--box-shadow-1);
+  }
+
+  input:focus {
+    border: 1.5px solid var(--clr--main-blue);
+  }
+
+  input:focus::-webkit-input-placeholder {
+    color: var(--clr--main-blue);
+  }
+
+  input::-webkit-input-placeholder {
+    color: rgb(160, 160, 160);
   }
 
   button {
     position: absolute;
-    top: -0.45rem;
-    left: -0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.3rem;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
     padding: 0;
 
     i {
@@ -25,7 +45,5 @@ form {
         color: var(--clr--main-blue);
       }
     }
-
-    background-color: transparent;
   }
 }

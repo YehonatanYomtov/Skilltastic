@@ -133,13 +133,7 @@ function Navbar() {
                     visibleSubMenu !== "profile" ? styles.hidden : ""
                   }`}
                 >
-                  <Link to="/profile/change">Change Profile</Link>
-
-                  <NavbarLink subNavLink={true} to="/profile/create-course">
-                    <i className="fa-regular fa-square-plus">
-                      <span>Create New Course</span>
-                    </i>
-                  </NavbarLink>
+                  <Link to="/profile/change">Edit Profile</Link>
 
                   <Link to="/profile/settings">Settings</Link>
                 </div>
@@ -160,9 +154,19 @@ function Navbar() {
                     visibleSubMenu !== "courses" ? styles.hidden : ""
                   }`}
                 >
+                  <Link to="/courses/owned">Owned courses</Link>
+
+                  <Link to="/courses/created">My created courses</Link>
+
                   <Link to="/courses/wishlist">Wishlist</Link>
 
                   <Link to="/courses/favorites">Favorite Courses</Link>
+
+                  <NavbarLink subNavLink={true} to="/courses/create-course">
+                    <i className="fa-regular fa-square-plus">
+                      <span>Create New Course</span>
+                    </i>
+                  </NavbarLink>
                 </div>
               )}
             </li>

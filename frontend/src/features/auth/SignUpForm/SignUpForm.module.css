@@ -1,10 +1,9 @@
-/* .container_main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-position: center;
-  background-size: cover;
-} */
+.container_main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .form_container {
   height: 38rem;
