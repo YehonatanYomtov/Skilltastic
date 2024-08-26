@@ -10,7 +10,6 @@ type BreakpointType = {
   max: number;
   min: number;
 };
-
 type ResponsiveType = {
   [key: string]: {
     breakpoint: BreakpointType;

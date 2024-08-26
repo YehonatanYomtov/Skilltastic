@@ -1,53 +1,5 @@
 .logo {
   font-size: 2.5rem;
-  color: var(--clr--main-primary-active);
+  color: var(--clr--main-blue);
   margin-bottom: 2rem;
 }
-
-/* .container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  .logo {
-    width: 4.5rem;
-  }
-
-  .text {
-    color: var(--clr--main-green);
-    font-weight: var(--fw-bold);
-    font-size: var(--fs-5);
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .container {
-    transition: all 0.3s;
-
-    .logo {
-      width: 3rem;
-    }
-
-    .text {
-      font-size: var(--fs-3);
-    }
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  .container {
-    .logo {
-      width: 2.5rem;
-    }
-
-    .text {
-      display: none;
-    }
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .container {
-    display: none;
-  }
-} */

@@ -5,27 +5,39 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 //* UI-components
-// import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 //* Styles
-// import styles from "./ProtectedRoute.module.css";
+import { StringObject } from "../../../../types";
 
-import { ReactNode } from "react";
+//* Types
 import { RootState } from "../../../data/store";
-
+import { ReactNode } from "react";
 type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector<RootState>((state) => state.auth.user);
+  const status = useSelector<RootState>((state) => state.auth.status);
 
-  // If the user is not logged in, redirect to the login page
-  if (!user) {
-    return <Navigate replace to="/log-in" />;
-  }
+  const loadingSpinnerStyles: StringObject = {
+    height: "100vh",
+    width: "100%",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
 
-  // If the user is logged in, render the children components
+  if (status === "Loading" || status === "idle")
+    return <LoadingSpinner style={loadingSpinnerStyles} />;
+
+  if (!user) return <Navigate replace to="/log-in" />;
+
   return <>{children}</>;
 }
 

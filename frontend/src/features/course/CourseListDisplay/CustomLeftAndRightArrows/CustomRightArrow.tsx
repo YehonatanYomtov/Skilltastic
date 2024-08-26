@@ -1,5 +1,5 @@
 //* Styles
-import styles from "./CustomLeftAndRightArrows.module.css";
+import styles from "../CourseListDisplay.module.css";
 
 //* Types
 import { ClickHandler } from "../../../../../types/index.ts";

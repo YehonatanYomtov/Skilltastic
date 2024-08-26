@@ -17,7 +17,8 @@ function useAuth() {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(authIsReady(user));
+        const { uid, email } = user;
+        dispatch(authIsReady({ uid, email }));
       } else {
         dispatch(authIsReady(null));
       }

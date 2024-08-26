@@ -20,7 +20,9 @@ function BackButton() {
     });
   }
 
-  return location.pathname !== "/" ? (
+  return location.pathname !== "/" &&
+    location.pathname !== "/log-in" &&
+    location.pathname !== "/sign-up" ? (
     <button
       style={
         location.pathname === "/user"

@@ -91,7 +91,6 @@ function SignUpForm() {
 
       {(status === "success" || status === "idle") && !error && (
         <form className={styles.form_container} onSubmit={handleSubmit}>
-          <div className={styles.blur}></div>
           <h1>Sign Up</h1>
 
           <input

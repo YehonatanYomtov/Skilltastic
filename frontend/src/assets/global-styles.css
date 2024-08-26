@@ -6,11 +6,15 @@
   /** Main-Colors */
   --clr--main-primary: white;
   --clr--main-secondary: rgb(73, 73, 73);
-  --clr--main-blue: rgb(45, 157, 255);
+  --clr--main-blue: #2d9dff;
   --clr--main-grey-light: rgb(151, 155, 157);
 
-  --clr--main-primary-bg-active: rgb(237, 241, 255);
-  --clr--main-primary-active: rgb(51, 49, 222);
+  --clr--main-hover-primary: rgb(245, 245, 245);
+  --clr--main-hover-secondary: rgb(89, 89, 89);
+  --clr--main-hover-blue: #47a9ff;
+
+  --clr--main-blue-bg-active: rgb(230, 246, 255);
+  --clr--main-blue-active: #1c95ff8f;
 
   --clr--nav-bg: white;
 
@@ -73,10 +77,6 @@ body,
   align-items: center;
 }
 
-html {
-  left: 3.6rem;
-}
-
 body {
   transition: all 0.1s;
   background-color: var(--clr--main-primary);
@@ -85,12 +85,6 @@ body {
 
 #root {
   padding: 2rem 2rem 1rem 2rem;
-}
-
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 a {
@@ -104,16 +98,7 @@ li {
 
 button {
   border-radius: 0.4rem;
-  border: 1px solid transparent;
-  /* background-color: #1a1a1a; */
-  padding: 0.5rem 0.7rem;
   cursor: pointer;
-  /* transition: border-color 0.25s; */
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 input:focus,

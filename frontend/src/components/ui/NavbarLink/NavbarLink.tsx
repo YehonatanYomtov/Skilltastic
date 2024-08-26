@@ -1,25 +1,33 @@
-//* react-router
+//* React-router
 import { NavLink, NavLinkProps } from "react-router-dom";
 
-//* styles
+//* Styles
 import styles from "./NavbarLink.module.css";
 import { ReactNode } from "react";
 
-//* types
+//* Types
 type NavbarLinkProps = {
   to: string;
+  subNavLink?: boolean;
   children: ReactNode;
-} & Omit<NavLinkProps, "to">; // Use Omit to exclude the 'to' prop from NavLinkProps since it's already defined
+} & Omit<NavLinkProps, "to">;
 
-function NavbarLink({ to = "/", children, ...props }: NavbarLinkProps) {
+function NavbarLink({
+  subNavLink = false,
+  to,
+  children,
+  ...props
+}: NavbarLinkProps) {
   return (
     <NavLink
-      className={({ isActive }: { isActive: boolean }) =>
-        isActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link
+      className={({ isActive }) =>
+        `${styles.nav_link} ${subNavLink ? styles.subNavLink : ""} ${
+          isActive ? styles.active : ""
+        }`
       }
       to={to}
-      end
-      {...props} // Spread other NavLinkProps here
+      end={subNavLink ? false : true}
+      {...props}
     >
       {children}
     </NavLink>

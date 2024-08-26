@@ -15,21 +15,36 @@
   transition: all 0.1s;
 
   &:hover {
-    color: var(--clr--main-primary-active);
+    color: var(--clr--main-blue);
 
     i {
-      scale: 1.2;
-      transition: scale 0.2s;
+      scale: 1.1;
+      transition: scale 0.1s;
     }
   }
 }
 
 .nav_link.active {
-  color: var(--clr--main-primary-active);
-  background-color: var(--clr--main-primary-bg-active);
+  color: var(--clr--main-blue);
+  background-color: var(--clr--main-blue-bg-active);
   border: 2px solid rgba(255, 255, 255, 0.309);
   border-right: none;
   box-shadow: var(--box-shadow-1);
   transition: 0.4s;
   transition: box-shadow none;
+}
+
+.subNavLink {
+  a {
+    width: 100%;
+  }
+
+  i {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 1rem;
+    }
+  }
 }

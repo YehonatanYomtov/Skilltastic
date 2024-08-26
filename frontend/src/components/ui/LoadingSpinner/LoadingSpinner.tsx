@@ -14,8 +14,8 @@ function LoadingSpinner({
   style,
   height = 80,
   width = 80,
-  color = "#4fa94d",
-  secondaryColor = "#4fa94d",
+  color = "#2d9dff",
+  secondaryColor = "#2d9dff",
   strokeWidth = 2,
   strokeWidthSecondary = 2,
 }: LoadingSpinnerProps) {

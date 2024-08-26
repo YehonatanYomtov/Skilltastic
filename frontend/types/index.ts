@@ -1,5 +1,10 @@
 import React from "react";
 
+//* Object of strings
+export type StringObject = {
+  [key: string]: string;
+};
+
 //* Basic event handler types
 //* Buttons
 export type ClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -24,3 +29,11 @@ export type CourseCard = {
   tag?: string;
   imageUrl: string;
 };
+
+//* User-auth-type
+export type User = {
+  uid: string | null;
+  email: string | null;
+};
+
+export type AuthUser = User | null;

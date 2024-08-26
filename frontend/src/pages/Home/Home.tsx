@@ -139,13 +139,11 @@ const courseList = [
 function HomePage() {
   return (
     <div className={styles.container_main}>
-      <h1>Home</h1>
-
-      <WelcomeMessage />
-
       <section>
         <SearchCoursesInput />
       </section>
+
+      <WelcomeMessage />
 
       <section>
         <IntroCarousel />

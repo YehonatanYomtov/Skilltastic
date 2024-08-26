@@ -115,6 +115,15 @@ function AppRouter() {
           ),
         },
         {
+          path: "profile/create-course",
+          element: (
+            <ProtectedRoute>
+              <CourseCreation />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
           path: "/sign-up",
           element: !user ? <SignUpForm /> : <Navigate replace to="/" />,
         },

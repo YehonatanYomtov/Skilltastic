@@ -1,7 +1,7 @@
-//* react-hooks
+//* React-hooks
 import { useEffect, useState } from "react";
 
-//* styles
+//* Styles
 import styles from "./DarkLightModeButton.module.css";
 
 function DarkLightModeButton() {
@@ -11,6 +11,7 @@ function DarkLightModeButton() {
   }
 
   const rootEl = document.querySelector(":root");
+
   useEffect(() => {
     if (!lightTheme) {
       rootEl.setAttribute("class", "dark");
@@ -24,22 +25,50 @@ function DarkLightModeButton() {
   }, [lightTheme, rootEl]);
 
   return (
-    <button
-      style={{
-        backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
-        border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
-      }}
-      className={styles.theme_button_base}
-      onClick={handleThemeMode}
-    >
-      <div className={lightTheme ? styles.light_theme : styles.dark_theme}>
-        <img
-          src={lightTheme ? "/images/Light-mode.png" : "/images/Dark-mode.png"}
-          alt="Theme"
-        />
-      </div>
-    </button>
+    <div className={styles.container}>
+      <button
+        onClick={handleThemeMode}
+        style={{
+          backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
+          border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
+        }}
+        className={styles.light}
+      >
+        <i className="fa-regular fa-sun"></i>
+      </button>
+
+      <button
+        onClick={handleThemeMode}
+        style={{
+          backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
+          border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
+        }}
+        className={styles.dark}
+      >
+        <i className="fa-regular fa-moon"></i>
+      </button>
+    </div>
   );
 }
 
 export default DarkLightModeButton;
+
+{
+  /* <button
+style={{
+  backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
+  border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
+}}
+className={styles.theme_button_base}
+onClick={handleThemeMode}
+>
+<div className={lightTheme ? styles.light_theme : styles.dark_theme}>
+  <img
+    src={
+      lightTheme ? "/images/Light-mode.png" : "/images/Dark-mode.png"
+    }
+    alt="Theme"
+  />
+</div>
+</button> */
+}

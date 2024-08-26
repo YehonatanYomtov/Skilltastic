@@ -34,6 +34,11 @@ type EmailAndPassword = {
   password: string;
 };
 
+type AuthUser = {
+  uid: string;
+  email: string | null;
+};
+
 //* Initial state
 const initialState: AuthState = {
   status: "idle",
@@ -48,7 +53,6 @@ const initialState: AuthState = {
 export const login = createAsyncThunk(
   "auth/login",
   async function ({ email, password }: EmailAndPassword) {
-    console.log(email, password);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -85,9 +89,9 @@ export const logout = createAsyncThunk("auth/logout", async function () {
   await signOut(auth);
 });
 
-export const authIsReady = createAsyncThunk(
+export const authIsReady = createAsyncThunk<AuthUser | null, AuthUser | null>(
   "auth/authIsReady",
-  async function (user) {
+  async function (user: AuthUser | null) {
     return user;
   }
 );
@@ -132,6 +136,13 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+      })
+      .addCase(authIsReady.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(authIsReady.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
     // addCaseFullTemplate(builder, signup, {
     //   user: "payload",
