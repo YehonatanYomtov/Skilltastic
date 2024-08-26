@@ -1,39 +1,42 @@
-//* react-hooks
+//* React-hooks
 import { useState } from "react";
 
-//* redux
-import { useDispatch, useSelector } from "react-redux";
+//* Redux
+import { useSelector } from "react-redux";
 
-//* slice-user
-import { setIsClicked, updateProfileImage } from "../userSlice";
+//* Slice-user
+// import { setIsClicked, updateProfileImage } from "../userSlice";
 
-//* components-UI
+//* Components-ui
 import Button from "../../../components/ui/Button/Button";
 
-//* styles
+//* Types
+import { RootState } from "../../../data/store";
+
+//* Styles
 import styles from "./UploadImageSection.module.css";
 
-function UploadImageSection({ isClicked }) {
-  const [selectedImage, setSelectedImage] = useState(null);
+function UploadImageSection() {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const status = useSelector((state) => state.user.status);
+  const status = useSelector<RootState>((state) => state.auth.status);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  function handleImageSelected(e) {
-    if (e.target.files[0]) {
+  function handleImageSelected(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files[0]) {
       setSelectedImage(e.target.files[0]);
     }
   }
 
   function handleImageUpload() {
-    dispatch(updateProfileImage(selectedImage));
-    dispatch(setIsClicked());
+    // dispatch(updateProfileImage(selectedImage));
+    // dispatch(setIsClicked());
   }
 
   return (
     <div
-      style={isClicked ? { alignSelf: "center" } : {}}
+      // style={isClicked ? { alignSelf: "center" } : {}}
       className={styles.file_input_container}
     >
       <label className={styles.file_input}>
