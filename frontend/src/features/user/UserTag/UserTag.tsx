@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 //* redux-hooks
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 //* components-UI
 // import ParallaxEffect from "../../../components/ui/ParallaxEffect/ParallaxEffect";
@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //* styles
 import styles from "./UserTag.module.css";
+import { DNA } from "react-loader-spinner";
 
 function UserTag() {
   const [isActive, setIsActive] = useState(false);
@@ -26,7 +27,7 @@ function UserTag() {
   // const email = useSelector((state) => state.user.user.email);
   // const photoURL = useSelector((state) => state.user.user.photoURL);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   function handleLogout() {
     // dispatch(logout());
@@ -42,7 +43,7 @@ function UserTag() {
         {/* <ParallaxEffect> */}
         <div className={styles.image_container}>
           {status === "loading" ? (
-            <Dna height={22} width={22} />
+            <DNA height={22} width={22} />
           ) : (
             <img
               className={`${styles.image} ${styles.spin}`}

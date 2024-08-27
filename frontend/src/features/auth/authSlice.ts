@@ -17,26 +17,20 @@ import {
 // } from "../../utils/addCaseTemplate.ts";
 
 //* Types
-
 type AuthUser = {
   uid: string;
   email: string | null;
 };
 
-interface AuthState {
+type AuthState = {
   status: "idle" | "loading" | "success" | "error";
   user: AuthUser | null;
   error: string | null;
-}
+};
 
 type EmailAndPassword = {
   email: string;
   password: string;
-};
-
-type AuthUser = {
-  uid: string;
-  email: string | null;
 };
 
 //* Initial state
@@ -49,7 +43,6 @@ const initialState: AuthState = {
 };
 
 //* Async thunks
-
 export const login = createAsyncThunk(
   "auth/login",
   async function ({ email, password }: EmailAndPassword) {

@@ -1,74 +1,51 @@
 //* React-hooks
 import { useEffect, useState } from "react";
 
+//* Components-UI
+import ToggleThemeButton from "./ToggleThemeButton/ToggleThemeButton";
+
 //* Styles
 import styles from "./DarkLightModeButton.module.css";
 
 function DarkLightModeButton() {
-  const [lightTheme, setLightTheme] = useState(true);
-  function handleThemeMode() {
-    setLightTheme((cur) => !cur);
-  }
-
-  const rootEl = document.querySelector(":root");
+  const [colorTheme, setColorTheme] = useState<string>("light");
 
   useEffect(() => {
-    if (!lightTheme) {
-      rootEl.setAttribute("class", "dark");
-      localStorage.setItem("theme", "dark");
+    const rootEl = document.querySelector(":root") as HTMLElement | null;
+
+    if (rootEl) {
+      if (colorTheme === "dark") {
+        rootEl.setAttribute("class", "dark");
+        //! Switch to store in the database
+        localStorage.setItem("theme", "dark");
+      }
+      if (colorTheme === "light") {
+        document.documentElement.style.getPropertyValue("color-scheme");
+        rootEl.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
     }
-    if (lightTheme) {
-      document.documentElement.style.getPropertyValue("color-scheme", "light");
-      rootEl.removeAttribute("class", "dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [lightTheme, rootEl]);
+  }, [colorTheme]);
 
   return (
     <div className={styles.container}>
-      <button
-        onClick={handleThemeMode}
-        style={{
-          backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
-          border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
-        }}
-        className={styles.light}
+      <ToggleThemeButton
+        isActive={colorTheme === "light"}
+        theme={colorTheme}
+        onClick={() => setColorTheme("light")}
       >
         <i className="fa-regular fa-sun"></i>
-      </button>
+      </ToggleThemeButton>
 
-      <button
-        onClick={handleThemeMode}
-        style={{
-          backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
-          border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
-        }}
-        className={styles.dark}
+      <ToggleThemeButton
+        isActive={colorTheme === "dark"}
+        theme={colorTheme}
+        onClick={() => setColorTheme("dark")}
       >
         <i className="fa-regular fa-moon"></i>
-      </button>
+      </ToggleThemeButton>
     </div>
   );
 }
 
 export default DarkLightModeButton;
-
-{
-  /* <button
-style={{
-  backgroundColor: `${lightTheme ? "#f4f4f4" : "#50605d"}`,
-  border: `2px solid ${lightTheme ? "#b4b4b4" : "#384442"}`,
-}}
-className={styles.theme_button_base}
-onClick={handleThemeMode}
->
-<div className={lightTheme ? styles.light_theme : styles.dark_theme}>
-  <img
-    src={
-      lightTheme ? "/images/Light-mode.png" : "/images/Dark-mode.png"
-    }
-    alt="Theme"
-  />
-</div>
-</button> */
-}

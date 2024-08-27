@@ -3,12 +3,14 @@ import { ChangeEvent, useState } from "react";
 //* Styles
 import styles from "./CourseCreation.module.css";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../../data/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../data/store";
 import { usernameFromEmailExtractor } from "../../../utils/usernameFromEmailExtractor";
 import Input from "../../../components/ui/Input/Input";
 import Select from "../../../components/ui/Select/Select";
 import { AuthUser } from "../../../../types";
+import { createCourse } from "../courseSlice";
+import Button from "../../../components/ui/Button/Button";
 
 //? To utils folder
 const formatDuration = (duration: number): string => {
@@ -26,11 +28,13 @@ function CourseCreation() {
     videoFile: null as File | null,
     duration: 0,
     category: "",
-    price: "",
+    price: 0,
     currency: "USD",
   });
 
   const user = useSelector<RootState, AuthUser>((state) => state.auth.user);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   function handleInputChange(
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -73,7 +77,9 @@ function CourseCreation() {
     }
   }
 
-  const handleUpload = async () => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
     const {
       title,
       description,
@@ -90,113 +96,109 @@ function CourseCreation() {
       title,
       teacherName: usernameFromEmailExtractor(user?.email || ""),
       description,
-      price,
+      //! Check if needed to switch to a number
+      price: +price,
       currency,
       duration,
       category,
     };
 
     console.log(newCourse);
-
-    // const courseData = new courseData();
-    // courseData.append('video', selectedFile);
-
-    // try {
-    //   const response = await fetch('YOUR_SERVER_ENDPOINT', {
-    //     method: 'POST',
-    //     body: courseData,
-    //   });
-
-    //   if (response.ok) {
-    //     alert('Video uploaded successfully!');
-    //   } else {
-    //     alert('Failed to upload video');
-    //   }
-    // } catch (error) {
-    //   console.error('Error uploading video:', error);
-    //   alert('An error occurred while uploading the video');
-    // }
-  };
+    dispatch(createCourse(newCourse));
+  }
 
   return (
-    <div className={styles.container}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <h1>Course Creation</h1>
-      <section>
-        <h3>Upload a Video</h3>
-        <input
-          type="file"
-          accept="video/*"
-          name="videoFile"
-          onChange={handleFileChange}
-        />
-        {videoPreview && (
+
+      <h3>Upload a Video</h3>
+
+      <input
+        type="file"
+        accept="video/*"
+        name="videoFile"
+        onChange={handleFileChange}
+      />
+      {videoPreview && (
+        <div>
+          <h3>Preview:</h3>
+
+          <video src={videoPreview} controls width="700" />
+
+          <h3>
+            Course teacher: {usernameFromEmailExtractor(user?.email || "")}
+          </h3>
+
           <div>
-            <h3>Preview:</h3>
-            <video src={videoPreview} controls width="700" />
-            <h3>
-              Course teacher: {usernameFromEmailExtractor(user?.email || "")}
-            </h3>
+            <label>Course title: </label>
+            <Input
+              name="title"
+              type="text"
+              value={courseData.title}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div>
+            <label>Course description: </label>
+            <textarea
+              name="description"
+              value={courseData.description}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div>
+            <label>Course price: </label>
+            <Input
+              name="price"
+              type="number"
+              value={courseData.price}
+              onChange={handleInputChange}
+              required
+            />
+
             <div>
-              <label>Course title: </label>
-              <Input
-                name="title"
-                type="text"
-                value={courseData.title}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Course description: </label>
-              <textarea
-                name="description"
-                value={courseData.description}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Course price: </label>
-              <Input
-                name="price"
-                type="number"
-                value={courseData.price}
-                onChange={handleInputChange}
-              />
-              <div>
-                <label>Currency:</label>
-                <Select
-                  name="currency"
-                  value={courseData.currency}
-                  onChange={handleInputChange}
-                  options={[
-                    { value: "USD", label: "USD" },
-                    { value: "ILS", label: "ILS" },
-                    { value: "EURO", label: "EURO" },
-                  ]}
-                />
-              </div>
-            </div>
-            <div>
-              <h3>Video duration:</h3>
-              <p>{formatDuration(courseData.duration)}</p>
-            </div>
-            <div>
-              <label>Course category:</label>
+              <label>Currency:</label>
               <Select
-                name="category"
-                value={courseData.category}
+                name="currency"
+                value={courseData.currency}
                 onChange={handleInputChange}
                 options={[
-                  { value: "programming", label: "Programming" },
-                  { value: "sports", label: "Sports" },
-                  { value: "electronics", label: "Electronics" },
+                  { value: "USD", label: "USD" },
+                  { value: "ILS", label: "ILS" },
+                  { value: "EURO", label: "EURO" },
                 ]}
               />
             </div>
           </div>
-        )}
-        <button onClick={handleUpload}>Upload Video</button>
-      </section>
-    </div>
+
+          <div>
+            <h3>Video duration:</h3>
+
+            <p>{formatDuration(courseData.duration)}</p>
+          </div>
+
+          <div>
+            <label>Course category:</label>
+            <Select
+              name="category"
+              value={courseData.category}
+              onChange={handleInputChange}
+              options={[
+                { value: "programming", label: "Programming" },
+                { value: "sports", label: "Sports" },
+                { value: "electronics", label: "Electronics" },
+              ]}
+            />
+          </div>
+          <Button className={styles.submit_btn} type="submit">
+            Upload course
+          </Button>
+        </div>
+      )}
+    </form>
   );
 }
 

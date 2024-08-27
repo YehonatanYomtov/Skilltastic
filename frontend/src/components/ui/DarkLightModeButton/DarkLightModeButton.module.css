@@ -7,24 +7,8 @@
   flex-direction: column;
   align-items: center;
   gap: 0.2rem;
-  border: 2px solid rgba(242, 229, 255, 0.352);
+  border: 2px solid rgba(255, 255, 255, 0.235);
   padding: 0.4rem;
   border-radius: 0.4rem;
   box-shadow: var(--box-shadow-1) inset;
-
-  .light,
-  .dark {
-    position: relative;
-    border: 2px solid rgba(171, 87, 255, 0.352);
-    border-radius: 0.4rem;
-    height: 3rem;
-    width: 3rem;
-    padding: 0;
-    background-color: var(--clr--main-primary);
-    box-shadow: var(--box-shadow-1);
-
-    &:hover {
-      background-color: var(--clr--main-hover-primary);
-    }
-  }
 }

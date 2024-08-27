@@ -12,9 +12,15 @@ type SelectProps = {
   options: OptionsType[];
 };
 
-function Select({ name, value, onChange, options }: SelectProps) {
+function Select({
+  name,
+  value,
+  onChange,
+  options,
+  ...restOdProps
+}: SelectProps) {
   return (
-    <select name={name} value={value} onChange={onChange}>
+    <select name={name} value={value} onChange={onChange} {...restOdProps}>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

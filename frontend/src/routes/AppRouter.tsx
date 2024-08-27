@@ -47,7 +47,6 @@ function AppRouter() {
   // const userSignedIn = useSelector((state) => state.user.userSignedIn);
   // const error = useSelector((state) => state.user.error);
   const user = useSelector((state: RootState) => state.auth.user);
-  console.log("user: ", user);
 
   useAuth();
 
