@@ -4,7 +4,7 @@ export type Price = {
   id: number;
   amount: number;
   currency: string;
-  discount?: number;
+  discount: number;
 };
 
 export type Course = {

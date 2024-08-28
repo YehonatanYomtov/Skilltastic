@@ -8,33 +8,28 @@ import {
 } from "../models/courseModel";
 
 import db from "../config/db";
-
-// export const createCourse = async (req: Request, res: Response) => {
-//   try {
-//     const newCourse = req.body;
-//     const createdCourse = await _createCourse(newCourse);
-
-//     console.log("CONTROLLER -> Created Course:", createdCourse);
-
-//     res.status(201).json(createdCourse);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Failed to create course" });
-//   }
-// };
+import { uploadFile } from "../utils/uploadFile";
 
 export async function createCourse(req: Request, res: Response) {
-  const {
-    title,
-    description,
-    teacherAuthId,
-    amount,
-    currency,
-    discount,
-    videos,
-  } = req.body;
+  const { title, description, teacherAuthId, amount, currency, discount } =
+    req.body;
+
+  const image = req.file;
+  const videoFiles = req.files as Express.Multer.File[];
 
   try {
+    // Upload image to Firebase Storage
+    const imageUrl = image
+      ? await uploadFile(image, `courses/${Date.now()}_${image.originalname}`)
+      : null;
+
+    // Upload videos to Firebase Storage
+    const videoUrls = await Promise.all(
+      videoFiles.map((file) =>
+        uploadFile(file, `videos/${Date.now()}_${file.originalname}`)
+      )
+    );
+
     await db.transaction(async (trx) => {
       // Fetching the teacher's ID using auth_id within the transaction
       const teacher = await _findTeacherByAuthId(trx, teacherAuthId);
@@ -55,8 +50,18 @@ export async function createCourse(req: Request, res: Response) {
         priceId
       );
 
+      if (imageUrl) {
+        await trx("courses")
+          .where("id", courseId)
+          .update({ image_url: imageUrl });
+      }
+
       // Add Video to course
-      await _addVideosToCourse(trx, videos, courseId);
+      await _addVideosToCourse(
+        trx,
+        videoUrls.map((url, index) => ({ url, index: index + 1 })),
+        courseId
+      );
 
       res
         .status(201)
@@ -71,9 +76,13 @@ export async function createCourse(req: Request, res: Response) {
 
 export const getAllCourses = async (req: Request, res: Response) => {
   try {
+    const courses = await _getAllCourses();
     res.status(201).json(req.body);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to get all courses" });
+    const err = error as Error;
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to get all courses", error: err.message });
   }
 };
