@@ -11,6 +11,7 @@
 .customArrow {
   background-color: #333333d3;
   border-radius: 100%;
+  border: none;
   color: #fff;
   font-size: 1.2rem;
   width: 2.5rem;
@@ -23,6 +24,7 @@
   top: 50%;
   transform: translateY(-50%);
   transition: all 0.1s;
+  box-shadow: var(--box-shadow-3);
 
   &:hover {
     background-color: #333;

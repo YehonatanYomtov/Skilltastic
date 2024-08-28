@@ -4,7 +4,7 @@ import { memo } from "react";
 import styles from "./CourseCard.module.css";
 
 //* Types
-import { CourseCard as CourseCardType } from "../../../../types/index.ts";
+import { CourseCard as CourseCardType } from "../../../types/index.ts";
 type CourseCardProps = {
   course: CourseCardType;
 };

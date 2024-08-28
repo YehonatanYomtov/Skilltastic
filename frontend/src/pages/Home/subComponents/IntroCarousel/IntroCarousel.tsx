@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 
 //* Styles
 import styles from "./IntroCarousel.module.css";
+import IntroDisplayItem from "./IntroDisplayItem/IntroDisplayItem";
 
 //* Types
 type BreakpointType = {
@@ -38,15 +39,15 @@ function IntroCarousel() {
       containerClass={styles.container}
       itemClass={styles.item}
     >
-      <div className={styles.item} style={{ backgroundColor: "red" }}>
-        Item 1
-      </div>
-      <div className={styles.item} style={{ backgroundColor: "green" }}>
-        Item 2
-      </div>
-      <div className={styles.item} style={{ backgroundColor: "blue" }}>
-        Item 3
-      </div>
+      <IntroDisplayItem style={{ backgroundColor: "lightblue" }}>
+        Welcome to SkillTastic! where Skills are taught and learned.
+      </IntroDisplayItem>
+      <IntroDisplayItem style={{ backgroundColor: "#dde3af" }}>
+        Don't forget about your Wishlist :p
+      </IntroDisplayItem>
+      <IntroDisplayItem style={{ backgroundColor: "#d7a6d4" }}>
+        Create your own courses!
+      </IntroDisplayItem>
     </Carousel>
   );
 }

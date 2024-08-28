@@ -1,19 +1,19 @@
 //* Config-db
-import db from "config/db.ts";
+import db from "../config/db";
 
 //* Types
-import { CourseType } from "../../types/index.ts";
+import { Course } from "../types/index";
 
-export async function _createCourse(courseData: CourseType) {
-  const {
-    title,
-    teacherName,
-    description,
-    price,
-    currency,
-    duration,
-    category,
-  } = courseData;
+export async function _createCourse(courseData: Course) {
+  // const {
+  //   title,
+  //   teacherName,
+  //   description,
+  //   price,
+  //   currency,
+  //   duration,
+  //   category,
+  // } = courseData;
 
   console.log("--BACKEND--> courseData: ", courseData);
 

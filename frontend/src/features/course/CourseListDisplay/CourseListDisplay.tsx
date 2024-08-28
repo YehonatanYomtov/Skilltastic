@@ -15,7 +15,7 @@ import CustomRightArrow from "./CustomLeftAndRightArrows/CustomRightArrow";
 import styles from "./CourseListDisplay.module.css";
 
 //* Types
-import { CourseCard as CourseCardType } from "../../../../types/index.ts";
+import { CourseCard as CourseCardType } from "../../../types/index.ts";
 
 const responsive = {
   superLargeDesktop: {

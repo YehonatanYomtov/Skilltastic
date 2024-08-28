@@ -8,7 +8,7 @@ import { AppDispatch, RootState } from "../../../data/store";
 import { usernameFromEmailExtractor } from "../../../utils/usernameFromEmailExtractor";
 import Input from "../../../components/ui/Input/Input";
 import Select from "../../../components/ui/Select/Select";
-import { AuthUser } from "../../../../types";
+import { AuthUser } from "../../../types";
 import { createCourse } from "../courseSlice";
 import Button from "../../../components/ui/Button/Button";
 

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 //* Styles
-import { StringObject } from "../../../../types";
+import { StringObject } from "../../../types";
 
 //* Types
 import { RootState } from "../../../data/store";

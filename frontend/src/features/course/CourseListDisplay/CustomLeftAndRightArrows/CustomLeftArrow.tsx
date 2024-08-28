@@ -2,7 +2,7 @@
 import styles from "../CourseListDisplay.module.css";
 
 //* Types
-import { ClickHandler } from "../../../../../types/index.ts";
+import { ClickHandler } from "../../../../types/index.ts";
 
 function CustomLeftArrow({ onClick }: { onClick?: ClickHandler }) {
   return (

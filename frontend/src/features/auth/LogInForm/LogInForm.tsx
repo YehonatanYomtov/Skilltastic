@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 //* Redux-hooks
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 //* Components-UI
 import Button from "../../../components/ui/Button/Button.tsx";
@@ -14,10 +14,10 @@ import ErrorMessage from "../../../components/ui/ErrorMessage/ErrorMessage.tsx";
 import PopUp from "../../../components/ui/PopUp/PopUp.tsx";
 
 //* Auth-slice
-import { login } from "../authSlice.ts";
+// import { login } from "../authSlice.ts";
 
 //* Types
-import { AppDispatch, RootState } from "../../../data/store.ts";
+import { RootState } from "../../../data/store.ts";
 
 //* Styles
 import styles from "./LogInForm.module.css";
@@ -33,7 +33,7 @@ function LogInForm() {
   const user = useSelector((state: RootState) => state.auth.user);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,7 +45,7 @@ function LogInForm() {
       return setAlert("One or more inputs are empty!");
     }
 
-    dispatch(login({ email, password }));
+    // dispatch(login({ email, password }));
     navigate("/");
   }
 

@@ -21,7 +21,7 @@ import styles from "./Navbar.module.css";
 
 //* Types
 import { RootState } from "../../../data/store.ts";
-import { StringObject } from "../../../../types/index.ts";
+import { StringObject } from "../../../types/index.ts";
 
 function Navbar() {
   const [isExtended, setIsExtended] = useState(false);

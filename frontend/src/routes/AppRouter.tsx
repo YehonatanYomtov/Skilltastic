@@ -8,7 +8,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
 
 //* layout
-import AppLayout from "../layout/AppLayout.tsx";
+import AppLayout from "../layouts/AppLayout.tsx";
 
 //* pages
 import Home from "../pages/Home/Home.tsx";
@@ -30,7 +30,7 @@ import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 import { RootState } from "../data/store.ts";
 import { useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth.ts";
-import SubLayout from "../layout/SubLayout/SubLayout.tsx";
+import SubLayout from "../layouts/SubLayout/SubLayout.tsx";
 import FavoriteCourses from "../features/course/FavoriteCourses/FavoriteCourses.tsx";
 import CourseWishlist from "../features/course/CourseWishlist/CourseWishlist.tsx";
 import MyCreatedCourses from "../features/course/MyCreatedCourses/MyCreatedCourses.tsx";

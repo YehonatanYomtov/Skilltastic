@@ -22,7 +22,7 @@
   --clr--main-hover-secondary: rgb(89, 89, 89);
   --clr--main--hover-bg-secondary: #d9edff;
 
-  --clr--main-hover-blue: #47a9ff;
+  --clr--main-hover-blue: rgb(63, 165, 255);
 
   /** Active */
   --clr--main-blue-bg-active: #e6f6ff;

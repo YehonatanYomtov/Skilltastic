@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { _createCourse, _getAllCourses } from "models/courseModel.ts";
+import { _createCourse, _getAllCourses } from "../models/courseModel";
 
 export const createCourse = async (req: Request, res: Response) => {
   try {

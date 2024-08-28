@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 //* react-router
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 //* redux-hooks
 // import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +26,7 @@ function UserTag() {
   // const status = useSelector((state) => state.user.status);
   // const email = useSelector((state) => state.user.user.email);
   // const photoURL = useSelector((state) => state.user.user.photoURL);
-
+  const photoURL = null;
   // const dispatch = useDispatch();
 
   function handleLogout() {
@@ -40,44 +40,31 @@ function UserTag() {
         className={styles.main_container}
         onClick={() => setIsActive((cur) => !cur)}
       >
-        {/* <ParallaxEffect> */}
         <div className={styles.image_container}>
           {status === "loading" ? (
             <DNA height={22} width={22} />
-          ) : (
+          ) : photoURL ? (
             <img
               className={`${styles.image} ${styles.spin}`}
-              // src={photoURL || "/images/User-dark.png"}
+              src={photoURL || "/images/User-dark.png"}
               alt="User Pic"
             />
+          ) : (
+            <i className="fa-solid fa-user"></i>
           )}
         </div>
-        {/* </ParallaxEffect> */}
+
         <div className={styles.email_text_container}>
           {/* <p className={styles.email_text}>{email || "User"}</p> */}
         </div>
       </div>
 
-      <div
-        className={`${styles.dropdown_container} ${
-          isActive ? styles.active : null
-        }`}
+      <button
+        className={`${styles.dropdown_button} ${styles.dropdown_bottom_button}`}
+        onClick={handleLogout}
       >
-        <Link
-          to={"/user"}
-          onClick={() => setIsActive(false)}
-          className={`${styles.dropdown_button} ${styles.dropdown_top_button}`}
-        >
-          View Profile
-        </Link>
-
-        <button
-          className={`${styles.dropdown_button} ${styles.dropdown_bottom_button}`}
-          onClick={handleLogout}
-        >
-          Sign Out
-        </button>
-      </div>
+        Sign Out
+      </button>
     </>
   );
 }
