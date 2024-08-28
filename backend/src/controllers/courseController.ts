@@ -1,19 +1,73 @@
 import { Request, Response } from "express";
-import { _createCourse, _getAllCourses } from "../models/courseModel";
+import {
+  _addVideosToCourse,
+  _createCourse,
+  _createPrice,
+  _findTeacherByAuthId,
+  _getAllCourses,
+} from "../models/courseModel";
 
-export const createCourse = async (req: Request, res: Response) => {
+import db from "../config/db";
+
+// export const createCourse = async (req: Request, res: Response) => {
+//   try {
+//     const newCourse = req.body;
+//     const createdCourse = await _createCourse(newCourse);
+
+//     console.log("CONTROLLER -> Created Course:", createdCourse);
+
+//     res.status(201).json(createdCourse);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Failed to create course" });
+//   }
+// };
+
+export async function createCourse(req: Request, res: Response) {
+  const {
+    title,
+    description,
+    teacherAuthId,
+    amount,
+    currency,
+    discount,
+    videos,
+  } = req.body;
+
   try {
-    const newCourse = req.body;
-    const createdCourse = await _createCourse(newCourse);
+    await db.transaction(async (trx) => {
+      // Fetching the teacher's ID using auth_id within the transaction
+      const teacher = await _findTeacherByAuthId(trx, teacherAuthId);
 
-    console.log("CONTROLLER -> Created Course:", createdCourse);
+      if (!teacher) {
+        throw new Error("Teacher not found");
+      }
 
-    res.status(201).json(createdCourse);
+      // Create Price
+      const priceId = await _createPrice(trx, amount, currency, discount);
+
+      // Create Course
+      const courseId = await _createCourse(
+        trx,
+        title,
+        description,
+        teacher.id,
+        priceId
+      );
+
+      // Add Video to course
+      await _addVideosToCourse(trx, videos, courseId);
+
+      res
+        .status(201)
+        .json({ message: "Course created successfully", courseId });
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to create course" });
+    const err = error as Error;
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
-};
+}
 
 export const getAllCourses = async (req: Request, res: Response) => {
   try {
