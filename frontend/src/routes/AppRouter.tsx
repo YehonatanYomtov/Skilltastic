@@ -30,11 +30,17 @@ import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 import { RootState } from "../data/store.ts";
 import { useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth.ts";
-import SubLayout from "../layouts/SubLayout/SubLayout.tsx";
 import FavoriteCourses from "../features/course/FavoriteCourses/FavoriteCourses.tsx";
 import CourseWishlist from "../features/course/CourseWishlist/CourseWishlist.tsx";
 import MyCreatedCourses from "../features/course/MyCreatedCourses/MyCreatedCourses.tsx";
 import OwnedCourses from "../features/course/OwnedCourses/OwnedCourses.tsx";
+import CourseLayout from "../layouts/SubLayout/CourseLayout/CourseLayout.tsx";
+import CourseCertificates from "../features/course/CourseCertificates/CourseCertificates.tsx";
+import Overview from "../features/user/Overview/Overview.tsx";
+import EditProfile from "../features/user/EditProfile/EditProfile.tsx";
+import AccountSettings from "../features/user/AccountSettings/AccountSettings.tsx";
+import SupportAndHelp from "../features/user/SupportAndHelp/SupportAndHelp.tsx";
+import ProfileLayout from "../layouts/SubLayout/ProfileLayout/ProfileLayout.tsx";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
@@ -79,17 +85,47 @@ function AppRouter() {
           ),
         },
         {
-          path: "profile",
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          ),
-          children: [{}],
+          path: "user-profile",
+          element: <ProfileLayout />,
+          children: [
+            {
+              path: "overview",
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  <Overview />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "edit",
+              element: (
+                <ProtectedRoute>
+                  <EditProfile />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "settings",
+              element: (
+                <ProtectedRoute>
+                  <AccountSettings />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "support",
+              element: (
+                <ProtectedRoute>
+                  <SupportAndHelp />
+                </ProtectedRoute>
+              ),
+            },
+          ],
         },
         {
           path: "courses",
-          element: <SubLayout />,
+          element: <CourseLayout />,
           children: [
             {
               path: "owned",
@@ -121,6 +157,14 @@ function AppRouter() {
               element: (
                 <ProtectedRoute>
                   <FavoriteCourses />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "certificate",
+              element: (
+                <ProtectedRoute>
+                  <CourseCertificates />
                 </ProtectedRoute>
               ),
             },

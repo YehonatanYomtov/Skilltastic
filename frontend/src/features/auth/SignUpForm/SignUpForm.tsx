@@ -53,7 +53,7 @@ function SignUpForm() {
       return setAlert("Password and ConfirmPassword do not match!");
     }
 
-    // dispatch(signup({ email, password }));
+    dispatch(signup({ email, password }));
 
     if (emailRef.current) emailRef.current.value = "";
     if (passwordRef.current) passwordRef.current.value = "";

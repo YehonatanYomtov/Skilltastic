@@ -1,13 +1,12 @@
 //* Redux-hooks
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+//* Axios
+import axios from "axios";
+
 //* Firebase-imports
 import { auth } from "../../firebase/firebaseConfig.ts";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 //* Utils
 // import {
@@ -63,18 +62,26 @@ export const login = createAsyncThunk(
 
 export const signup = createAsyncThunk(
   "auth/signup",
-  async ({ email, password }: { email: string; password: string }) => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const { user } = userCredential;
+  async function ({ email, password }: { email: string; password: string }) {
+    try {
+      const response = await axios.post("/api/user/sign-up", {
+        email,
+        password,
+      });
 
-    return {
-      uid: user.uid,
-      email: user.email,
-    };
+      const { data } = response;
+
+      return {
+        uid: data.uid,
+        email: data.email,
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        throw new Error(error.response.data.message || "Error during sign-up");
+      } else {
+        throw new Error("Unexpected error occurred");
+      }
+    }
   }
 );
 

@@ -2,15 +2,15 @@
 import { Outlet } from "react-router-dom";
 
 //* Components-ui
-import SideNavbar from "../../components/ui/SideNavbar/SideNavbar";
+import ProfileSideNavbar from "../../../features/user/ProfileSideNavbar/ProfileSideNavbar";
 
 //* Styles
-import styles from "./SubLayout.module.css";
+import styles from "./ProfileLayout.module.css";
 
-function SubLayout() {
+function ProfileLayout() {
   return (
     <div className={styles.container_main}>
-      <SideNavbar />
+      <ProfileSideNavbar />
 
       <div className={styles.outlet_container}>
         <Outlet />
@@ -19,4 +19,4 @@ function SubLayout() {
   );
 }
 
-export default SubLayout;
+export default ProfileLayout;

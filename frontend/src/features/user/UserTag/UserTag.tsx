@@ -1,5 +1,4 @@
 //* react-hooks
-import { useState } from "react";
 
 //* react-router
 // import { Link } from "react-router-dom";
@@ -14,32 +13,22 @@ import { useState } from "react";
 // import { logout } from "../userSlice";
 
 //* 3rd-party-loading-components
-// import { Dna } from "react-loader-spinner";
+import { DNA } from "react-loader-spinner";
 
 //* styles
 import styles from "./UserTag.module.css";
-import { DNA } from "react-loader-spinner";
+import LogoutButton from "../../auth/LogoutButton/LogoutButton";
 
 function UserTag() {
-  const [isActive, setIsActive] = useState(false);
-
   // const status = useSelector((state) => state.user.status);
   // const email = useSelector((state) => state.user.user.email);
   // const photoURL = useSelector((state) => state.user.user.photoURL);
   const photoURL = null;
   // const dispatch = useDispatch();
 
-  function handleLogout() {
-    // dispatch(logout());
-    setIsActive(false);
-  }
-
   return (
     <>
-      <div
-        className={styles.main_container}
-        onClick={() => setIsActive((cur) => !cur)}
-      >
+      <div className={styles.main_container}>
         <div className={styles.image_container}>
           {status === "loading" ? (
             <DNA height={22} width={22} />
@@ -59,12 +48,7 @@ function UserTag() {
         </div>
       </div>
 
-      <button
-        className={`${styles.dropdown_button} ${styles.dropdown_bottom_button}`}
-        onClick={handleLogout}
-      >
-        Sign Out
-      </button>
+      <LogoutButton />
     </>
   );
 }

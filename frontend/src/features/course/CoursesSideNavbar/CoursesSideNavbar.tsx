@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 // import NavbarLink from "../NavbarLink/NavbarLink";
 
 //* Styles
-import styles from "./SideNavbar.module.css";
+import styles from "./CoursesSideNavbar.module.css";
 
-function SideNavbar() {
+function CoursesSideNavbar() {
   return (
     <div className={styles.container}>
       <h3>Course Management</h3>
@@ -65,4 +65,4 @@ function SideNavbar() {
   );
 }
 
-export default SideNavbar;
+export default CoursesSideNavbar;

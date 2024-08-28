@@ -1,14 +1,13 @@
-import { useDispatch } from "react-redux";
-import { logout } from "../../features/auth/authSlice";
-import { AppDispatch } from "../../data/store";
+// import { useDispatch } from "react-redux";
+// import { AppDispatch } from "../../data/store";
+import LogoutButton from "../../features/auth/LogoutButton/LogoutButton";
 
 function Profile() {
-  const dispatch = useDispatch<AppDispatch>();
-
   return (
     <div>
       <h1>Profile</h1>
-      <button onClick={() => dispatch(logout())}>Log out</button>
+
+      <LogoutButton />
     </div>
   );
 }
