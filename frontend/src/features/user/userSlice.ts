@@ -1,15 +1,10 @@
 // //* redux-hooks
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // //* firebase-imports
-// import { auth, storage } from "../../firebase/firebaseConfig.ts";
-// import {
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   signOut,
-//   updateProfile,
-// } from "firebase/auth";
-// import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { auth, storage } from "../../firebase/firebaseConfig.ts";
+import { updateProfile } from "firebase/auth";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 // //* utils
 // import {
@@ -18,50 +13,81 @@
 //   addCaseRejectedTemplate,
 // } from "../../utils/addCaseTemplate";
 
-// const initialState = {
-//   status: "idle",
-//   userSignedIn: JSON.parse(localStorage.getItem("userSignedIn")) || false,
-//   user: auth.currentUser,
-//   isClicked: false,
-//   // photoURL: "/images/User-dark.png",
-//   error: null,
-// };
+const initialState = {
+  status: "idle",
+  user: auth.currentUser,
+  isClicked: false,
+  photoURL: "/images/User-dark.png",
+  error: null,
+};
 
-// const userSlice = createSlice({
-//   name: "user",
-//   initialState,
+//* Async thunks
+export const updateProfileImage = createAsyncThunk(
+  "user/updateProfileImage",
+  async function (selectedImage) {
+    const currentUser = auth.currentUser;
+    const fileRef = ref(storage, `${currentUser.uid}.png`);
 
-//   reducers: {
-//     setIsClicked(state) {
-//       state.isClicked = !state.isClicked;
-//     },
-//   },
+    await uploadBytes(fileRef, selectedImage);
 
-//   extraReducers(builder) {
-//     addCaseFullTemplate(builder, signup, {
-//       user: "payload",
-//       userSignedIn: true,
-//     });
-//     //* ====
-//     addCasePendingTemplate(builder, signin);
-//     builder.addCase(signin.fulfilled, (state, action) => {
-//       state.status = "succeeded";
-//       state.user = action.payload.user;
-//       state.userSignedIn = true;
-//     });
-//     addCaseRejectedTemplate(builder, signin);
-//     //* ====
-//     addCaseFullTemplate(builder, logout, { user: null, userSignedIn: false });
-//     //* =====
-//     addCaseFullTemplate(builder, authIsReady, { user: "payload" });
-//     //* =====
-//     addCaseFullTemplate(builder, updateProfileImage, { photoURL: "payload" });
-//   },
-// });
+    const photoURL = await getDownloadURL(fileRef);
 
-// export const { setIsClicked } = userSlice.actions;
+    await updateProfile(currentUser, { photoURL });
 
-// export default userSlice.reducer;
+    return photoURL;
+  }
+);
+
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+
+  reducers: {
+    setIsClicked(state) {
+      state.isClicked = !state.isClicked;
+    },
+  },
+
+  extraReducers(builder) {
+    builder
+      .addCase(updateProfileImage.pending, (state) => {
+        state.error = null;
+        state.status = "loading";
+      })
+      .addCase(updateProfileImage.fulfilled, (state, action) => {
+        state.status = "success";
+        state.photoURL = action.payload;
+        console.log("action.payload: ", action.payload);
+      })
+      .addCase(updateProfileImage.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
+      });
+
+    // addCaseFullTemplate(builder, signup, {
+    //   user: "payload",
+    //   userSignedIn: true,
+    // });
+    // //* ====
+    // addCasePendingTemplate(builder, signin);
+    // builder.addCase(signin.fulfilled, (state, action) => {
+    //   state.status = "succeeded";
+    //   state.user = action.payload.user;
+    //   state.userSignedIn = true;
+    // });
+    // addCaseRejectedTemplate(builder, signin);
+    // //* ====
+    // addCaseFullTemplate(builder, logout, { user: null, userSignedIn: false });
+    // //* =====
+    // addCaseFullTemplate(builder, authIsReady, { user: "payload" });
+    // //* =====
+    // addCaseFullTemplate(builder, updateProfileImage, { photoURL: "payload" });
+  },
+});
+
+export const { setIsClicked } = userSlice.actions;
+
+export default userSlice.reducer;
 
 // export const signup = createAsyncThunk(
 //   "user/signup",
@@ -89,21 +115,5 @@
 //   "user/authIsReady",
 //   async function (user) {
 //     return user;
-//   }
-// );
-
-// export const updateProfileImage = createAsyncThunk(
-//   "user/updateProfileImage",
-//   async function (selectedImage) {
-//     const currentUser = auth.currentUser;
-//     const fileRef = ref(storage, `${currentUser.uid}.png`);
-
-//     await uploadBytes(fileRef, selectedImage);
-
-//     const photoURL = await getDownloadURL(fileRef);
-
-//     await updateProfile(currentUser, { photoURL });
-
-//     return photoURL;
 //   }
 // );

@@ -33,10 +33,11 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     alignItems: "center",
   };
 
-  if (status === "Loading" || status === "idle")
+  if (status === "Loading")
     return <LoadingSpinner style={loadingSpinnerStyles} />;
 
-  if (!user) return <Navigate replace to="/log-in" />;
+  if (!user && status !== "initialRender")
+    return <Navigate replace to="/log-in" />;
 
   return <>{children}</>;
 }

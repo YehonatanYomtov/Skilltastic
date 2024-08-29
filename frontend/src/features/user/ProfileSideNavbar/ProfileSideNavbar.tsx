@@ -16,52 +16,41 @@ function ProfileSideNavbar() {
         className={({ isActive }) =>
           `${styles.nav_link} ${isActive ? styles.active : ""}`
         }
-        to="/user/settings"
+        to="/profile/overview"
       >
-        <i className="fa-solid fa-briefcase"></i>
-        <p>Owned courses</p>
+        <i className="fa-solid fa-magnifying-glass"></i>
+        <p>Overview</p>
       </NavLink>
 
       <NavLink
         className={({ isActive }) =>
           `${styles.nav_link} ${isActive ? styles.active : ""}`
         }
-        to="/courses/created"
+        to="/profile/edit"
       >
-        <i className="fa-solid fa-person-chalkboard"></i>
-        <p>My created courses</p>
-      </NavLink>
-
-      {/* 
-      <NavLink
-        className={({ isActive }) =>
-          `${styles.nav_link} ${isActive ? styles.active : ""}`
-        }
-        to="/courses/wishlist"
-      >
-        <i className="fa-regular fa-heart"></i>
-        <p>Wishlist</p>
+        <i className="fa-solid fa-pencil"></i>
+        <p>Edit Profile</p>
       </NavLink>
 
       <NavLink
         className={({ isActive }) =>
           `${styles.nav_link} ${isActive ? styles.active : ""}`
         }
-        to="/courses/favorites"
+        to="/profile/settings"
       >
-        <i className="fa-regular fa-star"></i>
-        <p>Favorite Courses</p>
+        <i className="fa-solid fa-gear"></i>
+        <p>Account Settings</p>
       </NavLink>
 
       <NavLink
         className={({ isActive }) =>
           `${styles.nav_link} ${isActive ? styles.active : ""}`
         }
-        to="/courses/create-course"
+        to="/profile/support"
       >
-        <i className="fa-regular fa-square-plus"></i>
-        <p>Create New Course</p>
-      </NavLink> */}
+        <i className="fa-solid fa-headset"></i>
+        <p>Support & Help</p>
+      </NavLink>
     </div>
   );
 }

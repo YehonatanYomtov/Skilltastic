@@ -2,9 +2,17 @@ import { Request, Response } from "express";
 import { _signup } from "../models/userModel";
 
 export async function signup(req: Request, res: Response) {
+  const { name, email, password } = req.body;
+
+  console.log("name: ", name);
+  console.log("email: ", email);
+  console.log("password: ", password);
+
   try {
     //! if (!req.body) -> then must have input with value
-    const user = await _signup(req.body);
+
+    console.log("req.body: ", req.body);
+    const user = await _signup({ name, email, password });
 
     res.status(201).json(user);
   } catch (error) {
@@ -32,3 +40,5 @@ export async function signup(req: Request, res: Response) {
 //     res.status(500).json({ message: "Failed to log in." });
 //   }
 // }
+
+// max@gmail.com

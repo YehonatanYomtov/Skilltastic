@@ -7,8 +7,8 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 
 dotenv.config({ path: path.resolve(__dirname, "..", "..", ".env") });
 
-import courseRoutes from "./routes/courseRouter.js";
-import userRoutes from "./routes/userRouter.js";
+import courseRoutes from "./routes/courseRouter";
+import userRoutes from "./routes/userRouter";
 
 const app = express();
 

@@ -56,6 +56,16 @@ function CoursesSideNavbar() {
         className={({ isActive }) =>
           `${styles.nav_link} ${isActive ? styles.active : ""}`
         }
+        to="/courses/certificates"
+      >
+        <i className="fa-solid fa-medal"></i>
+        <p>Certificates</p>
+      </NavLink>
+
+      <NavLink
+        className={({ isActive }) =>
+          `${styles.nav_link} ${isActive ? styles.active : ""}`
+        }
         to="/courses/create-course"
       >
         <i className="fa-regular fa-square-plus"></i>

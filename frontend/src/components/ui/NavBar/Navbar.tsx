@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import Logo from "../Logo/Logo.tsx";
 import DarkLightModeButton from "../DarkLightModeButton/DarkLightModeButton.tsx";
 import NavbarLink from "../NavbarLink/NavbarLink.tsx";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.tsx";
 
 //* User-feature-components
 import UserTag from "../../../features/user/UserTag/UserTag.tsx";
@@ -21,7 +20,6 @@ import styles from "./Navbar.module.css";
 
 //* Types
 import { RootState } from "../../../data/store.ts";
-import { StringObject } from "../../../types/index.ts";
 
 function Navbar() {
   const [isExtended, setIsExtended] = useState(false);
@@ -42,18 +40,6 @@ function Navbar() {
     setVisibleSubMenu(null);
   };
 
-  const loadingSpinnerStyles: StringObject = {
-    height: "100vh",
-    width: "100%",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-
   return (
     <nav
       className={`${styles.nav_main_container} ${
@@ -63,27 +49,17 @@ function Navbar() {
       {
         <>
           <button
-            disabled={status === "idle"}
+            disabled={status === "loading"}
             onClick={toggleNavbar}
             className={styles.toggle_button}
           >
-            {status === "idle" ? (
-              <LoadingSpinner
-                style={loadingSpinnerStyles}
-                color="white"
-                secondaryColor="white"
-                height={10}
-                width={10}
-              />
-            ) : (
-              <i
-                className={
-                  isExtended
-                    ? "fa-solid fa-arrow-left"
-                    : "fa-solid fa-arrow-right"
-                }
-              ></i>
-            )}
+            <i
+              className={
+                isExtended
+                  ? "fa-solid fa-arrow-left"
+                  : "fa-solid fa-arrow-right"
+              }
+            ></i>
           </button>
         </>
       }
@@ -95,9 +71,7 @@ function Navbar() {
           </NavLink>
         </li>
 
-        {status === "idle" ? (
-          <LoadingSpinner style={loadingSpinnerStyles} height={40} width={40} />
-        ) : !user ? (
+        {!user && status !== "initialRender" ? (
           <>
             <li>
               <NavbarLink to="/log-in">
@@ -133,9 +107,13 @@ function Navbar() {
                     visibleSubMenu !== "profile" ? styles.hidden : ""
                   }`}
                 >
-                  <Link to="/profile/change">Edit Profile</Link>
+                  <Link to="/profile/overview">Overview</Link>
 
-                  <Link to="/profile/settings">Settings</Link>
+                  <Link to="/profile/edit">Edit Profile</Link>
+
+                  <Link to="/profile/settings">Account Settings</Link>
+
+                  <Link to="/profile/support">Support & Help</Link>
                 </div>
               )}
             </li>
@@ -162,11 +140,9 @@ function Navbar() {
 
                   <Link to="/courses/favorites">Favorite Courses</Link>
 
-                  <NavbarLink subNavLink={true} to="/courses/create-course">
-                    <i className="fa-regular fa-square-plus">
-                      <span>Create New Course</span>
-                    </i>
-                  </NavbarLink>
+                  <Link to="/courses/certificates">Certificates</Link>
+
+                  <Link to="/courses/create-course">Create New Course</Link>
                 </div>
               )}
             </li>
@@ -183,15 +159,8 @@ function Navbar() {
 
       <div className={styles.bottom_section}>
         <DarkLightModeButton />
-        {status === "idle" ? (
-          <LoadingSpinner
-            style={{ ...loadingSpinnerStyles, paddingBottom: "5rem" }}
-            height={30}
-            width={30}
-          />
-        ) : (
-          <UserTag />
-        )}
+
+        <UserTag />
       </div>
     </nav>
   );

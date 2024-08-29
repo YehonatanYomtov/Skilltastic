@@ -44,26 +44,49 @@ const initialState: CourseState = {
 };
 
 //* Async thunks
-export const createCourse = createAsyncThunk<
-  Course,
-  CourseData,
-  { rejectValue: string }
->("course/createCourse", async function (courseData: CourseData, thunkAPI) {
-  try {
-    const response = await axios.post("/api/courses/create", courseData);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const message =
-        error.response?.data?.message ||
-        error.message ||
-        "Failed to create course";
-      return thunkAPI.rejectWithValue(message);
-    } else {
-      return thunkAPI.rejectWithValue("An unexpected error occurred");
+export const createCourse = createAsyncThunk<Course, CourseData>(
+  "course/createCourse",
+  async function (courseData: CourseData, thunkAPI) {
+    try {
+      const response = await axios.post("/api/courses/create", courseData, {
+        // headers: {
+        // "Content-Type": "multipart/form-data",
+        // },
+      });
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to create course";
+        return thunkAPI.rejectWithValue(message);
+      } else {
+        return thunkAPI.rejectWithValue("An unexpected error occurred");
+      }
     }
   }
-});
+);
+
+export const getAllCourses = createAsyncThunk(
+  "course/getAllCourses",
+  async function (_, thunkAPI) {
+    try {
+      const response = await axios.get("/api/courses");
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch all courses";
+        return thunkAPI.rejectWithValue(message);
+      } else {
+        return thunkAPI.rejectWithValue("An unexpected error occurred");
+      }
+    }
+  }
+);
 
 //* Slice
 const courseSlice = createSlice({
@@ -87,6 +110,18 @@ const courseSlice = createSlice({
         state.status = "success";
       })
       .addCase(createCourse.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.status = "error";
+      })
+      .addCase(getAllCourses.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(getAllCourses.fulfilled, (state, action) => {
+        state.courses = action.payload;
+        state.status = "success";
+      })
+      .addCase(getAllCourses.rejected, (state, action) => {
         state.error = action.payload as string;
         state.status = "error";
       });

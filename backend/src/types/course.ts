@@ -14,7 +14,7 @@ export type Course = {
   //! check if null should be an option for 'teacher_id'
   teacher_id: number | null;
   price_id: number;
-  image_url: string;
+  // image_url: string;
 };
 
 export type Video = {

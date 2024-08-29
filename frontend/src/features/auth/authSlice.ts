@@ -7,13 +7,9 @@ import axios from "axios";
 //* Firebase-imports
 import { auth } from "../../firebase/firebaseConfig.ts";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { usernameFromEmailExtractor } from "../../utils/usernameFromEmailExtractor.ts";
 
 //* Utils
-// import {
-//   addCaseFullTemplate,
-//   addCasePendingTemplate,
-//   addCaseRejectedTemplate,
-// } from "../../utils/addCaseTemplate.ts";
 
 //* Types
 type AuthUser = {
@@ -22,7 +18,7 @@ type AuthUser = {
 };
 
 type AuthState = {
-  status: "idle" | "loading" | "success" | "error";
+  status: "initialRender" | "loading" | "success" | "error";
   user: AuthUser | null;
   error: string | null;
 };
@@ -34,7 +30,7 @@ type EmailAndPassword = {
 
 //* Initial state
 const initialState: AuthState = {
-  status: "idle",
+  status: "initialRender",
   user: auth.currentUser,
   error: null,
   // userSignedIn: JSON.parse(localStorage.getItem("userSignedIn")) || false,
@@ -63,11 +59,19 @@ export const login = createAsyncThunk(
 export const signup = createAsyncThunk(
   "auth/signup",
   async function ({ email, password }: { email: string; password: string }) {
+    const name = usernameFromEmailExtractor(email);
+    console.log("name: ", name);
+
     try {
       const response = await axios.post("/api/user/sign-up", {
+        name,
         email,
         password,
       });
+
+      console.log("name: ", name);
+      console.log("email: ", email);
+      console.log("password: ", password);
 
       const { data } = response;
 
@@ -135,6 +139,7 @@ const authSlice = createSlice({
         state.status = "error";
       })
       .addCase(logout.fulfilled, (state) => {
+        state.status = "success";
         state.user = null;
       })
       .addCase(authIsReady.pending, (state) => {
@@ -143,6 +148,7 @@ const authSlice = createSlice({
       })
       .addCase(authIsReady.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.status = "success";
       });
     // addCaseFullTemplate(builder, signup, {
     //   user: "payload",

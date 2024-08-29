@@ -11,11 +11,11 @@ import CourseCard from "../CourseCard/CourseCard";
 import CustomLeftArrow from "./CustomLeftAndRightArrows/CustomLeftArrow";
 import CustomRightArrow from "./CustomLeftAndRightArrows/CustomRightArrow";
 
+//* Types
+import { Course, CourseCard as CourseCardType } from "../../../types/index.ts";
+
 //* Styles
 import styles from "./CourseListDisplay.module.css";
-
-//* Types
-import { CourseCard as CourseCardType } from "../../../types/index.ts";
 
 const responsive = {
   superLargeDesktop: {
@@ -45,7 +45,7 @@ const responsive = {
 };
 
 type CourseListDisplayProps = {
-  courseList: CourseCardType[];
+  courseList: CourseCardType[] | Course[];
 };
 
 function CourseListDisplay({ courseList }: CourseListDisplayProps) {

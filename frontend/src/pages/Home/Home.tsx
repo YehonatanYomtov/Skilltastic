@@ -1,12 +1,16 @@
-//* components-UI
+//* Components-UI
 import ShowCase from "../../components/ui/ShowCase/ShowCase";
 import CourseListDisplay from "../../features/course/CourseListDisplay/CourseListDisplay";
 import IntroCarousel from "./subComponents/IntroCarousel/IntroCarousel";
 
-//* styles
+//* Styles
 import styles from "./Home.module.css";
 import WelcomeMessage from "../../features/user/WelcomeMessage/WelcomeMessage";
 import SearchCoursesInput from "./subComponents/SearchCoursesInput/SearchCoursesInput";
+import { AppDispatch, RootState } from "../../data/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllCourses } from "../../features/course/courseSlice";
 
 const courseList = [
   {
@@ -137,6 +141,15 @@ const courseList = [
 ];
 
 function HomePage() {
+  const courses = useSelector<RootState>((state) => state.course.courses);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getAllCourses());
+  }, [dispatch]);
+  console.log("courses: ", courses);
+
   return (
     <div className={styles.container_main}>
       <section>
@@ -151,6 +164,13 @@ function HomePage() {
 
       <section>
         <ShowCase>
+          <h1>All Courses</h1>
+          <CourseListDisplay courseList={courses} />
+        </ShowCase>
+      </section>
+
+      {/* <section>
+        <ShowCase>
           <h1>Continue Learning</h1>
           <CourseListDisplay courseList={courseList} />
         </ShowCase>
@@ -161,7 +181,7 @@ function HomePage() {
           <h1>Popular Courses</h1>
           <CourseListDisplay courseList={courseList} />
         </ShowCase>
-      </section>
+      </section> */}
     </div>
   );
 }

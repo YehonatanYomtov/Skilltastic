@@ -85,7 +85,7 @@ function AppRouter() {
           ),
         },
         {
-          path: "user-profile",
+          path: "profile",
           element: <ProfileLayout />,
           children: [
             {
@@ -161,7 +161,7 @@ function AppRouter() {
               ),
             },
             {
-              path: "certificate",
+              path: "certificates",
               element: (
                 <ProtectedRoute>
                   <CourseCertificates />
