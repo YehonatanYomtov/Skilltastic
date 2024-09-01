@@ -1,8 +1,8 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, ReactNode } from "react";
 
 type OptionsType = {
   value: string;
-  label: string;
+  label: ReactNode;
 };
 
 type SelectProps = {
@@ -17,10 +17,10 @@ function Select({
   value,
   onChange,
   options,
-  ...restOdProps
+  ...restOfProps
 }: SelectProps) {
   return (
-    <select name={name} value={value} onChange={onChange} {...restOdProps}>
+    <select name={name} value={value} onChange={onChange} {...restOfProps}>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

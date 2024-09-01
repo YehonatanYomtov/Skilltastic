@@ -1,7 +1,23 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../../data/store";
+import CourseCard from "../CourseCard/CourseCard";
+
+//* Styles
+import styles from "./MyCreatedCourses.module.css";
+
 function MyCreatedCourses() {
+  const myCourses = useSelector<RootState>((state) => state.course.myCourses);
+  console.log("myCourses: ", myCourses);
+
   return (
-    <div>
+    <div className={styles.container}>
       <h1>My Created Courses</h1>
+
+      <div className={styles.courses_display}>
+        {myCourses.map((course) => (
+          <CourseCard course={course} key={course.id} />
+        ))}
+      </div>
     </div>
   );
 }

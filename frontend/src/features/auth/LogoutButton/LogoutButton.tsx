@@ -12,9 +12,10 @@ import styles from "./LogoutButton.module.css";
 
 function LogoutButton() {
   const dispatch = useDispatch<AppDispatch>();
+
   return (
     <button className={styles.logout_btn} onClick={() => dispatch(logout())}>
-      Log out
+      <i className="fa-solid fa-arrow-right-from-bracket"></i>
     </button>
   );
 }

@@ -1,11 +1,10 @@
 .container {
   position: relative;
-  width: 90rem;
+  width: 94rem;
   display: flex;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 0.5rem 0.3rem;
   border-radius: 0.4rem;
-  box-shadow: var(--box-shadow-inset-1);
 }
 
 .customArrow {

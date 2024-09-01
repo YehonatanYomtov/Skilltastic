@@ -38,7 +38,7 @@ function SignUpForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const email: string = emailRef.current?.value || "";
@@ -53,6 +53,7 @@ function SignUpForm() {
       return setAlert("Password and ConfirmPassword do not match!");
     }
 
+    //! Change to axios then make 2 sync function to both slices
     dispatch(signup({ email, password }));
 
     if (emailRef.current) emailRef.current.value = "";
@@ -89,7 +90,7 @@ function SignUpForm() {
 
       {status === "loading" && !error && !user && <LoadingSpinner />}
 
-      {(status === "success" || status === "idle") && !error && (
+      {(status === "success" || status === "initialRender") && !error && (
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <h1>Sign Up</h1>
 

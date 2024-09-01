@@ -18,9 +18,12 @@ import { DNA } from "react-loader-spinner";
 //* styles
 import styles from "./UserTag.module.css";
 import LogoutButton from "../../auth/LogoutButton/LogoutButton";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../data/store";
+import { Link } from "react-router-dom";
 
 function UserTag() {
-  // const status = useSelector((state) => state.user.status);
+  const status = useSelector<RootState>((state) => state.auth.status);
   // const email = useSelector((state) => state.user.user.email);
   // const photoURL = useSelector((state) => state.user.user.photoURL);
   const photoURL = null;
@@ -29,7 +32,7 @@ function UserTag() {
   return (
     <>
       <div className={styles.main_container}>
-        <div className={styles.image_container}>
+        <Link to="/profile" className={styles.image_container}>
           {status === "loading" ? (
             <DNA height={22} width={22} />
           ) : photoURL ? (
@@ -41,11 +44,11 @@ function UserTag() {
           ) : (
             <i className="fa-solid fa-user"></i>
           )}
-        </div>
+        </Link>
 
-        <div className={styles.email_text_container}>
-          {/* <p className={styles.email_text}>{email || "User"}</p> */}
-        </div>
+        {/* <div className={styles.email_text_container}> */}
+        {/* <p className={styles.email_text}>{email || "User"}</p> */}
+        {/* </div> */}
       </div>
 
       <LogoutButton />

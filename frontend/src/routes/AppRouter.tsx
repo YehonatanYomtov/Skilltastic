@@ -12,7 +12,7 @@ import AppLayout from "../layouts/AppLayout.tsx";
 
 //* pages
 import Home from "../pages/Home/Home.tsx";
-import Profile from "../pages/Profile/Profile.tsx";
+
 // import Courses from "../pages/Courses/Courses.tsx";
 import Contact from "../pages/Contact/Contact.tsx";
 // import UserPage from "../pages/UserPage/UserPage";
@@ -41,6 +41,7 @@ import EditProfile from "../features/user/EditProfile/EditProfile.tsx";
 import AccountSettings from "../features/user/AccountSettings/AccountSettings.tsx";
 import SupportAndHelp from "../features/user/SupportAndHelp/SupportAndHelp.tsx";
 import ProfileLayout from "../layouts/SubLayout/ProfileLayout/ProfileLayout.tsx";
+import SearchCourses from "../pages/SearchCourses/SearchCourses.tsx";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
@@ -81,6 +82,14 @@ function AppRouter() {
           element: (
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "search",
+          element: (
+            <ProtectedRoute>
+              <SearchCourses />
             </ProtectedRoute>
           ),
         },
@@ -136,6 +145,7 @@ function AppRouter() {
                 </ProtectedRoute>
               ),
             },
+
             {
               path: "created",
               element: (

@@ -2,9 +2,11 @@
   position: relative;
   height: 19rem;
   width: 13.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.123);
   border-radius: 0.4rem;
   padding: 8.5rem 0.5rem 0.5rem 0.5rem;
   cursor: pointer;
+  background-color: var(--clr--main-primary);
   box-shadow: var(--box-shadow-1);
 }
 
@@ -15,7 +17,14 @@
   width: 100%;
   height: 8rem;
   border-radius: 0.4rem 0.4rem 0 0;
-  background-color: blueviolet;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 .card_info_container {
@@ -29,7 +38,12 @@
 
   .name {
     font-size: 0.8rem;
-    color: var(--clr--main-grey-light);
+    color: var(--clr-grey-3);
+  }
+
+  .description {
+    font-size: 0.9rem;
+    color: var(--clr-grey-4);
   }
 }
 

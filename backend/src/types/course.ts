@@ -33,3 +33,17 @@ export type Wishlist = {
   course_id: number;
   wanter_id: number;
 };
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+};
+
+export type CourseData = {
+  id: string;
+  name: string;
+  description: string;
+  teacher: User;
+  price: Price;
+};

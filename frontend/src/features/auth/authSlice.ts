@@ -8,14 +8,14 @@ import axios from "axios";
 import { auth } from "../../firebase/firebaseConfig.ts";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { usernameFromEmailExtractor } from "../../utils/usernameFromEmailExtractor.ts";
+import { User } from "../../types/index.ts";
 
 //* Utils
 
 //* Types
-type AuthUser = {
-  uid: string;
-  email: string | null;
-};
+export type AuthUser = {
+  uid?: string;
+} & Omit<Partial<User>, "auth_id">;
 
 type AuthState = {
   status: "initialRender" | "loading" | "success" | "error";
@@ -31,14 +31,14 @@ type EmailAndPassword = {
 //* Initial state
 const initialState: AuthState = {
   status: "initialRender",
-  user: auth.currentUser,
+  user: { uid: auth.currentUser?.uid } as AuthUser,
   error: null,
   // userSignedIn: JSON.parse(localStorage.getItem("userSignedIn")) || false,
   // isClicked: false,
 };
 
 //* Async thunks
-export const login = createAsyncThunk(
+export const login = createAsyncThunk<AuthUser, EmailAndPassword>(
   "auth/login",
   async function ({ email, password }: EmailAndPassword) {
     const userCredential = await signInWithEmailAndPassword(
@@ -47,16 +47,20 @@ export const login = createAsyncThunk(
       password
     );
 
-    const { user } = userCredential;
+    const user = await axios.post("/api/user/user", { email });
 
-    return {
-      uid: user.uid,
-      email: user.email,
-    };
+    const {
+      user: { uid },
+    } = userCredential;
+
+    console.log(uid);
+    console.log(user.data);
+
+    return { ...user.data, uid };
   }
 );
 
-export const signup = createAsyncThunk(
+export const signup = createAsyncThunk<AuthUser, EmailAndPassword>(
   "auth/signup",
   async function ({ email, password }: { email: string; password: string }) {
     const name = usernameFromEmailExtractor(email);
@@ -75,10 +79,7 @@ export const signup = createAsyncThunk(
 
       const { data } = response;
 
-      return {
-        uid: data.uid,
-        email: data.email,
-      };
+      return data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         throw new Error(error.response.data.message || "Error during sign-up");
@@ -118,6 +119,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.user = action.payload;
         state.status = "success";
       })

@@ -41,7 +41,7 @@ export async function _addVideosToCourse(
   courseId: number
 ) {
   for (let i = 0; i < videos.length; i++) {
-    await trx<Video>("videos").insert({
+    await trx("videos").insert({
       url: videos[i].url,
       index: i + 1,
       course_id: courseId,
@@ -58,14 +58,38 @@ export async function _findUserById(trx: Transaction, id: string) {
 
 export async function _findTeacherByAuthId(
   trx: Transaction,
-  teacherId: string
+  auth_Id: string
 ): Promise<User | undefined> {
   const teacher = await trx<User>("users")
     .select("*")
-    .where("id", teacherId)
+    .where("auth_id", auth_Id)
     .first();
 
   return teacher;
+}
+
+export async function _getCourseVideoById(
+  id: number
+): Promise<Video | undefined> {
+  const video = await db<Video>("videos").select("*").where("id", id).first();
+
+  return video;
+}
+
+export async function _getCourseById(id: number) {
+  try {
+    const course = await db("courses as c")
+      .leftJoin("videos as v", "v.course_id", "c.id")
+      .select("c.*", db.raw("array_agg(v.url) as video_urls"))
+      .where("c.id", id)
+      .groupBy("c.id")
+      .first();
+
+    return course;
+  } catch (error) {
+    console.error("Database query failed:", error);
+    return null;
+  }
 }
 
 export async function _getAllCourses() {
@@ -73,10 +97,10 @@ export async function _getAllCourses() {
     .join("users as u", "c.teacher_id", "u.id")
     .join("prices as p", "c.price_id", "p.id")
     .select(
-      "c.id",
+      "c.id as course_id",
       "c.title",
       "c.description",
-      "u.id ",
+      "u.id as user_id",
       "u.name",
       "u.email",
       "p.amount",
@@ -85,11 +109,82 @@ export async function _getAllCourses() {
     );
 
   return courses.map((course) => ({
-    id: course.id,
+    id: course.course_id,
     name: course.title,
     description: course.description,
     teacher: {
-      id: course.id,
+      id: course.user_id,
+      name: course.name,
+      email: course.email,
+    },
+    price: {
+      amount: course.amount,
+      currency: course.currency,
+      discount: course.discount,
+    },
+  }));
+}
+
+export async function _getAllUserCourses(userId: number | string) {
+  const courses = await db<Course>("courses as c")
+    .join("users as u", "c.teacher_id", "u.id")
+    .join("prices as p", "c.price_id", "p.id")
+    .select(
+      "c.id as course_id",
+      "c.title",
+      "c.description",
+      "u.id as user_id",
+      "u.name",
+      "u.email",
+      "p.amount",
+      "p.currency",
+      "p.discount"
+    )
+    .where("u.auth_id", userId);
+
+  return courses.map((course) => ({
+    id: course.course_id,
+    name: course.title,
+    description: course.description,
+    teacher: {
+      id: course.user_id,
+      name: course.name,
+      email: course.email,
+    },
+    price: {
+      amount: course.amount,
+      currency: course.currency,
+      discount: course.discount,
+    },
+  }));
+}
+
+export async function _searchCourses(searchQuery: string) {
+  const courses = await db<Course>("courses as c")
+    .join("users as u", "c.teacher_id", "u.id")
+    .join("prices as p", "c.price_id", "p.id")
+    .select(
+      "c.id as course_id",
+      "c.title",
+      "c.description",
+      "u.id as user_id",
+      "u.name",
+      "u.email",
+      "p.amount",
+      "p.currency",
+      "p.discount"
+    )
+    .whereRaw(
+      `to_tsvector('english', c.title || ' ' || c.description) @@ plainto_tsquery('english', ?)`,
+      [searchQuery]
+    );
+
+  return courses.map((course) => ({
+    id: course.course_id,
+    name: course.title,
+    description: course.description,
+    teacher: {
+      id: course.user_id,
       name: course.name,
       email: course.email,
     },

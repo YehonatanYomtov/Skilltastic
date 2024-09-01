@@ -1,3 +1,11 @@
 .logout_btn {
-  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: none;
+  padding: 0.4rem;
+  font-size: 1.3rem;
+  color: var(--clr-grey-5);
+
+  &:hover {
+    background-color: var(--clr--main-blue);
+  }
 }

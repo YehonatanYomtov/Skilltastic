@@ -6,11 +6,15 @@ import IntroCarousel from "./subComponents/IntroCarousel/IntroCarousel";
 //* Styles
 import styles from "./Home.module.css";
 import WelcomeMessage from "../../features/user/WelcomeMessage/WelcomeMessage";
-import SearchCoursesInput from "./subComponents/SearchCoursesInput/SearchCoursesInput";
+import SearchCoursesInput from "../../features/course/SearchCoursesInput/SearchCoursesInput";
 import { AppDispatch, RootState } from "../../data/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllCourses } from "../../features/course/courseSlice";
+import {
+  getAllCourses,
+  getAllUserCourses,
+} from "../../features/course/courseSlice";
+import { Link } from "react-router-dom";
 
 const courseList = [
   {
@@ -141,14 +145,20 @@ const courseList = [
 ];
 
 function HomePage() {
+  //! Change to user from 'userSlice'
+  const user = useSelector<RootState>((state) => state.auth.user);
   const courses = useSelector<RootState>((state) => state.course.courses);
+  const myCourses = useSelector<RootState>((state) => state.course.myCourses);
 
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(getAllCourses());
-  }, [dispatch]);
-  console.log("courses: ", courses);
+    //! Check if this is ok with rendering
+    if (user) {
+      dispatch(getAllCourses());
+      dispatch(getAllUserCourses(user.uid));
+    }
+  }, [dispatch, user]);
 
   return (
     <div className={styles.container_main}>
@@ -166,6 +176,23 @@ function HomePage() {
         <ShowCase>
           <h1>All Courses</h1>
           <CourseListDisplay courseList={courses} />
+        </ShowCase>
+      </section>
+
+      <section>
+        <ShowCase>
+          <>
+            <h1>Your Courses</h1>
+            {myCourses.length > 0 ? (
+              <CourseListDisplay courseList={myCourses} />
+            ) : (
+              <div>
+                <h3>Don't have any courses yet? </h3>{" "}
+                <p>Create one now! it's fast and easy.</p>
+                <Link to="courses/create">Lets go</Link>
+              </div>
+            )}
+          </>
         </ShowCase>
       </section>
 

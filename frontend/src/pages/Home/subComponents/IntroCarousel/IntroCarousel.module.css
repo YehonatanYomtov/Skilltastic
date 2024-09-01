@@ -13,6 +13,18 @@
   width: 100%;
 }
 
+.img_container {
+  position: relative;
+
+  img {
+    object-fit: cover;
+  }
+
+  p {
+    position: absolute;
+  }
+}
+
 @media (max-width: 1650px) {
   .container {
     width: 80vw;

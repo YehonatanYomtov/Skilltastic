@@ -6,13 +6,6 @@ import { auth, storage } from "../../firebase/firebaseConfig.ts";
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-// //* utils
-// import {
-//   addCaseFullTemplate,
-//   addCasePendingTemplate,
-//   addCaseRejectedTemplate,
-// } from "../../utils/addCaseTemplate";
-
 const initialState = {
   status: "idle",
   user: auth.currentUser,
@@ -38,14 +31,30 @@ export const updateProfileImage = createAsyncThunk(
   }
 );
 
+// export const setUser = createAsyncThunk(
+//   "user/setUser",
+//   async function (selectedImage) {
+//     const currentUser = auth.currentUser;
+//     const fileRef = ref(storage, `${currentUser.uid}.png`);
+
+//     await uploadBytes(fileRef, selectedImage);
+
+//     const photoURL = await getDownloadURL(fileRef);
+
+//     await updateProfile(currentUser, { photoURL });
+
+//     return photoURL;
+//   }
+// );
+
 const userSlice = createSlice({
   name: "user",
   initialState,
 
   reducers: {
-    setIsClicked(state) {
-      state.isClicked = !state.isClicked;
-    },
+    // setIsClicked(state) {
+    //   state.isClicked = !state.isClicked;
+    // },
   },
 
   extraReducers(builder) {
@@ -57,12 +66,23 @@ const userSlice = createSlice({
       .addCase(updateProfileImage.fulfilled, (state, action) => {
         state.status = "success";
         state.photoURL = action.payload;
-        console.log("action.payload: ", action.payload);
       })
       .addCase(updateProfileImage.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
       });
+    // .addCase(setUser.pending, (state) => {
+    //   state.error = null;
+    //   state.status = "loading";
+    // })
+    // .addCase(setUser.fulfilled, (state, action) => {
+    //   state.status = "success";
+    //   state.photoURL = action.payload;
+    // })
+    // .addCase(setUser.rejected, (state, action) => {
+    //   state.status = "rejected";
+    //   state.error = action.error.message;
+    // });
 
     // addCaseFullTemplate(builder, signup, {
     //   user: "payload",
@@ -85,7 +105,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setIsClicked } = userSlice.actions;
+// export const {} = userSlice.actions;
 
 export default userSlice.reducer;
 

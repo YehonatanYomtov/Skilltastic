@@ -5,39 +5,54 @@ import styles from "./CourseCard.module.css";
 
 //* Types
 import { CourseCard as CourseCardType } from "../../../types/index.ts";
+import CourseRatingStars from "../CourseRatingStars/CourseRatingStars.tsx";
+import { Link } from "react-router-dom";
+// import { Course, CourseData } from "../courseSlice.ts";
 type CourseCardProps = {
-  course: CourseCardType | Course;
+  course: CourseCardType;
 };
 
 function CourseCard({ course }: CourseCardProps) {
-  const { title, description, amount: price, currency, discount } = course;
-  console.log("course: ", course);
+  const { id, description, name: title, price, teacher, imageUrl } = course;
+
+  const { amount, currency, discount } = price;
+
+  const { name: teacherName } = teacher;
 
   return (
     <div className={styles.card_main_container}>
-      <div className={styles.card_img_container}>
-        {/* <img src={imageUrl} alt={courseTitle} /> */}
-        <img src="" alt="Course pic" />
-      </div>
-
-      <div className={styles.card_info_container}>
-        <h3>{title}</h3>
-        <p className={styles.name}>(Teacher name)</p>
-        <p>{description}</p>
-
-        <div className={styles.rating}>
-          <strong>(ratingAverage)</strong>
-          <div>(Rating stars)</div>
-          <p>(ratingCount)</p>
+      <Link to={`/courses/${id}`}>
+        <div className={styles.card_img_container}>
+          <img
+            src={imageUrl || "/images/course-bg-default.png"}
+            alt="Course img"
+          />
         </div>
 
-        <div className={styles.price}>
-          <strong>{discount !== 0 ? (price * discount) / 100 : price}</strong>
-          {discount > 0 && <span>{discount}%</span>}
-        </div>
+        <div className={styles.card_info_container}>
+          <h3>{title}</h3>
+          <p className={styles.name}>{teacherName}</p>
+          <p className={styles.description}>{description}</p>
 
-        {/* {tag && <div className={styles.tag}>{tag}</div>} */}
-      </div>
+          <div className={styles.rating}>
+            <strong>0.0</strong>
+
+            <CourseRatingStars />
+
+            <p>(0)</p>
+          </div>
+
+          <div className={styles.price}>
+            <strong>
+              {discount !== "0.00" ? (+amount * +discount) / 100 : amount}{" "}
+              {currency}
+            </strong>
+            {discount !== "0.00" && <span>{discount}%</span>}
+          </div>
+
+          {/* {tag && <div className={styles.tag}>{tag}</div>} */}
+        </div>
+      </Link>
     </div>
   );
 

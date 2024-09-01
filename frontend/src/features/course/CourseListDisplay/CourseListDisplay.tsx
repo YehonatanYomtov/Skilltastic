@@ -16,6 +16,9 @@ import { Course, CourseCard as CourseCardType } from "../../../types/index.ts";
 
 //* Styles
 import styles from "./CourseListDisplay.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../data/store.ts";
+import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner.tsx";
 
 const responsive = {
   superLargeDesktop: {
@@ -49,6 +52,8 @@ type CourseListDisplayProps = {
 };
 
 function CourseListDisplay({ courseList }: CourseListDisplayProps) {
+  const status = useSelector<RootState>((state) => state.course.status);
+
   return (
     <Carousel
       responsive={responsive}
@@ -61,9 +66,13 @@ function CourseListDisplay({ courseList }: CourseListDisplayProps) {
       customLeftArrow={<CustomLeftArrow />}
       customRightArrow={<CustomRightArrow />}
     >
-      {courseList.map((course) => (
-        <CourseCard course={course} key={course.id} />
-      ))}
+      {courseList && status !== "loading" ? (
+        courseList.map((course) => (
+          <CourseCard course={course} key={course.id} />
+        ))
+      ) : (
+        <LoadingSpinner />
+      )}
     </Carousel>
   );
 }

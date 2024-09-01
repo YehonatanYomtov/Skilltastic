@@ -1,3 +1,6 @@
+import { Request } from "express";
+import { File } from "multer";
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -11,6 +14,14 @@ declare global {
       PGPASSWORD: string;
     }
   }
+}
+
+interface MulterRequest extends Request {
+  file: File;
+}
+
+interface MulterRequestMultiple extends Request {
+  files: File[];
 }
 
 export {};

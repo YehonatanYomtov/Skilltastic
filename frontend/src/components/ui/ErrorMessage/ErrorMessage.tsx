@@ -17,7 +17,7 @@ import { AppDispatch } from "../../../data/store.ts";
 import styles from "./ErrorMessage.module.css";
 
 function ErrorMessage({ message = "Error" }) {
-  const error = useRouteError();
+  const error = useRouteError() as unknown as Error;
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +39,7 @@ function ErrorMessage({ message = "Error" }) {
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
 
-      <i>{error?.statusText || error?.message || message}</i>
+      <i>{error?.message || message}</i>
 
       <Button onClick={handleError} variant="blue-hollow">
         Ok

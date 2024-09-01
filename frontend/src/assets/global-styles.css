@@ -1,6 +1,4 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
   /* color-scheme: light dark; */
 
   /** Main-Colors */
@@ -50,10 +48,10 @@
 :root.dark {
   /** Main-Colors */
   /* --clr--main-primary: rgb(0, 30, 65); */
-  --clr--main-primary: #131413;
+  --clr--main-primary: #1b1c1d;
   --clr--main-bg-primary: rgb(15, 11, 72);
 
-  --clr--main-secondary: rgb(255, 255, 255);
+  --clr--main-secondary: rgb(242, 242, 242);
   --clr--main-bg-secondary: #292b2c;
 
   --clr--main-blue: rgb(45, 157, 255);
@@ -63,8 +61,18 @@
 
   --clr--nav-bg: rgb(39, 29, 193);
 
+  /** Hover */
+  --clr--main-hover-primary: rgb(245, 245, 245);
+
+  --clr--main-hover-secondary: rgb(89, 89, 89);
+  --clr--main--hover-bg-secondary: #393939;
+
+  --clr--main-hover-blue: rgb(63, 165, 255);
+
   /** Active */
   --clr--main-blue-bg-active: rgb(171, 194, 207);
+  --clr--main-blue-active: #1c95ff8f;
+  --clr--main--hover-bg-secondary-active: #2d475f;
 
   /** Other-Colors */
 
@@ -79,7 +87,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: Raleway;
 }
 
 html,

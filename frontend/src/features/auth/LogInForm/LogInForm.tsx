@@ -59,7 +59,7 @@ function LogInForm() {
 
       {status === "loading" && !error && !user && <LoadingSpinner />}
 
-      {(status === "success" || status === "idle") && !error && (
+      {(status === "success" || status === "initialRender") && !error && (
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.blur}></div>
           <h1>Log In</h1>

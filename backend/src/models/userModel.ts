@@ -42,6 +42,23 @@ import db from "../config/db";
 import { auth } from "../firebase/firebaseConfig";
 import { User } from "../types";
 
+export async function _getUserByEmail({
+  email,
+}: {
+  email: string;
+}): Promise<User | undefined> {
+  try {
+    const [user] = await db("users")
+      .select("id", "email", "name", "type")
+      .where("email", "=", email);
+
+    return user;
+  } catch (error) {
+    const err = error as Error;
+    console.error(err.message);
+  }
+}
+
 export async function _signup({
   name,
   email,
