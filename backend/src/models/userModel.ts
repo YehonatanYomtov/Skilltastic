@@ -72,22 +72,18 @@ export async function _signup({
   let firebaseUser: any;
 
   try {
-    // Create user in Firebase
     const userCredentials = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    // Store Firebase user reference
     firebaseUser = userCredentials.user;
 
-    // Insert user into the database
     const [user] = await db("users")
       .insert({ auth_id: firebaseUser.uid, name, email })
       .returning(["id", "name", "email"]);
 
-    // Store database user
     createdUser = user as User;
 
     return createdUser;
@@ -95,7 +91,6 @@ export async function _signup({
     const err = error as Error;
     console.error(err.message);
 
-    // Rollback logic: Delete Firebase user if DB insertion fails
     if (firebaseUser && firebaseUser.uid) {
       try {
         await deleteUser(firebaseUser);

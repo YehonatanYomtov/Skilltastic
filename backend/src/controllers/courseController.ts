@@ -13,43 +13,7 @@ import {
 } from "../models/courseModel";
 
 import db from "../config/db";
-import path from "path";
 import { uploadVideo } from "../utils/uploadVideoToFireStore";
-
-// export async function createCourse(req: Request, res: Response) {
-//   const { auth_id, title, description, price: amount, currency } = req.body;
-//   const videoFile = req.file;
-
-//   if (!videoFile) {
-//     return res.status(400).json({ error: "No video file uploaded" });
-//   }
-
-//   try {
-//     await db.transaction(async (trx) => {
-//       const teacher = await _findTeacherByAuthId(trx, auth_id);
-
-//       if (!teacher) {
-//         throw new Error("Teacher not found");
-//       }
-
-//       const priceId = await _createPrice(trx, amount, currency);
-
-//       const course = await _createCourse(
-//         trx,
-//         title,
-//         description,
-//         teacher.id,
-//         priceId
-//       );
-
-//       res.status(201).json({ message: "Course created successfully", course });
-//     });
-//   } catch (error) {
-//     const err = error as Error;
-//     console.error(err);
-//     res.status(500).json({ message: "Server error", error: err.message });
-//   }
-// };
 
 export async function createCourse(req: Request, res: Response) {
   const {

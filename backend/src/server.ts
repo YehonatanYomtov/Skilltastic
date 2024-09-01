@@ -2,8 +2,6 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import dotenv from "dotenv";
-import { fileURLToPath } from "url";
-import { createProxyMiddleware } from "http-proxy-middleware";
 
 dotenv.config({ path: path.resolve(__dirname, "..", "..", ".env") });
 
