@@ -5,8 +5,8 @@
   transform: translate(-50%, -50%);
   border-radius: 0.5rem;
   box-shadow: var(--box-shadow-1);
-  height: 35rem;
-  width: 35rem;
+  height: 50rem;
+  width: 55rem;
   display: flex;
   border: 2px solid rgba(255, 255, 255, 0.106);
 }

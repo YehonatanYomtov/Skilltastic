@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-// import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,19 +14,24 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-//* initialize-firebase
+//* Initialize-firebase
 const app = initializeApp(firebaseConfig);
 
-//* initialize-firebase-auth
+//* Initialize-firebase-auth
 const auth = getAuth(app);
 
-//* initialize-firestore
+//* Initialize-firestore
 const db = getFirestore(app);
 
-//* initialize-firebase-storage
+//* Initialize-firebase-storage
 const storage = getStorage(app);
 
-//* initialize-firebase-analytics
-// const analytics = getAnalytics(app);
+//* Initialize-firebase-analytics (safely)
+let analytics;
+isSupported().then((supported) => {
+  if (supported) {
+    analytics = getAnalytics(app);
+  }
+});
 
-export { auth, db, storage };
+export { auth, db, storage, analytics };

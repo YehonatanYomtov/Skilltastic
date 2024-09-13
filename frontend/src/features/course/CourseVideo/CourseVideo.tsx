@@ -7,6 +7,7 @@ import axios from "axios";
 
 function CourseVideo() {
   const [videoUrl, setVideoUrl] = useState<string>("");
+
   const params = useParams();
 
   useEffect(() => {
@@ -26,7 +27,8 @@ function CourseVideo() {
 
       <video width={500} controls src={videoUrl}></video>
 
-      <h2>(Course title)</h2>
+      <h3>Teacher : Yehonatan</h3>
+      <h4>More data... coming soon :p</h4>
     </div>
   );
 }

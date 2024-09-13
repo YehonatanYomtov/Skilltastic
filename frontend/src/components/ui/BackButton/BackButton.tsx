@@ -1,7 +1,7 @@
-//* react-router
+//* React-router
 import { useLocation, useNavigate } from "react-router-dom";
 
-//* styles
+//* Styles
 import styles from "./BackButton.module.css";
 
 const mainRoutes: string[] = ["/", "/profile", "/courses", "/contact"];

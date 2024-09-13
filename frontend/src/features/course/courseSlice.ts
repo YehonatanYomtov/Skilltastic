@@ -1,35 +1,10 @@
+//* Axios;
+import axios from "axios";
+
 //* Redux-hooks
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-//* Axios
-import axios from "axios";
-
-// //* Types
-// type Course = {
-//   id?: string;
-//   title: string;
-//   teacherName: string;
-//   description: string;
-//   price: number;
-//   currency: string;
-//   duration: string | number;
-//   category: string;
-//   ratingAverage: string | number;
-//   ratingCount: string | number;
-// };
-
-// type CourseData = {
-//   title: string;
-//   teacherName: string;
-//   description: string;
-//   price: number;
-//   currency: string;
-//   duration: string | number;
-//   category: string;
-//   ratingAverage: string | number;
-//   ratingCount: string | number;
-// };
-
+//* Types
 export type Price = {
   id: number;
   amount: number;
@@ -87,7 +62,6 @@ const initialState: CourseState = {
 };
 
 //* Async thunks
-
 export const createCourse = createAsyncThunk<CourseData, FormData>(
   "course/createCourse",
   async function (courseData: FormData, thunkAPI) {

@@ -1,14 +1,15 @@
-// //* redux-hooks
+// //* Redux-hooks
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// //* firebase-imports
+// //* Firebase-imports
 import { auth, storage } from "../../firebase/firebaseConfig.ts";
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const initialState = {
   status: "idle",
-  user: auth.currentUser,
+  // user: auth.currentUser,
+  user: null,
   isClicked: false,
   photoURL: "/images/User-dark.png",
   error: null,

@@ -28,17 +28,17 @@ function Navbar() {
   const user = useSelector<RootState>((state) => state.auth.user);
   const status = useSelector<RootState>((state) => state.auth.status);
 
-  const toggleNavbar = () => {
+  function toggleNavbar() {
     setIsExtended((prev) => !prev);
-  };
+  }
 
-  const showSubMenu = (menu: string) => {
+  function showSubMenu(menu: string) {
     setVisibleSubMenu(menu);
-  };
+  }
 
-  const hideSubMenu = () => {
+  function hideSubMenu() {
     setVisibleSubMenu(null);
-  };
+  }
 
   return (
     <nav
@@ -90,6 +90,8 @@ function Navbar() {
             <li>
               <NavbarLink to="/">
                 <i className="fa-solid fa-house-chimney"></i>
+
+                {isExtended && <span>Home</span>}
               </NavbarLink>
             </li>
 
@@ -99,8 +101,10 @@ function Navbar() {
             >
               <NavbarLink to="/profile">
                 <i className="fa-solid fa-user"></i>
+
                 {isExtended && <span>Profile</span>}
               </NavbarLink>
+
               {visibleSubMenu === "profile" && (
                 <div
                   className={`${styles.submenu} ${

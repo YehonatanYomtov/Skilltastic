@@ -12,9 +12,11 @@
 
 - Change CourseVideo to Course
 
+- Check if the 'AppDispatch' and 'RootState' are actual types, and if so where should they be stored.
+
 
 ---- CSS ----
-- Fix 'Navbar' text when sliding it open
+- Fix 'Navbar' text when sliding it open ✅
 
 - Fix 'Navbar's 'subnav' to be above the arrow button of the 'Carousel'
 

@@ -1,5 +1,8 @@
 import { Oval } from "react-loader-spinner";
 
+//* Styles
+import styles from "./LoadingSpinner.module.css";
+
 type LoadingSpinnerProps = {
   style?: React.CSSProperties;
   height?: number;
@@ -20,7 +23,7 @@ function LoadingSpinner({
   strokeWidthSecondary = 2,
 }: LoadingSpinnerProps) {
   return (
-    <div style={style}>
+    <div style={style} className={styles.loading_spinner_container}>
       <Oval
         height={height}
         width={width}

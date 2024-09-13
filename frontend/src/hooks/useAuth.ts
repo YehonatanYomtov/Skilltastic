@@ -1,16 +1,21 @@
-//* react-hooks
+//* Axios
+import axios from "axios";
+
+//* React-hooks
 import { useEffect } from "react";
 
-//* redux
+//* Redux
 import { useDispatch } from "react-redux";
 
-//* slice-auth
+//* Slice-auth
 import { authIsReady } from "../features/auth/authSlice.ts";
 
-//* firebase-imports
+//* Firebase-imports
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig.ts";
-import axios from "axios";
+
+//* Types
+//! Check if the 'AppDispatch' and 'RootState' are actual types, and if so where should they be stored.
 import { AppDispatch } from "../data/store.ts";
 // import { setUser } from "../features/user/userSlice.ts";
 

@@ -3,9 +3,10 @@ import { NavLink, NavLinkProps } from "react-router-dom";
 
 //* Styles
 import styles from "./NavbarLink.module.css";
-import { ReactNode } from "react";
 
 //* Types
+import { ReactNode } from "react";
+
 type NavbarLinkProps = {
   to: string;
   subNavLink?: boolean;
