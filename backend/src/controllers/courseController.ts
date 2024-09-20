@@ -97,6 +97,7 @@ export async function getCourseById(req: Request, res: Response) {
 
 export async function getAllUserCourses(req: Request, res: Response) {
   const userId = req.params.id;
+
   try {
     const courses = await _getAllUserCourses(userId);
     res.status(200).json(courses);
@@ -114,8 +115,9 @@ export async function searchCourses(req: Request, res: Response) {
   const searchQuery = req.query.q;
 
   try {
-    if (typeof searchQuery !== "string")
+    if (typeof searchQuery !== "string") {
       return res.status(400).send({ message: "No query provided." });
+    }
 
     const courses = await _searchCourses(searchQuery);
     res.status(200).json(courses);
@@ -123,7 +125,7 @@ export async function searchCourses(req: Request, res: Response) {
     const err = error as Error;
     console.error(err);
     res.status(500).json({
-      message: "Failed to get all current users courses",
+      message: "Failed to get courses",
       error: err.message,
     });
   }

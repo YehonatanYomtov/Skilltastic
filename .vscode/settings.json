@@ -1,3 +1,9 @@
 {
-  "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5501,
+  "workbench.colorCustomizations": {
+    "tree.indentGuidesStroke": "#00ff00",
+    "editorCursor.background": "#b39595",
+    "editorCursor.foreground": "#e79f0f",
+    "terminal.foreground": "#FFC489"
+  }
 }
