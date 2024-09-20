@@ -16,28 +16,14 @@ import db from "../config/db";
 import { uploadVideo } from "../utils/uploadVideoToFireStore";
 
 export async function createCourse(req: Request, res: Response) {
-  const {
-    teacherId,
-    title,
-    description,
-    // price: amount,
-    // currency,
-    // videoUrl,
-  } = req.body;
+  const { teacherId, title, description } = req.body;
 
-  // if (!title || !description || !amount || !currency) {
   if (!title || !description) {
     return res.status(400).json({ error: "All course fields are required" });
   }
 
-  // if (!videoUrl) {
-  //   return res.status(400).json({ error: "No video file uploaded" });
-  // }
-
   try {
     await db.transaction(async (trx) => {
-      // const priceId = await _createPrice(trx, amount, currency);
-
       const course = await _createCourse(trx, title, description, teacherId, 1);
 
       const url = await uploadVideo(req.file);
