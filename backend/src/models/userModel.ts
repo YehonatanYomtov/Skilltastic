@@ -49,7 +49,8 @@ export async function _getUserByEmail({
 }): Promise<User | undefined> {
   try {
     const [user] = await db("users")
-      .select("id", "email", "name", "type")
+      // .select("id", "email", "name", "type")
+      .select("*")
       .where("email", "=", email);
 
     return user;

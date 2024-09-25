@@ -14,6 +14,8 @@
 
 - Check if the 'AppDispatch' and 'RootState' are actual types, and if so where should they be stored.
 
+- Move the courseVideo.tsx to the pages folder.
+
 
 ---- CSS ----
 - Fix 'Navbar' text when sliding it open ✅

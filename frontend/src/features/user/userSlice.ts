@@ -1,10 +1,11 @@
-// //* Redux-hooks
+//* Redux-hooks
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// //* Firebase-imports
+//* Firebase-imports
 import { auth, storage } from "../../firebase/firebaseConfig.ts";
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import axios from "axios";
 
 const initialState = {
   status: "idle",
@@ -29,6 +30,20 @@ export const updateProfileImage = createAsyncThunk(
     await updateProfile(currentUser, { photoURL });
 
     return photoURL;
+  }
+);
+
+export const getUserFullInfo = createAsyncThunk(
+  "user/getUserFullInfo",
+  async function (userAuth) {
+    try {
+      const response = await axios.post("/api/user/user", userAuth);
+      return response.data;
+    } catch (err) {
+      const error = err as Error;
+      const message = error.message || "Failed to get user from db.";
+      return message;
+    }
   }
 );
 
@@ -71,19 +86,20 @@ const userSlice = createSlice({
       .addCase(updateProfileImage.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
+      })
+      .addCase(getUserFullInfo.pending, (state) => {
+        state.error = null;
+        state.status = "loading";
+      })
+      .addCase(getUserFullInfo.fulfilled, (state, action) => {
+        state.status = "success";
+        state.user = action.payload;
+        console.log("action.payload: ", action.payload);
+      })
+      .addCase(getUserFullInfo.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
       });
-    // .addCase(setUser.pending, (state) => {
-    //   state.error = null;
-    //   state.status = "loading";
-    // })
-    // .addCase(setUser.fulfilled, (state, action) => {
-    //   state.status = "success";
-    //   state.photoURL = action.payload;
-    // })
-    // .addCase(setUser.rejected, (state, action) => {
-    //   state.status = "rejected";
-    //   state.error = action.error.message;
-    // });
 
     // addCaseFullTemplate(builder, signup, {
     //   user: "payload",

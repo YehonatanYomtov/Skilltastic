@@ -27,8 +27,8 @@ import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
 import CourseCreation from "../features/course/CourseCreation/CourseCreation.tsx";
 import CourseVideo from "../features/course/CourseVideo/CourseVideo.tsx";
 import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
-import { RootState } from "../data/store.ts";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../data/store.ts";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth.ts";
 import FavoriteCourses from "../features/course/FavoriteCourses/FavoriteCourses.tsx";
 import CourseWishlist from "../features/course/CourseWishlist/CourseWishlist.tsx";
@@ -42,6 +42,8 @@ import AccountSettings from "../features/user/AccountSettings/AccountSettings.ts
 import SupportAndHelp from "../features/user/SupportAndHelp/SupportAndHelp.tsx";
 import ProfileLayout from "../layouts/SubLayout/ProfileLayout/ProfileLayout.tsx";
 import SearchCourses from "../pages/SearchCourses/SearchCourses.tsx";
+import { useEffect } from "react";
+import { getUserFullInfo } from "../features/user/userSlice.ts";
 // import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* custom-hooks
@@ -54,8 +56,17 @@ function AppRouter() {
   // const userSignedIn = useSelector((state) => state.user.userSignedIn);
   // const error = useSelector((state) => state.user.error);
   const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch<AppDispatch>();
 
   useAuth();
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getUserFullInfo(user));
+    }
+  }, [dispatch, user]);
+
+  // const userFullData = useSelector((state: RootState) => state.user.user);
 
   // useEffect(() => {
   //   localStorage.setItem("userSignedIn", JSON.stringify(userSignedIn));
