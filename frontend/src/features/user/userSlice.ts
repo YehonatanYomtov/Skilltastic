@@ -7,9 +7,25 @@ import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import axios from "axios";
 
-const initialState = {
+//* Types
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  auth_ui: string;
+  type: string;
+};
+
+type UserState = {
+  status: "idle" | "loading" | "success" | "rejected";
+  user: User | null;
+  isClicked: boolean;
+  photoURL: string;
+  error: string | null;
+};
+
+const initialState: UserState = {
   status: "idle",
-  // user: auth.currentUser,
   user: null,
   isClicked: false,
   photoURL: "/images/User-dark.png",
@@ -17,23 +33,22 @@ const initialState = {
 };
 
 //* Async thunks
-export const updateProfileImage = createAsyncThunk(
+export const updateProfileImage = createAsyncThunk<string, File>(
   "user/updateProfileImage",
   async function (selectedImage) {
     const currentUser = auth.currentUser;
+    if (!currentUser) throw new Error("User not authenticated");
+
     const fileRef = ref(storage, `${currentUser.uid}.png`);
-
     await uploadBytes(fileRef, selectedImage);
-
     const photoURL = await getDownloadURL(fileRef);
 
     await updateProfile(currentUser, { photoURL });
-
     return photoURL;
   }
 );
 
-export const getUserFullInfo = createAsyncThunk(
+export const getUserFullInfo = createAsyncThunk<User, { email: string }>(
   "user/getUserFullInfo",
   async function (userAuth) {
     try {
@@ -41,8 +56,7 @@ export const getUserFullInfo = createAsyncThunk(
       return response.data;
     } catch (err) {
       const error = err as Error;
-      const message = error.message || "Failed to get user from db.";
-      return message;
+      throw new Error(error.message || "Failed to get user from db.");
     }
   }
 );
@@ -85,7 +99,7 @@ const userSlice = createSlice({
       })
       .addCase(updateProfileImage.rejected, (state, action) => {
         state.status = "rejected";
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
       })
       .addCase(getUserFullInfo.pending, (state) => {
         state.error = null;
@@ -94,63 +108,14 @@ const userSlice = createSlice({
       .addCase(getUserFullInfo.fulfilled, (state, action) => {
         state.status = "success";
         state.user = action.payload;
-        console.log("action.payload: ", action.payload);
       })
       .addCase(getUserFullInfo.rejected, (state, action) => {
         state.status = "rejected";
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
       });
-
-    // addCaseFullTemplate(builder, signup, {
-    //   user: "payload",
-    //   userSignedIn: true,
-    // });
-    // //* ====
-    // addCasePendingTemplate(builder, signin);
-    // builder.addCase(signin.fulfilled, (state, action) => {
-    //   state.status = "succeeded";
-    //   state.user = action.payload.user;
-    //   state.userSignedIn = true;
-    // });
-    // addCaseRejectedTemplate(builder, signin);
-    // //* ====
-    // addCaseFullTemplate(builder, logout, { user: null, userSignedIn: false });
-    // //* =====
-    // addCaseFullTemplate(builder, authIsReady, { user: "payload" });
-    // //* =====
-    // addCaseFullTemplate(builder, updateProfileImage, { photoURL: "payload" });
   },
 });
 
 // export const {} = userSlice.actions;
 
 export default userSlice.reducer;
-
-// export const signup = createAsyncThunk(
-//   "user/signup",
-//   async function ({ email, password }) {
-//     const res = await createUserWithEmailAndPassword(auth, email, password);
-//     const newUser = res.user;
-
-//     return newUser;
-//   }
-// );
-
-// export const signin = createAsyncThunk(
-//   "user/signin",
-//   async function ({ email, password }) {
-//     const res = await signInWithEmailAndPassword(auth, email, password);
-//     return res;
-//   }
-// );
-
-// export const logout = createAsyncThunk("user/logout", async function () {
-//   await signOut(auth);
-// });
-
-// export const authIsReady = createAsyncThunk(
-//   "user/authIsReady",
-//   async function (user) {
-//     return user;
-//   }
-// );

@@ -51,7 +51,7 @@ export async function _getUserByEmail({
     const [user] = await db("users")
       // .select("id", "email", "name", "type")
       .select("*")
-      .where("email", "=", email);
+      .where({ email });
 
     return user;
   } catch (error) {

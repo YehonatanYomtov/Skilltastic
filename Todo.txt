@@ -16,6 +16,13 @@
 
 - Move the courseVideo.tsx to the pages folder.
 
+- Fix CourseCard that if it has more then x amount of characters it should display a '...'
+
+- Create a 'types' file for each slice/feature, so that there is AOC.
+
+- Fix 'type' of each user, that if he created a course he should be of 'type': 'teacher'
+
+- 
 
 ---- CSS ----
 - Fix 'Navbar' text when sliding it open ✅
@@ -23,3 +30,4 @@
 - Fix 'Navbar's 'subnav' to be above the arrow button of the 'Carousel'
 
 - Add border secondary color to 'CourseCard'
+
