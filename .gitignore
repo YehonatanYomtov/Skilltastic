@@ -5,4 +5,7 @@
 .env
 
 # Ignore backend dist folder
-backend/dist
+/backend/dist/
+
+# Ignore backend uploads folder
+/backend/uploads/
