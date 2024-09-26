@@ -1,21 +1,16 @@
 //* Redux-hooks
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+//* Axios
+import axios from "axios";
+
 //* Firebase-imports
 import { auth, storage } from "../../firebase/firebaseConfig.ts";
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import axios from "axios";
 
 //* Types
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  auth_ui: string;
-  type: string;
-};
-
+import { User } from "../../types/user.ts";
 type UserState = {
   status: "idle" | "loading" | "success" | "rejected";
   user: User | null;
@@ -27,6 +22,7 @@ type UserState = {
 const initialState: UserState = {
   status: "idle",
   user: null,
+  // user: auth.currentUser,
   isClicked: false,
   photoURL: "/images/User-dark.png",
   error: null,

@@ -55,10 +55,10 @@ function AppRouter() {
   // const user = useSelector((state) => state.user.user);
   // const userSignedIn = useSelector((state) => state.user.userSignedIn);
   // const error = useSelector((state) => state.user.error);
-  useAuth();
-
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
+
+  useAuth();
 
   useEffect(() => {
     if (user) {
