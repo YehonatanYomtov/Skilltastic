@@ -1,12 +1,17 @@
+//* React-hooks
 import { memo } from "react";
+
+//* React-router-dom
+import { Link } from "react-router-dom";
+
+//* Components-course
+import CourseRatingStars from "../CourseRatingStars/CourseRatingStars.tsx";
 
 //* Styles
 import styles from "./CourseCard.module.css";
 
 //* Types
-import { CourseCard as CourseCardType } from "../../../types/index.ts";
-import CourseRatingStars from "../CourseRatingStars/CourseRatingStars.tsx";
-import { Link } from "react-router-dom";
+import { CourseCard as CourseCardType } from "../../../types/course.ts";
 // import { Course, CourseData } from "../courseSlice.ts";
 type CourseCardProps = {
   course: CourseCardType;

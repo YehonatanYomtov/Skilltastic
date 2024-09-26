@@ -7,12 +7,12 @@ import axios from "axios";
 //* Firebase-imports
 import { auth } from "../../firebase/firebaseConfig.ts";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { usernameFromEmailExtractor } from "../../utils/usernameFromEmailExtractor.ts";
-import { User } from "../../types/index.ts";
 
 //* Utils
+import { usernameFromEmailExtractor } from "../../utils/usernameFromEmailExtractor.ts";
 
 //* Types
+import { User } from "../../types/user.ts";
 export type AuthUser = {
   uid?: string;
 } & Omit<Partial<User>, "auth_id">;
