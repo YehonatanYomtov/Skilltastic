@@ -2,9 +2,9 @@
 import { Outlet } from "react-router-dom";
 
 //* Components-UI
-import Navbar from "../components/ui/Navbar/Navbar.tsx";
-import BackButton from "../components/ui/BackButton/BackButton.tsx";
-import Footer from "../components/ui/Footer/Footer.tsx";
+import Navbar from "../components/ui/Navbar/Navbar";
+import BackButton from "../components/ui/BackButton/BackButton";
+import Footer from "../components/ui/Footer/Footer";
 
 //* Styles
 import styles from "./AppLayout.module.css";
