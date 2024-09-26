@@ -1,5 +1,7 @@
 //* Course-types
 
+import { User } from "./user";
+
 export type Price = {
   id: number;
   amount: number;
@@ -34,11 +36,11 @@ export type Wishlist = {
   wanter_id: number;
 };
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-};
+// export type User = {
+//   id: string;
+//   name: string;
+//   email: string;
+// };
 
 export type CourseData = {
   id: string;
