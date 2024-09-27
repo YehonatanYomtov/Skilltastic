@@ -25,8 +25,8 @@ function Navbar() {
   const [isExtended, setIsExtended] = useState(false);
   const [visibleSubMenu, setVisibleSubMenu] = useState<string | null>(null);
 
-  const user = useSelector<RootState>((state) => state.auth.user);
-  const status = useSelector<RootState>((state) => state.auth.status);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const status = useSelector((state: RootState) => state.auth.status);
 
   function toggleNavbar() {
     setIsExtended((prev) => !prev);

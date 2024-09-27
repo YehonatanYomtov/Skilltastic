@@ -23,7 +23,8 @@ import { RootState } from "../../../data/store";
 import { Link } from "react-router-dom";
 
 function UserTag() {
-  const status = useSelector<RootState>((state) => state.auth.status);
+  const status = useSelector((state: RootState) => state.auth.status);
+
   // const email = useSelector((state) => state.user.user.email);
   // const photoURL = useSelector((state) => state.user.user.photoURL);
   const photoURL = null;

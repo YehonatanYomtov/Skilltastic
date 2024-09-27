@@ -19,7 +19,7 @@ import styles from "./UploadImageSection.module.css";
 function UploadImageSection() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const status = useSelector<RootState>((state) => state.auth.status);
+  const status = useSelector((state: RootState) => state.auth.status);
 
   // const dispatch = useDispatch();
 

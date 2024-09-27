@@ -23,19 +23,19 @@ const options = [
 function SearchCourses() {
   const [selectedOption, setSelectedOption] = useState<string>("most-relevant");
 
-  const searchCoursesResult = useSelector<RootState>(
-    (state) => state.course.searchCoursesResult
+  const searchCoursesResult = useSelector(
+    (state: RootState) => state.course.searchCoursesResult
   );
-  const status = useSelector<RootState>((state) => state.course.status);
-  const error = useSelector<RootState>((state) => state.course.error);
+  const status = useSelector((state: RootState) => state.course.status);
+  const error = useSelector((state: RootState) => state.course.error);
 
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get("q") || "";
 
-  const handleChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
+  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedOption(event.target.value);
-  };
+  }
 
   return (
     <>
@@ -62,9 +62,10 @@ function SearchCourses() {
           </div>
 
           <div className={styles.courses_display}>
-            {searchCoursesResult.map((course) => (
-              <CourseCard course={course} key={course.id} />
-            ))}
+            {searchCoursesResult.map((course) => {
+              console.log(">>>> ", course);
+              return <CourseCard course={course} key={course.id} />;
+            })}
           </div>
         </div>
       )}

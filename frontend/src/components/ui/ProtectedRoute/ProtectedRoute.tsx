@@ -18,8 +18,8 @@ type ProtectedRouteProps = {
 };
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const user = useSelector<RootState>((state) => state.auth.user);
-  const status = useSelector<RootState>((state) => state.auth.status);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const status = useSelector((state: RootState) => state.auth.status);
 
   const loadingSpinnerStyles: StringObject = {
     height: "100vh",
@@ -33,7 +33,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     alignItems: "center",
   };
 
-  if (status === "Loading")
+  if (status === "loading")
     return <LoadingSpinner style={loadingSpinnerStyles} />;
 
   if (!user && status !== "initialRender")

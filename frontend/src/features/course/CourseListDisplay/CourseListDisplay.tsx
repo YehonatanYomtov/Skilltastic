@@ -12,7 +12,7 @@ import CustomLeftArrow from "./CustomLeftAndRightArrows/CustomLeftArrow";
 import CustomRightArrow from "./CustomLeftAndRightArrows/CustomRightArrow";
 
 //* Types
-import { Course, CourseCard as CourseCardType } from "../../../types/index.ts";
+import { Course, CourseCard as CourseCardType } from "../../../types/course.ts";
 
 //* Styles
 import styles from "./CourseListDisplay.module.css";
@@ -52,7 +52,7 @@ type CourseListDisplayProps = {
 };
 
 function CourseListDisplay({ courseList }: CourseListDisplayProps) {
-  const status = useSelector<RootState>((state) => state.course.status);
+  const status = useSelector((state: RootState) => state.course.status);
 
   return (
     <Carousel

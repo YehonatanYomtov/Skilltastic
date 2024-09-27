@@ -6,7 +6,7 @@ import CourseCard from "../CourseCard/CourseCard";
 import styles from "./MyCreatedCourses.module.css";
 
 function MyCreatedCourses() {
-  const myCourses = useSelector<RootState>((state) => state.course.myCourses);
+  const myCourses = useSelector((state: RootState) => state.course.myCourses);
   console.log("myCourses: ", myCourses);
 
   return (

@@ -18,9 +18,9 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   //! Change to user from 'userSlice'
-  const user = useSelector<RootState>((state) => state.auth.user);
-  const courses = useSelector<RootState>((state) => state.course.courses);
-  const myCourses = useSelector<RootState>((state) => state.course.myCourses);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const courses = useSelector((state: RootState) => state.course.courses);
+  const myCourses = useSelector((state: RootState) => state.course.myCourses);
 
   const dispatch = useDispatch<AppDispatch>();
 
