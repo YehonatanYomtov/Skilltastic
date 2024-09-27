@@ -8,7 +8,7 @@
 
 - Fix 'BackButton' when going back
 
-- Fix search to have query so it can show dasdsad has found 0 
+- Fix search result message (in SearchCourses.tsx) to have query so it can show dasdsad has found 0 
 
 - Change CourseVideo to Course
 
@@ -23,6 +23,8 @@
 - Fix 'type' of each user, that if he created a course he should be of 'type': 'teacher'
 
 - Finish the carousel cards (by adding relevant data there).
+
+- Switch all alerts, to message on the screen (maybe create a popup).
 
 - 
 

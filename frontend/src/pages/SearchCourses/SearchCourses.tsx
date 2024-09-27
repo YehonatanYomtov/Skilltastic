@@ -63,7 +63,7 @@ function SearchCourses() {
 
           <div className={styles.courses_display}>
             {searchCoursesResult.map((course) => {
-              console.log(">>>> ", course);
+              console.log("COURSE >>>> ", course);
               return <CourseCard course={course} key={course.id} />;
             })}
           </div>

@@ -12,7 +12,7 @@ import CustomLeftArrow from "./CustomLeftAndRightArrows/CustomLeftArrow";
 import CustomRightArrow from "./CustomLeftAndRightArrows/CustomRightArrow";
 
 //* Types
-import { Course, CourseCard as CourseCardType } from "../../../types/course.ts";
+import { CourseCard as CourseCardType } from "../../../types/course.ts";
 
 //* Styles
 import styles from "./CourseListDisplay.module.css";
@@ -48,7 +48,7 @@ const responsive = {
 };
 
 type CourseListDisplayProps = {
-  courseList: CourseCardType[] | Course[];
+  courseList: CourseCardType[];
 };
 
 function CourseListDisplay({ courseList }: CourseListDisplayProps) {

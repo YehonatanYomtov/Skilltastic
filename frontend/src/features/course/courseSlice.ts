@@ -3,6 +3,7 @@ import axios from "axios";
 
 //* Redux-hooks
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { CourseCard as CourseDataType } from "../../types/course";
 
 //* Types
 export type Price = {
@@ -12,20 +13,20 @@ export type Price = {
   discount: number;
 };
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-};
+// export type User = {
+//   id: string;
+//   name: string;
+//   email: string;
+// };
 
-export type Course = {
-  id: number;
-  title: string;
-  description: string;
-  teacher_id: number | null;
-  price_id: number;
-  // image_url: string;
-};
+// export type Course = {
+//   id: number;
+//   title: string;
+//   description: string;
+//   teacher_id: number | null;
+//   price_id: number;
+//   // image_url: string;
+// };
 
 export type CourseCreationPayload = {
   title: string;
@@ -34,18 +35,18 @@ export type CourseCreationPayload = {
   videoFile: File;
 };
 
-export type CourseData = {
-  id: string;
-  name: string;
-  description: string;
-  teacher: User;
-  price: Price;
-};
+// export type CourseData = {
+//   id: string;
+//   name: string;
+//   description: string;
+//   teacher: User;
+//   price: Price;
+// };
 
 type CourseState = {
-  courses: CourseData[];
-  myCourses: CourseData[];
-  searchCoursesResult: CourseData[];
+  courses: CourseDataType[];
+  myCourses: CourseDataType[];
+  searchCoursesResult: CourseDataType[];
   videoUrl: string;
   status: "idle" | "loading" | "success" | "error";
   error: string | null;
@@ -62,7 +63,7 @@ const initialState: CourseState = {
 };
 
 //* Async thunks
-export const createCourse = createAsyncThunk<CourseData, FormData>(
+export const createCourse = createAsyncThunk<CourseDataType, FormData>(
   "course/createCourse",
   async function (courseData: FormData, thunkAPI) {
     try {

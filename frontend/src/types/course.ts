@@ -29,10 +29,10 @@ export type CourseCard = {
   name: string;
   teacher: CourseTeacher;
   description?: string;
-  ratingAverage: string | number;
-  ratingCount: string | number;
+  ratingAverage?: string | number;
+  ratingCount?: string | number;
   price: CoursePrice;
   discountPrice?: string | number | null;
   tag?: string;
-  imageUrl: string;
+  imageUrl?: string;
 };
