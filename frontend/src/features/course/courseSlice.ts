@@ -110,9 +110,8 @@ export const getAllCourses = createAsyncThunk(
 
 export const getAllUserCourses = createAsyncThunk(
   "course/getAllUserCourses",
-  async function (uid, thunkAPI) {
+  async function (uid: string, thunkAPI) {
     try {
-      //! Check if sending user id is safe like this
       const response = await axios.get(`/api/courses/created/${uid}`);
       return response.data;
     } catch (error) {
@@ -129,25 +128,26 @@ export const getAllUserCourses = createAsyncThunk(
   }
 );
 
-export const searchCourses = createAsyncThunk(
-  "course/searchCourses",
-  async function (searchQuery, thunkAPI) {
-    try {
-      const response = await axios.get(`/api/courses/search?q=${searchQuery}`);
-      return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          error.response?.data?.message ||
-          error.message ||
-          "Failed to search courses";
-        return thunkAPI.rejectWithValue(message);
-      } else {
-        return thunkAPI.rejectWithValue("An unexpected error occurred");
-      }
+export const searchCourses = createAsyncThunk<
+  CourseDataType[],
+  string,
+  { rejectValue: string }
+>("course/searchCourses", async function (searchQuery, thunkAPI) {
+  try {
+    const response = await axios.get(`/api/courses/search?q=${searchQuery}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to search courses";
+      return thunkAPI.rejectWithValue(message);
+    } else {
+      return thunkAPI.rejectWithValue("An unexpected error occurred");
     }
   }
-);
+});
 
 //* Slice
 const courseSlice = createSlice({

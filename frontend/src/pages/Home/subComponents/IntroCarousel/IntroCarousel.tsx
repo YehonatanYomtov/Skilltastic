@@ -2,9 +2,11 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+//* Sub-Components
+import IntroDisplayItem from "./IntroDisplayItem/IntroDisplayItem";
+
 //* Styles
 import styles from "./IntroCarousel.module.css";
-import IntroDisplayItem from "./IntroDisplayItem/IntroDisplayItem";
 
 //* Types
 type BreakpointType = {

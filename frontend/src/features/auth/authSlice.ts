@@ -15,6 +15,7 @@ import { usernameFromEmailExtractor } from "../../utils/usernameFromEmailExtract
 import { User } from "../../types/user.ts";
 export type AuthUser = {
   uid?: string;
+  email: string;
 } & Omit<Partial<User>, "auth_id">;
 
 type AuthState = {

@@ -125,7 +125,7 @@ export async function _getAllCourses() {
   }));
 }
 
-export async function _getAllUserCourses(userId: number | string) {
+export async function _getAllUserCourses(userId: string) {
   const courses = await db<Course>("courses as c")
     .join("users as u", "c.teacher_id", "u.id")
     .join("prices as p", "c.price_id", "p.id")

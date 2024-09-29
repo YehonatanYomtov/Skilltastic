@@ -26,6 +26,8 @@
 
 - Switch all alerts, to message on the screen (maybe create a popup).
 
+- Rename or split 'CourseCard' type in types/course.ts to a mor general name
+
 - 
 
 ---- CSS ----

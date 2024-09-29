@@ -61,7 +61,7 @@ function AppRouter() {
   useAuth();
 
   useEffect(() => {
-    if (user) {
+    if (user && user.email) {
       dispatch(getUserFullInfo(user));
     }
   }, [dispatch, user]);

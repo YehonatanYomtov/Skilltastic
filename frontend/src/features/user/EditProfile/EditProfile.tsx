@@ -1,33 +1,39 @@
-import { useState } from "react";
-// import UploadImageSection from "../UploadImageSection/UploadImageSection";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProfileImage } from "../userSlice";
+//* React-hooks
+// import { useState } from "react";
 
+//* Redux
+import { useSelector } from "react-redux";
+
+//* Slice-user
+// import { updateProfileImage } from "../userSlice";
+
+//* Styles
 import styles from "./EditProfile.module.css";
 
-function EditProfile() {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+//* Types
+import { RootState } from "../../../data/store";
 
-  const photoURL = useSelector((state) => state.user.photoURL);
+function EditProfile() {
+  // const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const photoURL = useSelector((state: RootState) => state.user.photoURL);
 
   // const uploadInputRef = useRef(null);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     // formData.append("fileName", uploadInputRef.);
-    dispatch(updateProfileImage(selectedImage));
+    // dispatch(updateProfileImage(selectedImage));
   }
 
   function handleImageSelected(e: React.ChangeEvent<HTMLInputElement>) {
-    const formData = new FormData();
+    // const formData = new FormData();
 
     if (e.target.files && e.target.files[0]) {
-      setSelectedImage(e.target.files[0]);
+      // setSelectedImage(e.target.files[0]);
     }
-
-    console.log("-------->", selectedImage);
   }
 
   return (

@@ -1,9 +1,15 @@
-import { ReactNode } from "react";
+import { ReactNode, CSSProperties } from "react";
 
 //* Styles
 import styles from "./IntroDisplayItem.module.css";
 
-function IntroDisplayItem({ style, children }: { children: ReactNode }) {
+//* Types
+type IntroDisplayItemProps = {
+  style?: CSSProperties;
+  children: ReactNode;
+};
+
+function IntroDisplayItem({ style, children }: IntroDisplayItemProps) {
   return (
     <div className={styles.container} style={style}>
       {children}

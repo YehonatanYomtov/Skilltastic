@@ -1,16 +1,22 @@
+//* React-router-dom
 import { useLocation, useNavigate } from "react-router-dom";
+
+//* Redux
+import { useDispatch } from "react-redux";
+
+//* Slice
+import { searchCourses } from "../courseSlice";
 
 //* Styles
 import styles from "./SearchCoursesInput.module.css";
 
 //* Types
 import { FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../data/store";
-import { searchCourses } from "../courseSlice";
 
 function SearchCoursesInput() {
   const [searchQuery, setSearchQuery] = useState<string>("");
+
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
