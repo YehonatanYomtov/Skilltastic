@@ -1,7 +1,7 @@
 //* React-router
 import { Outlet } from "react-router-dom";
 
-//* Components-ui
+//* Components-UI
 import CoursesSideNavbar from "../../../features/course/CoursesSideNavbar/CoursesSideNavbar";
 
 //* Styles
