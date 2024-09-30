@@ -28,6 +28,10 @@
 
 - Rename or split 'CourseCard' type in types/course.ts to a mor general name
 
+- Fix CourseListDisplay.tsx that when the 'status' is 'loading' the container should not be squashed.
+
+- Add the common and necessary error messages to the 'LogIn' and 'SignUp' components
+
 - 
 
 ---- CSS ----
@@ -37,3 +41,4 @@
 
 - Add border secondary color to 'CourseCard'
 
+- Change title of 'LogIn' and 'SignUp' components
