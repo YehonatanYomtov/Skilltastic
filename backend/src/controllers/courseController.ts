@@ -97,6 +97,7 @@ export async function getCourseById(req: Request, res: Response) {
 
 export async function getAllUserCourses(req: Request, res: Response) {
   const userId = req.params.id;
+  console.log("userId: ", userId);
 
   try {
     const courses = await _getAllUserCourses(userId);

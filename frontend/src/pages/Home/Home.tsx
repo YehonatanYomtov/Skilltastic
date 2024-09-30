@@ -26,9 +26,9 @@ function HomePage() {
 
   useEffect(() => {
     //! Check if this is ok with rendering
-    if (user && !user.id) {
+    if (user && user.uid !== undefined) {
       dispatch(getAllCourses());
-      dispatch(getAllUserCourses(String(user.uid)));
+      dispatch(getAllUserCourses(user?.uid));
     }
   }, [dispatch, user]);
 

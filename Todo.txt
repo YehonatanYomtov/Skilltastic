@@ -32,7 +32,7 @@
 
 - Add the common and necessary error messages to the 'LogIn' and 'SignUp' components
 
-- 
+- Fix un needed rendering in the Home.tsx
 
 ---- CSS ----
 - Fix 'Navbar' text when sliding it open ✅
