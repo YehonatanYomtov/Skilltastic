@@ -48,8 +48,6 @@ export async function _getUserByEmail({
   email: string;
 }): Promise<User | undefined> {
   try {
-    console.log(">> email: ", email);
-
     const [user] = await db("users")
       // .select("id", "email", "name", "type")
       .select("*")

@@ -1,20 +1,32 @@
+//* React-hooks
+import { useEffect } from "react";
+
+//* React-router-dom
+import { Link } from "react-router-dom";
+
+//* Redux
+import { useDispatch, useSelector } from "react-redux";
+
 //* Components-UI
 import ShowCase from "../../components/ui/ShowCase/ShowCase";
 import CourseListDisplay from "../../features/course/CourseListDisplay/CourseListDisplay";
 import IntroCarousel from "./subComponents/IntroCarousel/IntroCarousel";
 
-//* Styles
-import styles from "./Home.module.css";
+//* Components-features
 import WelcomeMessage from "../../features/user/WelcomeMessage/WelcomeMessage";
 import SearchCoursesInput from "../../features/course/SearchCoursesInput/SearchCoursesInput";
-import { AppDispatch, RootState } from "../../data/store";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+
+//* Slice-course
 import {
   getAllCourses,
   getAllUserCourses,
 } from "../../features/course/courseSlice";
-import { Link } from "react-router-dom";
+
+//* Styles
+import styles from "./Home.module.css";
+
+//* Types
+import { AppDispatch, RootState } from "../../data/store";
 
 function HomePage() {
   //! Change to user from 'userSlice'

@@ -34,6 +34,8 @@
 
 - Fix un needed rendering in the Home.tsx
 
+- 
+
 ---- CSS ----
 - Fix 'Navbar' text when sliding it open ✅
 
