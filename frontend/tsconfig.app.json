@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "exclude": ["public/sw.js", "node_modules"]
+  "exclude": ["sw.js", "node_modules"]
 }
 
 // {
