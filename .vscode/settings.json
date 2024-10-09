@@ -4,6 +4,17 @@
     "tree.indentGuidesStroke": "#00ff00",
     "editorCursor.background": "#b39595",
     "editorCursor.foreground": "#e79f0f",
-    "terminal.foreground": "#FFC489"
+    "terminal.foreground": "#FFC489",
+    "editor.lineHighlightBorder": "#9fced11f",
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "blockman.colors": [
+      "red",
+      "#7FFFD4",
+      "#FF6347",
+      "#4682B4",
+      "#9370DB",
+      "#32CD32",
+      "#FF69B4"
+    ]
   }
 }

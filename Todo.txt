@@ -1,46 +1,76 @@
-- Make 'userSlice' with all user info, and then use that instead of 'user' from 'authSlice'
+-- To FIX --
+- Fix 'BackButton' when going back
+
+- Fix search result message (in SearchCourses.tsx) to have query so it can show dasdsad has found 0 
+
+- Check if the 'AppDispatch' and 'RootState' are actual types, and if so where should they be stored
+
+- Fix CourseCard that if it has more then x amount of characters it should display a '...'
+
+- Fix 'type' of each user, that if he created a course he should be of 'type': 'teacher'
+
+- Fix CourseListDisplay.tsx that when the 'status' is 'loading' the container should not be squashed
+
+- Fix un needed rendering in the Home.tsx
+
+- Add a section under the course video in the Course 'page' with these tabs: 1) Overview. 2) Notes (of users). 3) Q&A. (Other courses(by the current teacher))
+
+- 
+
+-- To FINISH -- 
+- Finish the carousel cards (by adding relevant data there)
+
+- 
+
+
+-- To CHANGE -- 
+- Change/Make 'userSlice' with all user info, and then use that instead of 'user' from 'authSlice'
 
 - Change all/needed auth user 'uid'/"auth_id" in the app's code to normal 'id' from 'userSlice' user.id. (so that all id's are of type number)
 
 - Change 'All course' 'ShowCase' to something more probational
 
-- Make a template for all duplicate code in the async thunk functions, and if needed in the 'builder' as well
-
-- Fix 'BackButton' when going back
-
-- Fix search result message (in SearchCourses.tsx) to have query so it can show dasdsad has found 0 
-
 - Change CourseVideo to Course
 
-- Check if the 'AppDispatch' and 'RootState' are actual types, and if so where should they be stored.
+- Create a template for all duplicate code in the async thunk functions, and if needed in the 'builder' as well
 
-- Move the courseVideo.tsx to the pages folder.
-
-- Fix CourseCard that if it has more then x amount of characters it should display a '...'
-
-- Create a 'types' file for each slice/feature in frontend folder, so that there is AOC.
-
-- Fix 'type' of each user, that if he created a course he should be of 'type': 'teacher'
-
-- Finish the carousel cards (by adding relevant data there).
-
-- Switch all alerts, to message on the screen (maybe create a popup).
+- Switch all alerts, to message on the screen (maybe create a popup)
 
 - Rename or split 'CourseCard' type in types/course.ts to a mor general name
 
-- Fix CourseListDisplay.tsx that when the 'status' is 'loading' the container should not be squashed.
+- Create a 'types' file for each slice/feature in frontend folder, so that there is AOC
 
-- Add the common and necessary error messages to the 'LogIn' and 'SignUp' components
-
-- Fix un needed rendering in the Home.tsx
+- Move the courseVideo.tsx to the pages folder
 
 - 
+
+
+-- To ADD --
+- Add the common and necessary error messages to the 'LogIn' and 'SignUp' components
+
+- Add a teacher page, where you can browse all the selected teacher's courses
+
+- Maybe add a 'GeoLocation' functionality on app initial render, so that you can select the language of the site
+
+- Add the functionalities to select a language
+
+- 
+
+
+-----------------------------------------------***-----------------------------------------------
+
 
 ---- CSS ----
 - Fix 'Navbar' text when sliding it open ✅
 
-- Fix 'Navbar's 'subnav' to be above the arrow button of the 'Carousel'
+- Fix 'Navbar's 'subNav' to be above the arrow button of the 'Carousel'
 
 - Add border secondary color to 'CourseCard'
 
 - Change title of 'LogIn' and 'SignUp' components
+
+- Style the 'Course' component page
+
+- Fix the logo moving when opening the side navbar
+
+- 

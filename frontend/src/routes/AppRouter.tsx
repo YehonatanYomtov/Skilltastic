@@ -1,60 +1,57 @@
-//* react-hooks
-// import { useEffect } from "react";
+//* React-hooks
+import { useEffect } from "react";
 
-//* react-router
+//* React-router-dom
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-//* redux-hooks
-// import { useSelector } from "react-redux";
+//* Redux
+import { useDispatch, useSelector } from "react-redux";
 
-//* layout
+//* Layouts
 import AppLayout from "../layouts/AppLayout.tsx";
+import CourseLayout from "../layouts/SubLayout/CourseLayout/CourseLayout.tsx";
+import ProfileLayout from "../layouts/SubLayout/ProfileLayout/ProfileLayout.tsx";
 
-//* pages
+//* Pages
 import Home from "../pages/Home/Home.tsx";
-
-// import Courses from "../pages/Courses/Courses.tsx";
 import Contact from "../pages/Contact/Contact.tsx";
-// import UserPage from "../pages/UserPage/UserPage";
+import SearchCourses from "../pages/SearchCourses/SearchCourses.tsx";
 
-//* components-UI
+//* Components-UI
 import ErrorMessage from "../components/ui/ErrorMessage/ErrorMessage.tsx";
+import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
+
+//* Components-auth
 import SignUpForm from "../features/auth/SignUpForm/SignUpForm.tsx";
 import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
-// import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../data/store.ts";
+
+//* Components-course
 import CourseCreation from "../features/course/CourseCreation/CourseCreation.tsx";
 import CourseVideo from "../features/course/CourseVideo/CourseVideo.tsx";
-import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
-import { AppDispatch, RootState } from "../data/store.ts";
-import { useDispatch, useSelector } from "react-redux";
-import useAuth from "../hooks/useAuth.ts";
 import FavoriteCourses from "../features/course/FavoriteCourses/FavoriteCourses.tsx";
 import CourseWishlist from "../features/course/CourseWishlist/CourseWishlist.tsx";
 import MyCreatedCourses from "../features/course/MyCreatedCourses/MyCreatedCourses.tsx";
 import OwnedCourses from "../features/course/OwnedCourses/OwnedCourses.tsx";
-import CourseLayout from "../layouts/SubLayout/CourseLayout/CourseLayout.tsx";
 import CourseCertificates from "../features/course/CourseCertificates/CourseCertificates.tsx";
+
+//* Components-user
 import Overview from "../features/user/Overview/Overview.tsx";
 import EditProfile from "../features/user/EditProfile/EditProfile.tsx";
 import AccountSettings from "../features/user/AccountSettings/AccountSettings.tsx";
 import SupportAndHelp from "../features/user/SupportAndHelp/SupportAndHelp.tsx";
-import ProfileLayout from "../layouts/SubLayout/ProfileLayout/ProfileLayout.tsx";
-import SearchCourses from "../pages/SearchCourses/SearchCourses.tsx";
-import { useEffect } from "react";
-import { getUserFullInfo } from "../features/user/userSlice.ts";
-// import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
-//* custom-hooks
-// import useAuth from "../hooks/useAuth";
+//* Slice-user
+import { getUserFullInfo } from "../features/user/userSlice.ts";
+
+//* Custom-hooks
+import useAuth from "../hooks/useAuth.ts";
+
+//* Types
+import { AppDispatch, RootState } from "../data/store.ts";
 
 // NOTE: This seems to be ok, since it's being called in a top level component that doesn't have its own state
 // If it did, you might have an issue with React keeping track of existing state in the hooks here.
 function AppRouter() {
-  // const user = useSelector((state) => state.user.user);
-  // const userSignedIn = useSelector((state) => state.user.userSignedIn);
-  // const error = useSelector((state) => state.user.error);
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
 

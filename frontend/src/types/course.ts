@@ -5,6 +5,7 @@ export type Course = {
   description: string;
   teacher_id: number;
   price_id: number;
+  video_urls?: string;
 };
 
 //* Course-price-type
