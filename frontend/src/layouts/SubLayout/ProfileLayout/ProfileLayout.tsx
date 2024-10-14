@@ -1,8 +1,8 @@
 //* React-router
 import { Outlet } from "react-router-dom";
 
-//* Components-ui
-import ProfileSideNavbar from "../../../features/user/ProfileSideNavbar/ProfileSideNavbar";
+//* Components-UI
+import ProfileSideNavbar from "../../../features/user/components/ProfileSideNavbar/ProfileSideNavbar";
 
 //* Styles
 import styles from "./ProfileLayout.module.css";

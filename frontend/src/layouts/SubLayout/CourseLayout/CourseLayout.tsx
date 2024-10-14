@@ -2,7 +2,7 @@
 import { Outlet } from "react-router-dom";
 
 //* Components-UI
-import CoursesSideNavbar from "../../../features/course/CoursesSideNavbar/CoursesSideNavbar";
+import CoursesSideNavbar from "../../../features/course/components/CoursesSideNavbar/CoursesSideNavbar";
 
 //* Styles
 import styles from "./CourseLayout.module.css";

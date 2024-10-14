@@ -1,15 +1,26 @@
+//* React
+import { useState } from "react";
+
+//* React-router-dom
+import { useSearchParams } from "react-router-dom";
+
+//* Redux
 import { useSelector } from "react-redux";
-import SearchCoursesInput from "../../features/course/SearchCoursesInput/SearchCoursesInput";
+
+//* Components-UI
+import Select from "../../components/ui/Select/Select";
+import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
+import ErrorMessage from "../../components/ui/ErrorMessage/ErrorMessage";
+
+//* Components-course
+import SearchCoursesInput from "../../features/course/components/SearchCoursesInput/SearchCoursesInput";
+import CourseCard from "../../features/course/components/CourseCard/CourseCard";
 
 //* Styles
 import styles from "./SearchCourses.module.css";
+
+//* Types
 import { RootState } from "../../data/store";
-import CourseCard from "../../features/course/CourseCard/CourseCard";
-import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
-import ErrorMessage from "../../components/ui/ErrorMessage/ErrorMessage";
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
-import Select from "../../components/ui/Select/Select";
 
 const options = [
   {

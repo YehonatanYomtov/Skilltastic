@@ -24,13 +24,13 @@
 
 
 -- To CHANGE -- 
-- Change/Make 'userSlice' with all user info, and then use that instead of 'user' from 'authSlice'
+- ✅ Change/Make 'userSlice' with all user info, and then use that instead of 'user' from 'authSlice'
 
 - Change all/needed auth user 'uid'/"auth_id" in the app's code to normal 'id' from 'userSlice' user.id. (so that all id's are of type number)
 
 - Change 'All course' 'ShowCase' to something more probational
 
-- Change CourseVideo to Course
+- Change name of CourseVideo to Course
 
 - Create a template for all duplicate code in the async thunk functions, and if needed in the 'builder' as well
 
@@ -41,6 +41,8 @@
 - Create a 'types' file for each slice/feature in frontend folder, so that there is AOC
 
 - Move the courseVideo.tsx to the pages folder
+
+- Maybe change the order of the main 'Navbar.tsx' links, that the courses should be before the profile link
 
 - 
 
@@ -54,6 +56,8 @@
 
 - Add the functionalities to select a language
 
+- Add an expiration token that when the user is logged out for more then 24 hours it will log him out
+
 - 
 
 
@@ -61,7 +65,7 @@
 
 
 ---- CSS ----
-- Fix 'Navbar' text when sliding it open ✅
+- ✅ Fix 'Navbar' text when sliding it open 
 
 - Fix 'Navbar's 'subNav' to be above the arrow button of the 'Carousel'
 
@@ -73,4 +77,4 @@
 
 - Fix the logo moving when opening the side navbar
 
-- 
+- Fix icons stretching on small screen, in 'subLayout' side navbar

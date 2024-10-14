@@ -1,4 +1,4 @@
-//* react-router
+//* React-router-dom
 import { Outlet } from "react-router-dom";
 
 //* Components-UI

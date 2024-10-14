@@ -13,7 +13,7 @@ import DarkLightModeButton from "../DarkLightModeButton/DarkLightModeButton.tsx"
 import NavbarLink from "../NavbarLink/NavbarLink.tsx";
 
 //* User-feature-components
-import UserTag from "../../../features/user/UserTag/UserTag.tsx";
+import UserTag from "../../../features/user/components/UserTag/UserTag.tsx";
 
 //* Styles
 import styles from "./Navbar.module.css";

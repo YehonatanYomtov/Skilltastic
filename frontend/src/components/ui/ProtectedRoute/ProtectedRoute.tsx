@@ -1,7 +1,7 @@
-//* react-router
+//* React-router-dom
 import { Navigate } from "react-router-dom";
 
-//* redux
+//* Redux
 import { useSelector } from "react-redux";
 
 //* UI-components
@@ -33,11 +33,10 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     alignItems: "center",
   };
 
-  if (status === "loading")
+  if (status === "loading" || status === "initialRender")
     return <LoadingSpinner style={loadingSpinnerStyles} />;
 
-  if (!user && status !== "initialRender")
-    return <Navigate replace to="/log-in" />;
+  if (!user) return <Navigate replace to="/log-in" />;
 
   return <>{children}</>;
 }

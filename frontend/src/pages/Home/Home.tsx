@@ -9,12 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 //* Components-UI
 import ShowCase from "../../components/ui/ShowCase/ShowCase";
-import CourseListDisplay from "../../features/course/CourseListDisplay/CourseListDisplay";
+
+import CourseListDisplay from "../../features/course/components/CourseListDisplay/CourseListDisplay";
 import IntroCarousel from "./subComponents/IntroCarousel/IntroCarousel";
 
-//* Components-features
-import WelcomeMessage from "../../features/user/WelcomeMessage/WelcomeMessage";
-import SearchCoursesInput from "../../features/course/SearchCoursesInput/SearchCoursesInput";
+//* Components-user
+import WelcomeMessage from "../../features/user/components/WelcomeMessage/WelcomeMessage";
+
+//* Components-course
+import SearchCoursesInput from "../../features/course/components/SearchCoursesInput/SearchCoursesInput";
 
 //* Slice-course
 import {

@@ -22,23 +22,26 @@ import ErrorMessage from "../components/ui/ErrorMessage/ErrorMessage.tsx";
 import ProtectedRoute from "../components/ui/ProtectedRoute/ProtectedRoute.tsx";
 
 //* Components-auth
-import SignUpForm from "../features/auth/SignUpForm/SignUpForm.tsx";
-import LogInForm from "../features/auth/LogInForm/LogInForm.tsx";
+import SignUpForm from "../features/auth/components/SignUpForm/SignUpForm.tsx";
+import LogInForm from "../features/auth/components/LogInForm/LogInForm.tsx";
 
 //* Components-course
-import CourseCreation from "../features/course/CourseCreation/CourseCreation.tsx";
-import CourseVideo from "../features/course/CourseVideo/CourseVideo.tsx";
-import FavoriteCourses from "../features/course/FavoriteCourses/FavoriteCourses.tsx";
-import CourseWishlist from "../features/course/CourseWishlist/CourseWishlist.tsx";
-import MyCreatedCourses from "../features/course/MyCreatedCourses/MyCreatedCourses.tsx";
-import OwnedCourses from "../features/course/OwnedCourses/OwnedCourses.tsx";
-import CourseCertificates from "../features/course/CourseCertificates/CourseCertificates.tsx";
+import CourseCreation from "../features/course/components/CourseCreation/CourseCreation.tsx";
+import CourseVideo from "../features/course/components/CourseVideo/CourseVideo.tsx";
+import FavoriteCourses from "../features/course/components/FavoriteCourses/FavoriteCourses.tsx";
+import CourseWishlist from "../features/course/components/CourseWishlist/CourseWishlist.tsx";
+import MyCreatedCourses from "../features/course/components/MyCreatedCourses/MyCreatedCourses.tsx";
+import OwnedCourses from "../features/course/components/OwnedCourses/OwnedCourses.tsx";
+import CourseCertificates from "../features/course/components/CourseCertificates/CourseCertificates.tsx";
 
 //* Components-user
-import Overview from "../features/user/Overview/Overview.tsx";
-import EditProfile from "../features/user/EditProfile/EditProfile.tsx";
-import AccountSettings from "../features/user/AccountSettings/AccountSettings.tsx";
-import SupportAndHelp from "../features/user/SupportAndHelp/SupportAndHelp.tsx";
+import Overview from "../features/user/components/Overview/Overview.tsx";
+import EditProfile from "../features/user/components/EditProfile/EditProfile.tsx";
+import AccountSettings from "../features/user/components/AccountSettings/AccountSettings.tsx";
+import SupportAndHelp from "../features/user/components/SupportAndHelp/SupportAndHelp.tsx";
+
+//* Components-tasks
+import TaskDashboard from "../features/tasks/components/TaskDashboard/TaskDashboard.tsx";
 
 //* Slice-user
 import { getUserFullInfo } from "../features/user/userSlice.ts";
@@ -70,36 +73,26 @@ function AppRouter() {
   // }, [userSignedIn]);
 
   const router = createBrowserRouter([
-    // {
-    //   path: "/sign-up",
-    //   element:
-    //     !user && !userSignedIn ? <SignUpForm /> : <Navigate replace to="/" />,
-    // },
-    // {
-    //   path: "/log-in",
-    //   element:
-    //     !user && !userSignedIn ? <LogInForm /> : <Navigate replace to="/" />,
-    // },
     {
       path: "/",
-      element: <AppLayout />,
+      element: (
+        <ProtectedRoute>
+          <AppLayout />
+        </ProtectedRoute>
+      ),
       errorElement: <ErrorMessage />,
       children: [
         {
           index: true,
-          element: (
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          ),
+          element: <Home />,
         },
         {
           path: "search",
-          element: (
-            <ProtectedRoute>
-              <SearchCourses />
-            </ProtectedRoute>
-          ),
+          element: <SearchCourses />,
+        },
+        {
+          path: "tasks",
+          element: <TaskDashboard />,
         },
         {
           path: "profile",
@@ -108,35 +101,23 @@ function AppRouter() {
             {
               path: "overview",
               index: true,
-              element: (
-                <ProtectedRoute>
-                  <Overview />
-                </ProtectedRoute>
-              ),
+              element: <Overview />,
             },
             {
               path: "edit",
-              element: (
-                <ProtectedRoute>
-                  <EditProfile />
-                </ProtectedRoute>
-              ),
+              element: <EditProfile />,
             },
             {
               path: "settings",
-              element: (
-                <ProtectedRoute>
-                  <AccountSettings />
-                </ProtectedRoute>
-              ),
+              element: <AccountSettings />,
+            },
+            {
+              path: "settings",
+              element: <AccountSettings />,
             },
             {
               path: "support",
-              element: (
-                <ProtectedRoute>
-                  <SupportAndHelp />
-                </ProtectedRoute>
-              ),
+              element: <SupportAndHelp />,
             },
           ],
         },
@@ -147,83 +128,47 @@ function AppRouter() {
             {
               path: "owned",
               index: true,
-              element: (
-                <ProtectedRoute>
-                  <OwnedCourses />
-                </ProtectedRoute>
-              ),
+              element: <OwnedCourses />,
             },
-
             {
               path: "created",
-              element: (
-                <ProtectedRoute>
-                  <MyCreatedCourses />
-                </ProtectedRoute>
-              ),
+              element: <MyCreatedCourses />,
             },
             {
               path: "wishlist",
-              element: (
-                <ProtectedRoute>
-                  <CourseWishlist />
-                </ProtectedRoute>
-              ),
+              element: <CourseWishlist />,
             },
             {
               path: "favorites",
-              element: (
-                <ProtectedRoute>
-                  <FavoriteCourses />
-                </ProtectedRoute>
-              ),
+              element: <FavoriteCourses />,
             },
             {
               path: "certificates",
-              element: (
-                <ProtectedRoute>
-                  <CourseCertificates />
-                </ProtectedRoute>
-              ),
+              element: <CourseCertificates />,
             },
             {
               path: "create-course",
-              element: (
-                <ProtectedRoute>
-                  <CourseCreation />
-                </ProtectedRoute>
-              ),
+              element: <CourseCreation />,
             },
           ],
         },
-
         {
           path: "courses/:courseId",
-          element: (
-            <ProtectedRoute>
-              <CourseVideo />
-            </ProtectedRoute>
-          ),
+          element: <CourseVideo />,
         },
-
         {
           path: "contact",
-          element: (
-            <ProtectedRoute>
-              <Contact />
-            </ProtectedRoute>
-          ),
-        },
-
-        {
-          path: "/sign-up",
-          element: !user ? <SignUpForm /> : <Navigate replace to="/" />,
-        },
-        {
-          path: "/log-in",
-          element: !user ? <LogInForm /> : <Navigate replace to="/" />,
+          element: <Contact />,
         },
       ],
+    },
+    {
+      path: "/sign-up",
+      element: !user ? <SignUpForm /> : <Navigate replace to="/" />,
+    },
+    {
+      path: "/log-in",
+      element: !user ? <LogInForm /> : <Navigate replace to="/" />,
     },
   ]);
 
