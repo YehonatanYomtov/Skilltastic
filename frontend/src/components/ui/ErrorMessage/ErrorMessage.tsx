@@ -1,7 +1,7 @@
-//* react-router
+//* React-router
 import { useLocation, useNavigate, useRouteError } from "react-router-dom";
 
-//* redux
+//* Redux
 import { useDispatch } from "react-redux";
 
 //* Components-UI
@@ -13,7 +13,7 @@ import { clearError } from "../../../features/auth/authSlice.ts";
 //* Types
 import { AppDispatch } from "../../../data/store.ts";
 
-//* styles
+//* Styles
 import styles from "./ErrorMessage.module.css";
 
 function ErrorMessage({ message = "Error" }) {

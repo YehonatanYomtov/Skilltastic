@@ -44,6 +44,8 @@
 
 - Maybe change the order of the main 'Navbar.tsx' links, that the courses should be before the profile link
 
+- Make a new component named: "SubLayoutNavbar.tsx", which will have 'children' as links, and then you can have one component for BOTH 'CourseLayout' and 'ProfileLayout', and they will use the same styling as well
+
 - 
 
 

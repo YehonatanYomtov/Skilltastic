@@ -52,8 +52,6 @@ import useAuth from "../hooks/useAuth.ts";
 //* Types
 import { AppDispatch, RootState } from "../data/store.ts";
 
-// NOTE: This seems to be ok, since it's being called in a top level component that doesn't have its own state
-// If it did, you might have an issue with React keeping track of existing state in the hooks here.
 function AppRouter() {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
@@ -65,12 +63,6 @@ function AppRouter() {
       dispatch(getUserFullInfo(user));
     }
   }, [dispatch, user]);
-
-  // const userFullData = useSelector((state: RootState) => state.user.user);
-
-  // useEffect(() => {
-  //   localStorage.setItem("userSignedIn", JSON.stringify(userSignedIn));
-  // }, [userSignedIn]);
 
   const router = createBrowserRouter([
     {
@@ -106,10 +98,6 @@ function AppRouter() {
             {
               path: "edit",
               element: <EditProfile />,
-            },
-            {
-              path: "settings",
-              element: <AccountSettings />,
             },
             {
               path: "settings",

@@ -1,6 +1,8 @@
-//* styles
-import React, { ButtonHTMLAttributes } from "react";
+//* Styles
 import styles from "./Button.module.css";
+
+//* Types
+import { ButtonHTMLAttributes } from "react";
 
 type ButtonProps = {
   className?: string;

@@ -1,4 +1,4 @@
-//* React-router
+//* React-router-dom
 import { useLocation, useNavigate } from "react-router-dom";
 
 //* Styles
