@@ -16,6 +16,7 @@ import ProfileLayout from "../layouts/SubLayout/ProfileLayout/ProfileLayout.tsx"
 import Home from "../pages/Home/Home.tsx";
 import Contact from "../pages/Contact/Contact.tsx";
 import SearchCourses from "../pages/SearchCourses/SearchCourses.tsx";
+import TaskDashboard from "../pages/TaskDashboard/TaskDashboard.tsx";
 
 //* Components-UI
 import ErrorMessage from "../components/ui/ErrorMessage/ErrorMessage.tsx";
@@ -39,9 +40,6 @@ import Overview from "../features/user/components/Overview/Overview.tsx";
 import EditProfile from "../features/user/components/EditProfile/EditProfile.tsx";
 import AccountSettings from "../features/user/components/AccountSettings/AccountSettings.tsx";
 import SupportAndHelp from "../features/user/components/SupportAndHelp/SupportAndHelp.tsx";
-
-//* Components-tasks
-import TaskDashboard from "../features/tasks/components/TaskDashboard/TaskDashboard.tsx";
 
 //* Slice-user
 import { getUserFullInfo } from "../features/user/userSlice.ts";

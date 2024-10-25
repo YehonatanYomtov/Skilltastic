@@ -1,4 +1,4 @@
-//* styles
+//* Styles
 import styles from "./PopUp.module.css";
 
 type PopUpProps = {
